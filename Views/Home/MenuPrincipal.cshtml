@@ -1,0 +1,25 @@
+﻿@model ProyectoTFI.Entities.Usuario
+
+@{
+    ViewBag.Title = "MenuPrincipal";
+    Layout = "~/Views/Shared/_LayoutInterno.cshtml";
+}
+
+<h2>MenuPrincipal</h2>
+
+<p>@Model.DNI</p>
+<p>@Model.Nombre</p>
+<p>@Model.Apellido</p>
+<p>@Model.Rol.Nombre</p>
+
+@if (Model.Rol.Nombre == "Web Master")
+{
+    <p>sos un kpo</p>
+}
+else
+{
+    <p>sos un pete :c</p>
+}
+
+<h2>@Session["uwu"]</h2>
+

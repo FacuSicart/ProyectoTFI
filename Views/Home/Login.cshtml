@@ -1,0 +1,48 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Login</h2>
+<div style="background-color:antiquewhite">
+    <form action="@Url.Action("VerificarUsuario", "Home")" method="post">
+        <div class="row">
+            <div class="col-md-4">
+                <input type="text" class="form-control" id="txtUsuario" name="username" value="admin" placeholder="Usuario"/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <input type="password" class="form-control" id="txtPwd" name="password" value="admin" placeholder="Contraseña" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <input style="background-color:orange; color:black;" type="submit" name="" value="Ingresar" />
+            </div>
+        </div>
+    </form>
+</div>
+
+@*<script type="text/javascript">
+    function loguear() {
+        let usr = $('#txtUsuario').val();
+        let pwd = $('#txtPwd').val();
+
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("VerificarUsuario", "Home")',
+            data:
+            {
+                username: usr,
+                password: pwd
+            }
+        }).done(function (result) {
+            alert(result);
+        })
+    }
+
+</script>*@
+
+

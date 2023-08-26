@@ -1,0 +1,202 @@
+.navbar {
+    display: flex;
+    align-items: center;
+    background-color: orange;
+    font-family:Arial, Helvetica, sans-serif;
+    border-radius: 50px;
+    padding: 0 15px;
+    margin-left: 350px;
+}
+
+.navdiv {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    border-radius: 50px;
+}
+
+.logo {
+    display: flex;
+    align-items: center; /* Alinea verticalmente la imagen */
+}
+
+.logo img {
+    height: auto;
+    max-height: 100%;
+    margin-right: 20px;
+    width: 100px;
+    height: 100px;
+    margin-left: -360px;
+}
+
+li {
+    list-style: none;
+    display: inline-block;
+}
+
+li a {
+    color: white;
+    font-size: 22px;
+    font-weight: bold;
+    margin-right: 25px;
+}
+
+.inicio-container {
+    width: 100%;
+    display: flex;
+    overflow: auto;
+    min-height: 100vh;
+    align-items: center;
+    flex-direction: column;
+}
+
+.inicio-inicio {
+    width: 100%;
+    height: 832px;
+    display: flex;
+    overflow: hidden;
+    position: relative;
+    align-items: flex-start;
+    flex-shrink: 0;
+    background-color: rgba(255, 255, 255, 1);
+}
+
+.inicio-educarigualdad1 {
+    top: 14px;
+    left: 10px;
+    width: 202px;
+    height: 210px;
+    position: absolute;
+}
+
+.inicio-rectangle1 {
+    top: 26px;
+    left: 458px;
+    width: 840px;
+    height: 128px;
+    position: absolute;
+    border-radius: 33px;
+}
+
+.inicio-text {
+    top: 73px;
+    left: 695px;
+    color: rgba(255, 255, 255, 1);
+    height: auto;
+    position: absolute;
+    font-size: 28px;
+    font-style: Regular;
+    text-align: left;
+    font-family: Inter;
+    font-weight: 400;
+    line-height: normal;
+    font-stretch: normal;
+    text-decoration: none;
+}
+
+.inicio-text02 {
+    top: 73px;
+    left: 485px;
+    color: rgba(255, 255, 255, 1);
+    height: auto;
+    position: absolute;
+    font-size: 28px;
+    font-style: Regular;
+    text-align: left;
+    font-family: Inter;
+    font-weight: 400;
+    line-height: normal;
+    font-stretch: normal;
+    text-decoration: none;
+}
+
+.inicio-text04 {
+    top: 73px;
+    left: 870px;
+    color: rgba(255, 255, 255, 1);
+    height: auto;
+    position: absolute;
+    font-size: 28px;
+    font-style: Regular;
+    text-align: left;
+    font-family: Inter;
+    font-weight: 400;
+    line-height: normal;
+    font-stretch: normal;
+    text-decoration: none;
+}
+
+.inicio-text06 {
+    top: 67px;
+    color: rgba(255, 255, 255, 1);
+    right: -52px;
+    height: auto;
+    position: absolute;
+    font-size: 28px;
+    font-style: Regular;
+    text-align: left;
+    font-family: Inter;
+    font-weight: 400;
+    line-height: normal;
+    font-stretch: normal;
+    text-decoration: none;
+}
+
+.inicio-text08 {
+    top: 255px;
+    left: 606px;
+    color: rgba(241, 191, 56, 1);
+    width: 536px;
+    height: auto;
+    position: absolute;
+    font-size: 55px;
+    font-style: Regular;
+    text-align: left;
+    font-family: Inter;
+    font-weight: 400;
+    line-height: normal;
+    font-stretch: normal;
+    text-decoration: none;
+}
+
+.inicio-text10 {
+    top: 393px;
+    left: 606px;
+    color: rgba(255, 106, 19, 1);
+    width: 529px;
+    height: auto;
+    position: absolute;
+    font-size: 24px;
+    font-style: Regular;
+    text-align: left;
+    font-family: Inter;
+    font-weight: 400;
+    line-height: normal;
+    font-stretch: normal;
+    text-decoration: none;
+}
+
+.inicio-whitegraybluesoftwallpaperpreview4 {
+    top: -345px;
+    left: -333px;
+    width: 1440px;
+    height: 1040px;
+    position: absolute;
+}
+
+.inicio-image2 {
+    top: 213px;
+    left: 34px;
+    width: 479px;
+    height: 325px;
+    position: absolute;
+}
+
+.inicio-image1 {
+    top: 582px;
+    left: -4px;
+    width: 1302px;
+    height: 260px;
+    position: absolute;
+}
