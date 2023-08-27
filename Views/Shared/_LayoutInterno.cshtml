@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@{
+    ProyectoTFI.Entities.Usuario usuario = (ProyectoTFI.Entities.Usuario)Session["user"];
+}
+<!DOCTYPE html>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -20,16 +23,30 @@
             <div class="float-end">
                 <ul class="navbar-nav flex-grow-1">
                     <li>@Html.ActionLink("Inicio", "MenuPrincipal", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Mi Perfil", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Cursos", "About", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Mis Cursos", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Gestión Cursos", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Gestión Docentes", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Rendimiento", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Solicitudes", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Soporte", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Bitácora", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Cerrar Sesión", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                    @if (usuario.Rol.ID == 1) //WebMaster
+                    {
+                        <li>@Html.ActionLink("Gestión Administradores", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Bitácora", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                    }
+                    @if (usuario.Rol.ID == 2) //Administrador
+                    {
+                        <li>@Html.ActionLink("Soporte", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Gestión Docentes", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Gestión Cursos", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                    }
+                    @if (usuario.Rol.ID == 3) //Docente
+                    {
+                        <li>@Html.ActionLink("Mis Cursos", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Rendimiento", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                    }
+                    @if (usuario.Rol.ID == 4) //Alumno
+                    {
+                        <li>@Html.ActionLink("Mi Perfil", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Cursos", "About", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Mis Cursos", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Soporte", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                    }
+                    <li>@Html.ActionLink("Cerrar Sesión", "CerrarSesion", "Home", new { area = "" }, new { @class = "nav-link" })</li>
                 </ul>
             </div>
         </div>

@@ -59,5 +59,12 @@ namespace ProyectoTFI.Controllers
             }
             return View(Session["user"]);
         }
+
+        public ActionResult CerrarSesion()
+        {
+            Session["user"] = null;
+
+            return RedirectToAction("Index", "Home");
+        }
     }
 }
