@@ -16,7 +16,7 @@ namespace ProyectoTFI.Entities
             Solicitud_Soporte = new HashSet<Solicitud_Soporte>();
         }
 
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
 
         public int? UsuarioID { get; set; }

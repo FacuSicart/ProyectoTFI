@@ -22,5 +22,18 @@ namespace ProyectoTFI.Service
 
             return user;
         }
+
+        public bool VerificarNombreUsuario(Usuario usuario)
+        {
+            bool existe = usuarioRepository.VerificarNombreUsuario(usuario);
+
+            return existe;
+        }
+
+        public bool CrearAlumno(Usuario usuario)
+        {
+            bool Respuesta = usuarioRepository.CrearAlumno(usuario);
+            return Respuesta;
+        }
     }
 }

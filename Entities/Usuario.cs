@@ -17,7 +17,7 @@ namespace ProyectoTFI.Entities
             Docente = new HashSet<Docente>();
         }
 
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
 
         [Required]
