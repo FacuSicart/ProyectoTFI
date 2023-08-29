@@ -12,12 +12,11 @@ namespace ProyectoTFI.Controllers
     {
         UsuarioService usuarioService;
 
-        //Muestra la vista de Alta de Usuario/Alumno
         public ActionResult CrearAlumno()
         {
             return View();
         }
-        //Alta del Usuario/Alumno
+
         [HttpPost]
         public ActionResult CrearAlumno(Usuario usuario)
         {

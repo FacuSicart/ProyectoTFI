@@ -15,6 +15,13 @@ namespace ProyectoTFI.Entities
             Cursada_de_Alumno = new HashSet<Cursada_de_Alumno>();
             Solicitud_Soporte = new HashSet<Solicitud_Soporte>();
         }
+        public Alumno(Usuario user)
+        {
+            Cursada_de_Alumno = new HashSet<Cursada_de_Alumno>();
+            Solicitud_Soporte = new HashSet<Solicitud_Soporte>();
+
+            Usuario = user;
+        }
 
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }

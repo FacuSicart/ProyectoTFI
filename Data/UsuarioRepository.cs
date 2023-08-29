@@ -23,7 +23,7 @@ namespace ProyectoTFI.Data
         }
         public bool VerificarNombreUsuario(Usuario usuario) 
         {
-            int user = context.Usuario.Where(u => u.Username == usuario.Username).Count();
+            int user = context.Usuario.Count(u => u.Username == usuario.Username);
             //si el nombre no existe es 0 por lo que se puede usar
             if (user == 0)
             {
@@ -34,22 +34,12 @@ namespace ProyectoTFI.Data
 
         public bool CrearAlumno(Usuario usuario)
         {
+            Alumno a = new Alumno(usuario);
             usuario.RolID = 4;
             usuario.Activo = true;
-            context.Set<Usuario>().Add(usuario);
-            context.SaveChanges();
-            Alumno a = new Alumno();
-            a.UsuarioID = usuario.ID;
             context.Set<Alumno>().Add(a);
-            context.SaveChanges();
-            
-            if (context.SaveChanges() > 0)
-            {
-                return true;
-            }
-            else { return false; }
-        }
 
-        
+            return context.SaveChanges() > 0;
+        }
     }
 }
