@@ -9,7 +9,7 @@ namespace ProyectoTFI.Entities
     [Table("Donacion")]
     public partial class Donacion
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
 
         [Required]

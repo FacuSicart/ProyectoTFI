@@ -15,7 +15,7 @@ namespace ProyectoTFI.Entities
             Donacion = new HashSet<Donacion>();
         }
 
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
 
         public bool? Tipo { get; set; }

@@ -16,7 +16,7 @@ namespace ProyectoTFI.Entities
             Solicitud_Respuesta = new HashSet<Solicitud_Respuesta>();
         }
 
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
 
         public int UsuarioID { get; set; }

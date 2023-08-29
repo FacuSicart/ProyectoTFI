@@ -9,7 +9,7 @@ namespace ProyectoTFI.Entities
     [Table("Bitacora")]
     public partial class Bitacora
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
 
         public DateTime Fecha { get; set; }

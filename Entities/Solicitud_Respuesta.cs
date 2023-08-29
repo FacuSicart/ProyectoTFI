@@ -8,7 +8,7 @@ namespace ProyectoTFI.Entities
 
     public partial class Solicitud_Respuesta
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
 
         [Required]

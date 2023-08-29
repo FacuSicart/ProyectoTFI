@@ -8,7 +8,7 @@ namespace ProyectoTFI.Entities
 
     public partial class Docente_Curso
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
 
         public bool? Activo { get; set; }

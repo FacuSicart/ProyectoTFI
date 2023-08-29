@@ -8,7 +8,7 @@ namespace ProyectoTFI.Entities
 
     public partial class Cursada_de_Alumno
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
 
         public int? AlumnoID { get; set; }

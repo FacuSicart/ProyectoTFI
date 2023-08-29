@@ -16,7 +16,7 @@ namespace ProyectoTFI.Entities
             Cursada_de_Alumno = new HashSet<Cursada_de_Alumno>();
         }
 
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
 
         [StringLength(30)]

@@ -9,7 +9,7 @@ namespace ProyectoTFI.Entities
     [Table("Clase")]
     public partial class Clase
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
 
         [StringLength(500)]
