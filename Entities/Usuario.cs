@@ -22,10 +22,12 @@ namespace ProyectoTFI.Entities
 
         [Required]
         [StringLength(50)]
+        [Display(Name = "Nombre de Usuario")]
         public string Username { get; set; }
 
         [Required]
         [StringLength(50)]
+        [Display(Name = "Contraseña")]
         public string Password { get; set; }
 
         [Required]
@@ -38,12 +40,18 @@ namespace ProyectoTFI.Entities
 
         [Required]
         [StringLength(8)]
+        [Display(Name = "Número de Documento")]
         public string DNI { get; set; }
 
         [Column(TypeName = "date")]
+        [Display(Name = "Fecha de Nacimiento")]
+        [DisplayFormat(DataFormatString ="{0:MM/dd/yyyy}", ApplyFormatInEditMode =true)]
         public DateTime? FechaNacimiento { get; set; }
 
         [StringLength(100)]
+        [Display(Name = "Correo Electrónico")]
+        [EmailAddress(ErrorMessage = "El Formato del Correo Electrónico es incorrecto.")]
+        [DataType(DataType.EmailAddress, ErrorMessage = "El Formato del Correo Electrónico es incorrecto.")]
         public string Email { get; set; }
 
         public bool? Activo { get; set; }
