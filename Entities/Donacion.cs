@@ -9,6 +9,16 @@ namespace ProyectoTFI.Entities
     [Table("Donacion")]
     public partial class Donacion
     {
+        public Donacion()
+        {
+            Tarjeta = new Tarjeta();
+        }
+
+        public Donacion(Tarjeta pTarjeta)
+        {
+            Tarjeta = pTarjeta;
+        }
+
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
 
