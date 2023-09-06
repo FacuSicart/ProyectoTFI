@@ -21,10 +21,16 @@ namespace ProyectoTFI.Entities
         public bool? Tipo { get; set; }
 
         [StringLength(50)]
+        [Required]
+        [Display(Name = "Número de Tarjeta")]
         public string Numero { get; set; }
 
+        [Required]
+        [Display(Name = "Fecha de Caducidad")]
         public int? FechaCaducidad { get; set; }
 
+        [Required]
+        [Display(Name = "Código de Seguridad")]
         public int? CVV { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

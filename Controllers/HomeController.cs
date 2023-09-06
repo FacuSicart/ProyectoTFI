@@ -28,7 +28,7 @@ namespace ProyectoTFI.Controllers
             return View();
         }
 
-        public ActionResult Contact()
+        public ActionResult Donaciones()
         {
             ViewBag.Message = "Your contact page.";
 

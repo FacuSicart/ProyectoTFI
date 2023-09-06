@@ -9,7 +9,7 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm", style="background-color: orange; border-radius:15px;">        
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm", style="background-color: orange;">        
         <div class="container">
             <a class="navbar-brand" href="@Url.Action("Index", "Home")">
                 <img src="~/Images/EIBLUEWHITE.png" alt="" height="24" class="d-inline-block align-text-top">
@@ -22,7 +22,7 @@
             <div class="float-end">
                 <ul class="navbar-nav flex-grow-1">
                     <li style=" margin-right: 45px; font-weight: bold; font-size: 16px; ">@Html.ActionLink("Nosotros", "About", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li style="margin-right: 45px; font-weight: bold; font-size: 16px; ">@Html.ActionLink("Donaciones", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li style="margin-right: 45px; font-weight: bold; font-size: 16px; ">@Html.ActionLink("Donaciones", "Donaciones", "Home", new { area = "" }, new { @class = "nav-link" })</li>
                     <li style="margin-right: 45px; font-weight: bold; font-size: 16px; ">@Html.ActionLink("Crear Cuenta", "CrearAlumno", "Usuario", new { area = "" }, new { @class = "nav-link" })</li>
                     <li style="margin-right: 45px; font-weight: bold; font-size: 16px; ">@Html.ActionLink("Iniciar Sesión", "Login", "Home", new { area = "" }, new { @class = "nav-link" })</li>
                 </ul>
