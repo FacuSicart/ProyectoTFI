@@ -35,5 +35,14 @@ namespace ProyectoTFI.Service
             bool Respuesta = usuarioRepository.CrearAlumno(usuario);
             return Respuesta;
         }
+
+        public List<Usuario> ListarUsuarios()
+        {
+            List<Usuario> usuarios = null;
+
+            usuarios = usuarioRepository.ListarUsuarios();
+
+            return usuarios;
+        }
     }
 }

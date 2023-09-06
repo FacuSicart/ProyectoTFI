@@ -10,7 +10,13 @@ namespace ProyectoTFI.Controllers
 {
     public class HomeController : Controller
     {
-        UsuarioService usuarioService;   
+        UsuarioService usuarioService;
+
+        public HomeController()
+        {
+            usuarioService = new UsuarioService();
+        }
+
         public ActionResult Index()
         {
             return View();
@@ -37,7 +43,6 @@ namespace ProyectoTFI.Controllers
         [HttpPost]
         public ActionResult VerificarUsuario(string username, string password)
         {
-            usuarioService = new UsuarioService();
             Usuario user = usuarioService.VerificarUsuario(username, password);
 
             if (user != null)
@@ -65,6 +70,14 @@ namespace ProyectoTFI.Controllers
             Session["user"] = null;
 
             return RedirectToAction("Index", "Home");
+        }
+
+        public string ListarUsuarios()
+        {
+            var rta = usuarioService.ListarUsuarios();
+
+            string jsonResult = Newtonsoft.Json.JsonConvert.SerializeObject(rta);
+            return jsonResult;
         }
     }
 }

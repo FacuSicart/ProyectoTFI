@@ -16,4 +16,73 @@
         <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
         <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
     </address>
+    <table id="tbUsuarios"
+           data-content-type="application/json"
+           data-data-type="json"
+           data-pagination="true"
+           data-page-list="[10,20,50]"
+           data-date-format="ddmmyyyy"
+           class="table table-condensed table-striped table-hover table-no-bordered">
+    </table>
+    <button onclick="refreshData()">asdasds</button>
 </main>
+<script type="text/javascript">
+
+    $('#tbUsuarios').bootstrapTable({
+        locale: 'es-AR',
+        pagination: true,
+        columns: [
+            {
+                field: 'ID',
+                title: 'Id',
+                visible: true
+            },
+            {
+                field: 'Username',
+                title: 'Nombre de Usuario',
+                visible: true
+            },
+            {
+                field: 'Nombre',
+                title: 'Nombre',
+                visible: true
+            },
+            {
+                field: 'Apellido',
+                title: 'Apellido',
+                visible: true
+            },
+            {
+                field: 'DNI',
+                title: 'Documento',
+                visible: true
+            },
+            {
+                field: 'FechaNacimiento',
+                title: 'Fecha de<br>Nacimiento',
+                visible: true
+            },
+            {
+                field: 'Email',
+                title: 'Email',
+                visible: true
+            },
+            {
+                field: 'Activo',
+                title: 'Activo',
+                visible: false
+            },
+        ]
+    })
+
+    function refreshData() {
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("ListarUsuarios", "Home")'
+        }).done(function (result) {
+            $('#tbUsuarios').bootstrapTable('load', result)
+            alert('uwu')
+        });
+    }
+
+</script>

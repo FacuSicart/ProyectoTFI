@@ -41,5 +41,10 @@ namespace ProyectoTFI.Data
 
             return context.SaveChanges() > 0;
         }
+
+        public List<Usuario> ListarUsuarios()
+        {
+            return context.Usuario.ToList();
+        }
     }
 }
