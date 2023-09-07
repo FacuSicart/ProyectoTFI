@@ -72,6 +72,11 @@ namespace ProyectoTFI.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        public ActionResult VolverAInicio()
+        {
+            return RedirectToAction("Index", "Home");
+        }
+
         public string ListarUsuarios()
         {
             var rta = usuarioService.ListarUsuarios();
@@ -79,5 +84,6 @@ namespace ProyectoTFI.Controllers
             string jsonResult = Newtonsoft.Json.JsonConvert.SerializeObject(rta);
             return jsonResult;
         }
+
     }
 }

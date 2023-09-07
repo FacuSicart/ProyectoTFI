@@ -24,7 +24,7 @@ namespace ProyectoTFI.Controllers
             if (ModelState.IsValid)
             {
                 var respuesta = donacionService.RealizarDonacion(pDonacion);
-                return RedirectToAction("Index", "Home");
+                return View("Gracias", model: "La donación se realizó correctamente.");
             }
             else
             {

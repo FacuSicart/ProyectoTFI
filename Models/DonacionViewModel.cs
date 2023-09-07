@@ -46,12 +46,9 @@ namespace ProyectoTFI.Models
         [Required]
         [Display(Name = "Número de Teléfono")]
         public int Telefono { get; set; }
-
-        [StringLength(5)]
-        //[Column, Display(Name = "Monto a Donar"), Required, DisplayFormat(DataFormatString = "{0:0.00}", ApplyFormatInEditMode = true)]
-        [DataType(DataType.Currency)]
+       
         [Display(Name = "Monto a Donar")]
-        public decimal Monto { get; set; }
+        public int Monto { get; set; }
 
         //Datos de la Tarjeta
 

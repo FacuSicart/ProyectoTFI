@@ -631,7 +631,7 @@
           <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="PrefijoTelefono" Type="Int32" Nullable="false" />
           <Property Name="Telefono" Type="Int32" Nullable="false" />
-          <Property Name="Monto" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Monto" Type="Int32" Nullable="false" />
           <Property Name="TarjetaID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Tarjeta" Relationship="Self.FK_Donacion_Tarjeta" FromRole="Donacion" ToRole="Tarjeta" />
         </EntityType>
