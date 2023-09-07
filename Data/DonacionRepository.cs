@@ -19,7 +19,6 @@ namespace ProyectoTFI.Data
         public bool RealizarDonacion(Donacion pDonacion)
         {
             context.Donacion.Add(pDonacion);
-            //context.Tarjeta.Add(pDonacion.Tarjeta);
 
             return context.SaveChanges() > 0;
         }
