@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using ProyectoTFI.Entities;
 using ProyectoTFI.Service;
+using ProyectoTFI.Models;
 
 namespace ProyectoTFI.Controllers
 {
@@ -18,7 +19,7 @@ namespace ProyectoTFI.Controllers
         }
 
         [HttpPost]
-        public ActionResult CrearAlumno(Usuario usuario)
+        public ActionResult CrearAlumno(UsuarioViewModel usuario)
         {
             usuarioService = new UsuarioService();
             if (ModelState.IsValid)
@@ -28,6 +29,7 @@ namespace ProyectoTFI.Controllers
                 {
                     return View("Error", model: "Ya existe ese nombre de usuario");
                 }
+
                 var respuesta = usuarioService.CrearAlumno(usuario);
                 return RedirectToAction("Index", "Home");
             }

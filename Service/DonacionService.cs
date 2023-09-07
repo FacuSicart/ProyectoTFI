@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using ProyectoTFI.Data;
 using ProyectoTFI.Entities;
+using ProyectoTFI.Models;
 
 namespace ProyectoTFI.Service
 {
@@ -16,9 +17,10 @@ namespace ProyectoTFI.Service
             donacionRepository = new DonacionRepository();
         }        
 
-        public bool RealizarDonacion(Donacion pDonacion)
+        public bool RealizarDonacion(DonacionViewModel pDonacion)
         {
-            bool Respuesta = donacionRepository.RealizarDonacion(pDonacion);
+            Donacion DonacionReal = new Donacion(pDonacion);
+            bool Respuesta = donacionRepository.RealizarDonacion(DonacionReal);
             return Respuesta;
         }
     }

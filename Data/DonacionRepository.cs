@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using ProyectoTFI.Service;
 using ProyectoTFI.Entities;
+using ProyectoTFI.Models;
 
 namespace ProyectoTFI.Data
 {

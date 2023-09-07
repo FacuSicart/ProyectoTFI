@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using ProyectoTFI.Entities;
 using ProyectoTFI.Service;
+using ProyectoTFI.Models;
 
 namespace ProyectoTFI.Controllers
 {
@@ -17,7 +18,7 @@ namespace ProyectoTFI.Controllers
         }
 
         [HttpPost]
-        public ActionResult RealizarDonacion(Donacion pDonacion)
+        public ActionResult RealizarDonacion(DonacionViewModel pDonacion)
         {
             donacionService = new DonacionService();
             if (ModelState.IsValid)
@@ -29,6 +30,11 @@ namespace ProyectoTFI.Controllers
             {
                 return View("Error", model: "Se ha producido un error");
             }
+        }
+
+        public string CheckRadioButton(FormCollection pForm)
+        {
+            return pForm["TipoTarjeta"].ToString();            
         }
     }
 }
