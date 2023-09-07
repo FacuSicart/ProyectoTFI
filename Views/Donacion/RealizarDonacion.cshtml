@@ -1,4 +1,4 @@
-﻿@model ProyectoTFI.Entities.Donacion
+﻿@model ProyectoTFI.Models.DonacionViewModel
 
 @{
     ViewBag.Title = "Realizar Donacion";
@@ -71,37 +71,22 @@
                             @Html.LabelFor(model => model.Monto, htmlAttributes: new { @class = "control-label " })
                             <div class="col-md-10">
                                 @Html.ValidationMessageFor(model => model.Monto, "", new { @class = "text-danger" })
-                                @Html.EditorFor(model => model.Monto, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.EditorFor(model => model.Monto, new { htmlAttributes = new { @class = "form-control", @id = "Monto" } })
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            @Html.LabelFor(model => model.Tarjeta.Tipo, htmlAttributes: new { @class = "control-label " })
+                            @Html.LabelFor(model => model.TipoTarjeta, htmlAttributes: new { @class = "control-label" })
                             <div class="col-md-10">
-                                @*@Html.RadioButtonFor(model => model.Tarjeta.Tipo, new { htmlAttributes = new { @class = "form-control" } })*@
-                                @Html.RadioButton("TipoTarjeta", "0", true) Débito<br />
-                                @Html.RadioButton("TipoTarjeta", "1", false) Crédito
+                                @Html.Label("Débito")
+                                @Html.RadioButtonFor(model => model.TipoTarjeta, "Debito", new { @checked = true })
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
                         <div class="form-group">
-                            @Html.LabelFor(model => model.Tarjeta.Numero, htmlAttributes: new { @class = "control-label" })
                             <div class="col-md-10">
-                                @Html.ValidationMessageFor(model => model.Tarjeta.Numero, "", new { @class = "text-danger" })
-                                @Html.EditorFor(model => model.Tarjeta.Numero, new { htmlAttributes = new { @class = "form-control" } })
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.Tarjeta.FechaCaducidad, htmlAttributes: new { @class = "control-label" })
-                            <div class="col-md-10">
-                                @Html.ValidationMessageFor(model => model.Tarjeta.FechaCaducidad, "", new { @class = "text-danger" })
-                                @Html.EditorFor(model => model.Tarjeta.FechaCaducidad, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.Label("Crédito")
+                                @Html.RadioButtonFor(model => model.TipoTarjeta, "Credito")
                             </div>
                         </div>
                     </div>
@@ -109,10 +94,30 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            @Html.LabelFor(model => model.Tarjeta.CVV, htmlAttributes: new { @class = "control-label" })
+                            @Html.LabelFor(model => model.Numero, htmlAttributes: new { @class = "control-label" })
                             <div class="col-md-10">
-                                @Html.ValidationMessageFor(model => model.Tarjeta.CVV, "", new { @class = "text-danger" })
-                                @Html.EditorFor(model => model.Tarjeta.CVV, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Numero, "", new { @class = "text-danger" })
+                                @Html.EditorFor(model => model.Numero, new { htmlAttributes = new { @class = "form-control" } })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.FechaCaducidad, htmlAttributes: new { @class = "control-label" })
+                            <div class="col-md-10">
+                                @Html.ValidationMessageFor(model => model.FechaCaducidad, "", new { @class = "text-danger" })
+                                @Html.EditorFor(model => model.FechaCaducidad, new { htmlAttributes = new { @class = "form-control" } })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.CVV, htmlAttributes: new { @class = "control-label" })
+                            <div class="col-md-10">
+                                @Html.ValidationMessageFor(model => model.CVV, "", new { @class = "text-danger" })
+                                @Html.EditorFor(model => model.CVV, new { htmlAttributes = new { @class = "form-control" } })
                             </div>
                         </div>
                     </div>
@@ -129,5 +134,4 @@
         </div>
     }
 </body>
-
 </html>

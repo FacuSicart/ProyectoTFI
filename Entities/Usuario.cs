@@ -11,12 +11,30 @@ namespace ProyectoTFI.Entities
 {
     using System;
     using System.Collections.Generic;
+    using ProyectoTFI.Models;
     
     public partial class Usuario
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Usuario()
         {
+            this.Alumno = new HashSet<Alumno>();
+            this.Bitacora = new HashSet<Bitacora>();
+            this.Docente = new HashSet<Docente>();
+        }
+
+        public Usuario(UsuarioViewModel pUsuarioViewModel)
+        {
+            ID = pUsuarioViewModel.ID;
+            Username = pUsuarioViewModel.Username;
+            Password = pUsuarioViewModel.Password;
+            Nombre = pUsuarioViewModel.Nombre;
+            Apellido = pUsuarioViewModel.Apellido;
+            DNI = pUsuarioViewModel.DNI;
+            FechaNacimiento = pUsuarioViewModel.FechaNacimiento;
+            Email = pUsuarioViewModel.Email;
+            Activo = pUsuarioViewModel.Activo;
+
             this.Alumno = new HashSet<Alumno>();
             this.Bitacora = new HashSet<Bitacora>();
             this.Docente = new HashSet<Docente>();

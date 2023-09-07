@@ -21,9 +21,9 @@ namespace ProyectoTFI.Data
 
             return user;
         }
-        public bool VerificarNombreUsuario(Usuario usuario) 
+        public bool VerificarNombreUsuario(string pUsername) 
         {
-            int user = context.Usuario.Count(u => u.Username == usuario.Username);
+            int user = context.Usuario.Count(u => u.Username == pUsername);
             //si el nombre no existe es 0 por lo que se puede usar
             if (user == 0)
             {

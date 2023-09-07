@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using ProyectoTFI.Data;
 using ProyectoTFI.Entities;
+using ProyectoTFI.Models;
 
 namespace ProyectoTFI.Service
 {
@@ -23,16 +24,17 @@ namespace ProyectoTFI.Service
             return user;
         }
 
-        public bool VerificarNombreUsuario(Usuario usuario)
+        public bool VerificarNombreUsuario(UsuarioViewModel usuario)
         {
-            bool existe = usuarioRepository.VerificarNombreUsuario(usuario);
+            bool existe = usuarioRepository.VerificarNombreUsuario(usuario.Username);
 
             return existe;
         }
 
-        public bool CrearAlumno(Usuario usuario)
+        public bool CrearAlumno(UsuarioViewModel usuario)
         {
-            bool Respuesta = usuarioRepository.CrearAlumno(usuario);
+            Usuario UsuarioReal = new Usuario(usuario);
+            bool Respuesta = usuarioRepository.CrearAlumno(UsuarioReal);
             return Respuesta;
         }
 
