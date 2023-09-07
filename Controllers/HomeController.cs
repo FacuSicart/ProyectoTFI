@@ -28,12 +28,12 @@ namespace ProyectoTFI.Controllers
             return View();
         }
 
-        public ActionResult Donaciones()
-        {
-            ViewBag.Message = "Your contact page.";
+        //public ActionResult Donaciones()
+        //{
+        //    ViewBag.Message = "Your contact page.";
 
-            return View();
-        }
+        //    return View();
+        //}
 
         public ActionResult Login()
         {

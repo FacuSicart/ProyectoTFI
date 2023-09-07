@@ -132,25 +132,85 @@
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Data\DonacionRepository.cs" />
     <Compile Include="Data\UsuarioRepository.cs" />
-    <Compile Include="Entities\Administrador.cs" />
-    <Compile Include="Entities\Alumno.cs" />
-    <Compile Include="Entities\Bitacora.cs" />
-    <Compile Include="Entities\Clase.cs" />
-    <Compile Include="Entities\Cursada_de_Alumno.cs" />
-    <Compile Include="Entities\Curso.cs" />
-    <Compile Include="Entities\Docente.cs" />
-    <Compile Include="Entities\Docente_Curso.cs" />
-    <Compile Include="Entities\Donacion.cs" />
-    <Compile Include="Entities\Rol.cs" />
-    <Compile Include="Entities\Solicitud_Respuesta.cs" />
-    <Compile Include="Entities\Solicitud_Soporte.cs" />
-    <Compile Include="Entities\sysdiagrams.cs" />
-    <Compile Include="Entities\Tarjeta.cs" />
-    <Compile Include="Entities\TFIContext.cs" />
-    <Compile Include="Entities\Usuario.cs" />
+    <Compile Include="Entities\Administrador.cs">
+      <DependentUpon>TFIContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\Alumno.cs">
+      <DependentUpon>TFIContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\Bitacora.cs">
+      <DependentUpon>TFIContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\Clase.cs">
+      <DependentUpon>TFIContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\Cursada_de_Alumno.cs">
+      <DependentUpon>TFIContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\Curso.cs">
+      <DependentUpon>TFIContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\Docente.cs">
+      <DependentUpon>TFIContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\Docente_Curso.cs">
+      <DependentUpon>TFIContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\Donacion.cs">
+      <DependentUpon>TFIContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\Quiz.cs">
+      <DependentUpon>TFIContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\Quiz_Conclusion.cs">
+      <DependentUpon>TFIContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\Quiz_Cursada_de_Alumno.cs">
+      <DependentUpon>TFIContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\Quiz_Pregunta.cs">
+      <DependentUpon>TFIContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\Quiz_Pregunta_Opcion.cs">
+      <DependentUpon>TFIContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\Quiz_Respuesta.cs">
+      <DependentUpon>TFIContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\Rol.cs">
+      <DependentUpon>TFIContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\Solicitud_Respuesta.cs">
+      <DependentUpon>TFIContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\Solicitud_Soporte.cs">
+      <DependentUpon>TFIContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\Tarjeta.cs">
+      <DependentUpon>TFIContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\TFIContext.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TFIContext.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\TFIContext.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TFIContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\TFIContext.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TFIContext.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\Usuario.cs">
+      <DependentUpon>TFIContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\DonacionModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\DonacionService.cs" />
     <Compile Include="Service\UsuarioService.cs" />
@@ -172,6 +232,16 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Entities\TFIContext.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>TFIContext.edmx</DependentUpon>
+      <LastGenOutput>TFIContext.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Entities\TFIContext.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>TFIContext.edmx</DependentUpon>
+      <LastGenOutput>TFIContext.cs</LastGenOutput>
+    </Content>
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -190,6 +260,13 @@
     <Content Include="Scripts\bootstrap.esm.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <EntityDeploy Include="Entities\TFIContext.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>TFIContext.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Entities\TFIContext.edmx.diagram">
+      <DependentUpon>TFIContext.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -214,17 +291,15 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Donaciones.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Home\MenuPrincipal.cshtml" />
     <Content Include="Views\Shared\_LayoutInterno.cshtml" />
     <Content Include="Views\Usuario\CrearAlumno.cshtml" />
+    <Content Include="Views\Donacion\RealizarDonacion.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
-    <Folder Include="Views\Donacion\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />
@@ -252,6 +327,9 @@
     <Content Include="Scripts\bootstrap.bundle.js.map" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

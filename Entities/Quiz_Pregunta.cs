@@ -12,18 +12,20 @@ namespace ProyectoTFI.Entities
     using System;
     using System.Collections.Generic;
     
-    public partial class Rol
+    public partial class Quiz_Pregunta
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Rol()
+        public Quiz_Pregunta()
         {
-            this.Usuario = new HashSet<Usuario>();
+            this.Quiz_Pregunta_Opcion = new HashSet<Quiz_Pregunta_Opcion>();
         }
     
         public int ID { get; set; }
-        public string Nombre { get; set; }
+        public string DescripcionPregunta { get; set; }
+        public Nullable<int> QuizID { get; set; }
     
+        public virtual Quiz Quiz { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Usuario> Usuario { get; set; }
+        public virtual ICollection<Quiz_Pregunta_Opcion> Quiz_Pregunta_Opcion { get; set; }
     }
 }
