@@ -254,6 +254,9 @@
     <Content Include="Images\EIBLUEWHITE.png" />
     <Content Include="Images\image12310-snll-300h.png" />
     <Content Include="Images\image22311-io3-400h.png" />
+    <Content Include="Images\login-icon.svg" />
+    <Content Include="Images\password-icon.svg" />
+    <Content Include="Images\username-icon.svg" />
     <Content Include="Images\whitegraybluesoftwallpaperpreview42320-h97-1500w.png" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />

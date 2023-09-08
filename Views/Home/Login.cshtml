@@ -1,48 +1,37 @@
-﻿
+﻿@model ProyectoTFI.Entities.Usuario
+
 @{
     ViewBag.Title = "Iniciar Sesión";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h4>Iniciar Sesión</h4>
-<div style="background-color:antiquewhite">
-    <form action="@Url.Action("VerificarUsuario", "Home")" method="post">
-        <div class="row">
-            <div class="col-md-4">
-                <input type="text" class="form-control" id="txtUsuario" name="username" value="admin" placeholder="Usuario"/>
+<div class="d-flex justify-content-center align-items-center">
+    <div style="background-color:antiquewhite;" class="p-5 rounded-5">
+        <form action="@Url.Action("VerificarUsuario", "Home")" method="post">
+            <div class="d-flex justify-content-center">
+                <img src="~/Images/login-icon.svg" alt="login-icon" style="height:7rem;" />
             </div>
-        </div>
-        <div class="row">
-            <div class="col-md-4">
-                <input type="password" class="form-control" id="txtPwd" name="password" value="admin" placeholder="Contraseña" />
+            <div class="text-center fs-5 fw-bold">Iniciar Sesión</div>
+            <div class="input-group mt-2">
+                <div class="input-group-text bg-warning">
+                    <img src="~/Images/username-icon.svg" alt="username-icon" style="height:1rem;" />
+                </div>
+                @*<input type="text" class="form-control" id="txtUsuario" name="username" value="admin" placeholder="Nombre de Usuario" />*@
+                @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nombre de Usuario" } })
+                @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
             </div>
-        </div>
-        <div class="row">
-            <div class="col-md-4">
-                <input style="background-color:orange; color:black;" type="submit" name="" value="Ingresar" />
+            <div class="input-group mt-2">
+                <div class="input-group-text bg-warning">
+                    <img src="~/Images/password-icon.svg" alt="password-icon" style="height:1rem;" />
+                </div>
+                @Html.PasswordFor(model => model.Password, new { @class = "form-control", placeholder = "Contraseña" })
+                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                @*<input type="password" class="form-control" id="txtPwd" name="password" value="admin" placeholder="Contraseña" />*@
             </div>
-        </div>
-    </form>
+            <div class="text-center mt-2">
+                <input style="background-color: orange;border-color:black; ;color: black;"type="submit" name="" value="Ingresar" class="btn btn-warning w-200" onmouseover="this.style.backgroundColor = 'yellow';" onmouseout="this.style.backgroundColor = 'orange';" />
+            </div>
+        </form>
+    </div>
 </div>
-
-@*<script type="text/javascript">
-    function loguear() {
-        let usr = $('#txtUsuario').val();
-        let pwd = $('#txtPwd').val();
-
-        $.ajax({
-            type: 'POST',
-            url: '@Url.Action("VerificarUsuario", "Home")',
-            data:
-            {
-                username: usr,
-                password: pwd
-            }
-        }).done(function (result) {
-            alert(result);
-        })
-    }
-
-</script>*@
-
-
