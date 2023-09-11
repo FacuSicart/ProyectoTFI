@@ -18,11 +18,12 @@ namespace ProyectoTFI.Entities
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Usuario()
         {
+            this.Administrador = new HashSet<Administrador>();
             this.Alumno = new HashSet<Alumno>();
             this.Bitacora = new HashSet<Bitacora>();
             this.Docente = new HashSet<Docente>();
         }
-
+    
         public Usuario(UsuarioViewModel pUsuarioViewModel)
         {
             ID = pUsuarioViewModel.ID;
@@ -51,6 +52,8 @@ namespace ProyectoTFI.Entities
         public Nullable<bool> Activo { get; set; }
         public Nullable<int> RolID { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Administrador> Administrador { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Alumno> Alumno { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

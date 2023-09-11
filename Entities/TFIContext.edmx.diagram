@@ -4,47 +4,49 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="633bd89ac7eb4d2fb63f313a734ca051" Name="Diagram1">
-        <EntityTypeShape EntityType="TFIModel.Administrador" Width="1.5" PointX="3" PointY="3.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="TFIModel.Alumno" Width="1.5" PointX="5.25" PointY="5" IsExpanded="true" />
-        <EntityTypeShape EntityType="TFIModel.Bitacora" Width="1.5" PointX="5.25" PointY="8.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="TFIModel.Clase" Width="1.5" PointX="5.25" PointY="15" IsExpanded="true" />
-        <EntityTypeShape EntityType="TFIModel.Cursada_de_Alumno" Width="1.5" PointX="7.5" PointY="4" IsExpanded="true" />
-        <EntityTypeShape EntityType="TFIModel.Curso" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="TFIModel.Docente" Width="1.5" PointX="5.25" PointY="11.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="TFIModel.Docente_Curso" Width="1.5" PointX="7.5" PointY="11.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="TFIModel.Donacion" Width="1.5" PointX="12" PointY="11.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="TFIModel.Quiz" Width="1.5" PointX="7.5" PointY="14.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="TFIModel.Quiz_Conclusion" Width="1.5" PointX="0.75" PointY="11.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="TFIModel.Quiz_Cursada_de_Alumno" Width="1.5" PointX="9.75" PointY="4" IsExpanded="true" />
-        <EntityTypeShape EntityType="TFIModel.Quiz_Pregunta" Width="1.5" PointX="7.5" PointY="18.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="TFIModel.Quiz_Pregunta_Opcion" Width="1.5" PointX="9.75" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="TFIModel.Quiz_Respuesta" Width="1.5" PointX="12" PointY="4" IsExpanded="true" />
-        <EntityTypeShape EntityType="TFIModel.Rol" Width="1.5" PointX="0.75" PointY="8" IsExpanded="true" />
-        <EntityTypeShape EntityType="TFIModel.Solicitud_Respuesta" Width="1.5" PointX="9.75" PointY="7.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="TFIModel.Solicitud_Soporte" Width="1.5" PointX="7.5" PointY="7.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="TFIModel.Tarjeta" Width="1.5" PointX="9.75" PointY="12" IsExpanded="true" />
-        <EntityTypeShape EntityType="TFIModel.Usuario" Width="1.5" PointX="3" PointY="7" IsExpanded="true" />
-        <AssociationConnector Association="TFIModel.FK_Curso_Administrador" ManuallyRouted="false" />
-        <AssociationConnector Association="TFIModel.FK_Solicitud_Respuesta_Administrador" ManuallyRouted="false" />
-        <AssociationConnector Association="TFIModel.FK_Alumno_Usuario" ManuallyRouted="false" />
-        <AssociationConnector Association="TFIModel.FK_Cursada_de_Alumno_Alumno" ManuallyRouted="false" />
-        <AssociationConnector Association="TFIModel.FK_Solicitud_Soporte_Alumno" ManuallyRouted="false" />
-        <AssociationConnector Association="TFIModel.FK_Bitacora_Usuario" ManuallyRouted="false" />
-        <AssociationConnector Association="TFIModel.FK_Clase_Curso" ManuallyRouted="false" />
-        <AssociationConnector Association="TFIModel.FK_Quiz_Clase" ManuallyRouted="false" />
-        <AssociationConnector Association="TFIModel.FK_Cursada_de_Alumno_Curso" ManuallyRouted="false" />
-        <AssociationConnector Association="TFIModel.FK_Quiz_Cursada_de_Alumno_Cursada_de_Alumno" ManuallyRouted="false" />
-        <AssociationConnector Association="TFIModel.FK_Docente_Curso_Docente" ManuallyRouted="false" />
-        <AssociationConnector Association="TFIModel.FK_Docente_Usuario" ManuallyRouted="false" />
-        <AssociationConnector Association="TFIModel.FK_Donacion_Tarjeta" ManuallyRouted="false" />
-        <AssociationConnector Association="TFIModel.FK_Quiz_Cursada_de_Alumno_Quiz" ManuallyRouted="false" />
-        <AssociationConnector Association="TFIModel.FK_Quiz_Pregunta_Quiz" ManuallyRouted="false" />
-        <AssociationConnector Association="TFIModel.FK_Quiz_Respuesta_Quiz_Cursada_de_Alumno" ManuallyRouted="false" />
-        <AssociationConnector Association="TFIModel.FK_Quiz_Pregunta_Opcion_Quiz_Pregunta" ManuallyRouted="false" />
-        <AssociationConnector Association="TFIModel.FK_Quiz_Respuesta_Quiz_Pregunta_Opcion" ManuallyRouted="false" />
-        <AssociationConnector Association="TFIModel.FK_Usuario_Rol" ManuallyRouted="false" />
-        <AssociationConnector Association="TFIModel.FK_Solicitud_Respuesta_Solicitud_Soporte" ManuallyRouted="false" />
+      <Diagram DiagramId="673c1d54bdc5427e82787ade46b076bd" Name="Diagram1">
+        <EntityTypeShape EntityType="TFIContext.Administrador" Width="1.5" PointX="5.25" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TFIContext.Alumno" Width="1.5" PointX="5.25" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TFIContext.Bitacora" Width="1.5" PointX="5.25" PointY="12.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TFIContext.Clase" Width="1.5" PointX="9.75" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TFIContext.Cursada_de_Alumno" Width="1.5" PointX="9.75" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TFIContext.Curso" Width="1.5" PointX="7.5" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TFIContext.Docente" Width="1.5" PointX="5.25" PointY="16" IsExpanded="true" />
+        <EntityTypeShape EntityType="TFIContext.Docente_Curso" Width="1.5" PointX="7.5" PointY="15.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TFIContext.Donacion" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="TFIContext.Quiz" Width="1.5" PointX="12" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TFIContext.Quiz_Conclusion" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TFIContext.Quiz_Cursada_de_Alumno" Width="1.5" PointX="14.25" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TFIContext.Quiz_Pregunta" Width="1.5" PointX="14.25" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TFIContext.Quiz_Pregunta_Opcion" Width="1.5" PointX="16.5" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TFIContext.Quiz_Respuesta" Width="1.5" PointX="18.75" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TFIContext.Rol" Width="1.5" PointX="0.75" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TFIContext.Solicitud_Respuesta" Width="1.5" PointX="12.75" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TFIContext.Solicitud_Soporte" Width="1.5" PointX="7.5" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TFIContext.sysdiagrams" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TFIContext.Tarjeta" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TFIContext.Usuario" Width="1.5" PointX="3" PointY="10" IsExpanded="true" />
+        <AssociationConnector Association="TFIContext.FK_Administrador_Usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="TFIContext.FK_Curso_Administrador" ManuallyRouted="false" />
+        <AssociationConnector Association="TFIContext.FK_Solicitud_Respuesta_Administrador" ManuallyRouted="false" />
+        <AssociationConnector Association="TFIContext.FK_Alumno_Usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="TFIContext.FK_Cursada_de_Alumno_Alumno" ManuallyRouted="false" />
+        <AssociationConnector Association="TFIContext.FK_Solicitud_Soporte_Alumno" ManuallyRouted="false" />
+        <AssociationConnector Association="TFIContext.FK_Bitacora_Usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="TFIContext.FK_Clase_Curso" ManuallyRouted="false" />
+        <AssociationConnector Association="TFIContext.FK_Quiz_Clase" ManuallyRouted="false" />
+        <AssociationConnector Association="TFIContext.FK_Cursada_de_Alumno_Curso" ManuallyRouted="false" />
+        <AssociationConnector Association="TFIContext.FK_Quiz_Cursada_de_Alumno_Cursada_de_Alumno" ManuallyRouted="false" />
+        <AssociationConnector Association="TFIContext.FK_Docente_Curso_Docente" ManuallyRouted="false" />
+        <AssociationConnector Association="TFIContext.FK_Docente_Usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="TFIContext.FK_Donacion_Tarjeta" ManuallyRouted="false" />
+        <AssociationConnector Association="TFIContext.FK_Quiz_Cursada_de_Alumno_Quiz" ManuallyRouted="false" />
+        <AssociationConnector Association="TFIContext.FK_Quiz_Pregunta_Quiz" ManuallyRouted="false" />
+        <AssociationConnector Association="TFIContext.FK_Quiz_Respuesta_Quiz_Cursada_de_Alumno" ManuallyRouted="false" />
+        <AssociationConnector Association="TFIContext.FK_Quiz_Pregunta_Opcion_Quiz_Pregunta" ManuallyRouted="false" />
+        <AssociationConnector Association="TFIContext.FK_Quiz_Respuesta_Quiz_Pregunta_Opcion" ManuallyRouted="false" />
+        <AssociationConnector Association="TFIContext.FK_Usuario_Rol" ManuallyRouted="false" />
+        <AssociationConnector Association="TFIContext.FK_Solicitud_Respuesta_Solicitud_Soporte" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

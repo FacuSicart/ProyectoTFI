@@ -1,0 +1,59 @@
+﻿@model IEnumerable<ProyectoTFI.Entities.Usuario>
+
+@{
+    ViewBag.Title = "Gestión Administradores";
+    Layout = "~/Views/Shared/_LayoutInterno.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>VerAdministradores</title>
+</head>
+<body>
+    @Html.ActionLink("Crear", "CrearAdministrador", "Admin", new { area = "" }, new { @class = "btn", @style = "background-color: blue;color:white;border-color:blue;", @onmouseover = "this.style.backgroundColor='blue';", @onmouseout = "this.style.backgroundColor='white'; this.style.color: blue;" })
+    <div class="contentTable">
+        <table class="table table-hover" aria-describedby="admin">
+            <thead>
+                <tr>
+                    <th scope="col" class="col-2 order">ID</th>
+                    <th scope="col" class="col-2 order">Nombre</th>
+                    <th scope="col" class="col-2 ">Apellido</th>
+                    <th scope="col" class="col-1 ">Nombre Usuario</th>
+                </tr>
+            </thead>
+
+            <tbody id="bodyTable">
+
+                @foreach (var admin in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => admin.ID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => admin.Nombre)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => admin.Apellido)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => admin.Username)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = admin.ID }) |
+                            @Html.ActionLink("Details", "Details", new { id = admin.ID }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = admin.ID })
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+
+        </table>
+    </div>
+
+</body>
+</html>
