@@ -48,11 +48,13 @@ namespace ProyectoTFI.Controllers
             if (user != null)
             {
                 Session["user"] = user;
+                Session["Mensaje"] = null; //Limpiamos la variable de Sesion de Mensaje de Error si se logea correctamente
                 return RedirectToAction("MenuPrincipal", "Home");
             }
             else
             {
-                return View("Error", model:"El nombre o contraseña es incorrecto");
+                Session["Mensaje"] = "Usuario y/o Contraseña incorrecto/s";
+                return RedirectToAction("Login", "Home");
             }
         }
 
