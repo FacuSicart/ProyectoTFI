@@ -20,10 +20,14 @@ namespace ProyectoTFI.Entities
             this.Curso = new HashSet<Curso>();
             this.Solicitud_Respuesta = new HashSet<Solicitud_Respuesta>();
         }
-    
+        public Administrador(Usuario pUsuario)
+        {
+            Usuario = pUsuario;
+        }
         public int ID { get; set; }
         public int UsuarioID { get; set; }
     
+        public virtual Usuario Usuario { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Curso> Curso { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
