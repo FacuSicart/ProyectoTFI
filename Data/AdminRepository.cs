@@ -15,9 +15,18 @@ namespace ProyectoTFI.Data
             context = new TFIContext();
         }
 
-        public List<Usuario> ListarUsuarios()
+        public List<Usuario> ListarUsuarios(string pBusqueda)
         {
-            return context.Usuario.Where(u => u.RolID == 2 && u.Activo == true).ToList();
+            List<Usuario> LU = new List<Usuario>();
+            if (!String.IsNullOrEmpty(pBusqueda))
+            {
+                LU = context.Usuario.Where((u => (u.RolID == 2 && u.Activo == true) && (u.Nombre.Contains(pBusqueda) || u.Username.Contains(pBusqueda) || u.Apellido.Contains(pBusqueda)))).ToList();
+            }
+            else
+            { 
+                LU = context.Usuario.Where(u => u.RolID == 2 && u.Activo == true).ToList();
+            }
+            return LU;
             //return context.Usuario.Where(u => u.RolID == 2 && (u.Nombre.Contains(pBusqueda) || u.Apellido.Contains(pBusqueda) || u.Username.Contains(pBusqueda)) || pBusqueda == null).ToList();
         }
 
