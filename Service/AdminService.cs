@@ -11,20 +11,20 @@ namespace ProyectoTFI.Service
     public class AdminService
     {
         AdminRepository adminRepository;
-        public AdminService() 
+        public AdminService()
         {
-            adminRepository = new AdminRepository(); 
+            adminRepository = new AdminRepository();
         }
 
 
-        public List<Usuario> ListarAdministradores()
+        public List<Usuario> ListarAdministradores(string pBuscar)
         {
-            return adminRepository.ListarUsuarios();
+            return adminRepository.ListarUsuarios(pBuscar);
         }
-        public bool CrearAdministrador(UsuarioViewModel usuario)
+        public bool AgregarAdministrador(UsuarioViewModel usuario)
         {
             Usuario UsuarioReal = new Usuario(usuario);
-            bool Respuesta = adminRepository.CrearAdministrador(UsuarioReal);
+            bool Respuesta = adminRepository.AgregarAdministrador(UsuarioReal);
             return Respuesta;
         }
 

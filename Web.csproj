@@ -253,6 +253,7 @@
     <Content Include="Images\EDUCARIGUALDAD.png" />
     <Content Include="Images\educarigualdad1236-tpsc-300w.png" />
     <Content Include="Images\EDUCARIGUALDAD2.png" />
+    <Content Include="Images\EI.ico" />
     <Content Include="Images\EI.png" />
     <Content Include="Images\EIBLUEGREEN.png" />
     <Content Include="Images\EIBLUEWHITE.png" />
@@ -307,7 +308,7 @@
     <Content Include="Views\Usuario\CrearAlumno.cshtml" />
     <Content Include="Views\Donacion\RealizarDonacion.cshtml" />
     <Content Include="Views\Shared\Gracias.cshtml" />
-    <Content Include="Views\Admin\CrearAdministrador.cshtml" />
+    <Content Include="Views\Admin\AgregarAdministrador.cshtml" />
     <Content Include="Views\Admin\VerAdministradores.cshtml" />
   </ItemGroup>
   <ItemGroup>

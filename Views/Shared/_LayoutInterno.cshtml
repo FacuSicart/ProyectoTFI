@@ -7,7 +7,8 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Mi aplicación ASP.NET</title>
+    <title>@ViewBag.Title - Educar Igualdad</title>
+    <link href="~/Images/EI.ico" rel="shortcut icon" type="image/x-icon" />
 
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
@@ -16,39 +17,42 @@
 <body>
     <nav class="navbar navbar-expand-sm navbar-toggleable-sm" style="background-color:orange">
         <div class="container">
-
-            @Html.ActionLink("Educar Igualdad", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            <a class="navbar-brand" href="@Url.Action("MenuPrincipal", "Home")">
+                <img src="~/Images/EIBLUEWHITE.png" alt="" height="24" class="d-inline-block align-text-top">
+                Educar Igualdad
+            </a>
+            @*@Html.ActionLink("Educar Igualdad", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
             <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Alternar navegación" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="float-end">
                 <ul class="navbar-nav flex-grow-1">
-                    <li>@Html.ActionLink("Inicio", "MenuPrincipal", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li style="margin-right: 45px; font-weight: bold; font-size: 16px;">@Html.ActionLink("Inicio", "MenuPrincipal", "Home", new { area = "" }, new { @class = "nav-link" })</li>
                     @if (usuario.Rol.ID == 1) //WebMaster
                     {
-                        <li>@Html.ActionLink("Gestión Administradores", "VerAdministradores", "Admin", new { area = "" }, new { @class = "nav-link" })</li>
-                        <li>@Html.ActionLink("Bitácora", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li style="margin-right: 45px; font-weight: bold; font-size: 16px;">@Html.ActionLink("Gestión Administradores", "VerAdministradores", "Admin", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li style="margin-right: 45px; font-weight: bold; font-size: 16px;">@Html.ActionLink("Bitácora", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
                     }
                     @if (usuario.Rol.ID == 2) //Administrador
                     {
-                        <li>@Html.ActionLink("Soporte", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                        <li>@Html.ActionLink("Gestión Docentes", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                        <li>@Html.ActionLink("Gestión Cursos", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li style="margin-right: 45px; font-weight: bold; font-size: 16px;">@Html.ActionLink("Soporte", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li style="margin-right: 45px; font-weight: bold; font-size: 16px;">@Html.ActionLink("Gestión Docentes", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li style="margin-right: 45px; font-weight: bold; font-size: 16px;">@Html.ActionLink("Gestión Cursos", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
                     }
                     @if (usuario.Rol.ID == 3) //Docente
                     {
-                        <li>@Html.ActionLink("Mis Cursos", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                        <li>@Html.ActionLink("Rendimiento", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li style="margin-right: 45px; font-weight: bold; font-size: 16px;">@Html.ActionLink("Mis Cursos", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li style="margin-right: 45px; font-weight: bold; font-size: 16px;">@Html.ActionLink("Rendimiento", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
                     }
                     @if (usuario.Rol.ID == 4) //Alumno
                     {
-                        <li>@Html.ActionLink("Mi Perfil", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                        <li>@Html.ActionLink("Cursos", "About", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                        <li>@Html.ActionLink("Mis Cursos", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                        <li>@Html.ActionLink("Soporte", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li style="margin-right: 45px; font-weight: bold; font-size: 16px;"> style= "margin-right: 45px; font-weight: bold; font-size: 16px;"@Html.ActionLink("Mi Perfil", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li style="margin-right: 45px; font-weight: bold; font-size: 16px;">@Html.ActionLink("Cursos", "About", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li style="margin-right: 45px; font-weight: bold; font-size: 16px;">@Html.ActionLink("Mis Cursos", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li style="margin-right: 45px; font-weight: bold; font-size: 16px;">@Html.ActionLink("Soporte", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
                     }
-                    <li>@Html.ActionLink("Cerrar Sesión", "CerrarSesion", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li style="margin-right: 45px; font-weight: bold; font-size: 16px;">@Html.ActionLink("Cerrar Sesión", "CerrarSesion", "Home", new { area = "" }, new { @class = "nav-link" })</li>
                 </ul>
             </div>
         </div>

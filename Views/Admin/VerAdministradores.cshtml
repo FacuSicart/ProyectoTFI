@@ -13,16 +13,19 @@
     <title>VerAdministradores</title>
 </head>
 <body>
-    @Html.ActionLink("Crear", "CrearAdministrador", "Admin", new { area = "" }, new { @class = "btn", @style = "background-color: blue;color:white;border-color:blue;", @onmouseover = "this.style.backgroundColor='blue';", @onmouseout = "this.style.backgroundColor='white'; this.style.color: blue;" })
+    @*@Html.ActionLink("Agregar", "AgregarAdministrador", "Admin", new { area = "" }, new { @class = "btn", @style = "background-color: blue;color:white;border-color:blue;", @onmouseover = "this.style.backgroundColor='blue';", @onmouseout = "this.style.backgroundColor='white'; this.style.color: blue;" })*@
+    @Html.ActionLink("Agregar", "AgregarAdministrador", "Admin", new { area = "" }, new { @class = "btn btn-success" })
+
     <div class="contentTable">
-        <table class="table table-hover" aria-describedby="admin">
-            <thead>
+        <table class="table table-hover" aria-describedby="admin" style="padding-top:20px;">
+            <thead style="background-color: #ffd800;">
                 <tr>
-                    <th scope="col" class="col-2 order">ID</th>
-                    <th scope="col" class="col-2 order">Nombre</th>
-                    <th scope="col" class="col-2 ">Apellido</th>
-                    <th scope="col" class="col-1 ">Nombre Usuario</th>
-                    <th scope="col" class="col-1 ">Activo</th>
+                    <th scope="col" class="col-2 order" style="border: 2px solid #fff;">ID</th>
+                    <th scope="col" class="col-2 order" style="border: 2px solid #fff;">Nombre</th>
+                    <th scope="col" class="col-2" style="border: 2px solid #fff;">Apellido</th>
+                    <th scope="col" class="col-1" style="border: 2px solid #fff;">Usuario</th>
+                    @*<th scope="col" class="col-1 ">Activo</th>*@
+                    <th scope="col" class="col-1" style="border: 2px solid #fff;">Acciones</th>
                 </tr>
             </thead>
 
@@ -43,13 +46,15 @@
                         <td>
                             @Html.DisplayFor(modelItem => admin.Username)
                         </td>
+                        @*<td>
+                                @Html.DisplayFor(modelItem => admin.Activo)
+                            </td>*@
                         <td>
-                            @Html.DisplayFor(modelItem => admin.Activo)
-                        </td>
-                        <td>
-                            @Html.ActionLink("Edit", "EditarAdministrador", new { id = admin.ID }) |
-                            @Html.ActionLink("Details", "Details", new { id = admin.ID }) |
-                            @Html.ActionLink("Delete", "BajaAdministrador", new { id = admin.ID })
+                            <div class="d-flex justify-content-between">
+                                @Html.ActionLink("🔍", "Details", new { id = admin.ID }, new { @class = "btn btn-info" })
+                                @Html.ActionLink("✏", "EditarAdministrador", new { id = admin.ID }, new { @class = "btn btn-primary" })
+                                @Html.ActionLink("🗑", "BajaAdministrador", new { id = admin.ID }, new { @class = "btn btn-danger" })
+                            </div>
                         </td>
                     </tr>
                 }

@@ -15,12 +15,13 @@ namespace ProyectoTFI.Data
             context = new TFIContext();
         }
 
-        public List<Usuario> ListarUsuarios()
+        public List<Usuario> ListarUsuarios(string pBusqueda)
         {
-            return context.Usuario.Where(u => u.RolID == 2).ToList();
+            //return context.Usuario.Where(u => u.RolID == 2).ToList();
+            return context.Usuario.Where(u => u.RolID == 2 && (u.Nombre.Contains(pBusqueda) || u.Apellido.Contains(pBusqueda) || u.Username.Contains(pBusqueda)) || pBusqueda == null).ToList();
         }
 
-        public bool CrearAdministrador(Usuario usuario)
+        public bool AgregarAdministrador(Usuario usuario)
         {
             Administrador a = new Administrador(usuario);
             usuario.RolID = 2;
