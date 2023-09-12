@@ -32,6 +32,19 @@ namespace ProyectoTFI.Data
             else { return false; }
         }
 
+        public string ObtenerUsername(int pID)
+        {
+            string Username = "";
+            Usuario usuario = context.Usuario.First(x => x.ID == pID);
+
+            if (usuario!= null)
+            {
+                Username = usuario.Username;
+            }
+
+            return Username;
+        }
+
         public bool CrearAlumno(Usuario usuario)
         {
             Alumno a = new Alumno(usuario);

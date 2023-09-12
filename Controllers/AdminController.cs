@@ -28,10 +28,10 @@ namespace ProyectoTFI.Controllers
             return View(usuario);
         }
 
-        public ActionResult VerAdministradores(string pBuscar)
+        public ActionResult VerAdministradores()
         {
             adminService = new AdminService();
-            var listaAdmins = adminService.ListarAdministradores(pBuscar);
+            var listaAdmins = adminService.ListarAdministradores();
             return View(listaAdmins);
         }
 
@@ -52,7 +52,8 @@ namespace ProyectoTFI.Controllers
                 //si el resultado es false existe, por lo tanto no se puede usar
                 if (usuarioService.VerificarNombreUsuario(usuario) == false)
                 {
-                    return View("Error", model: "Ya existe ese nombre de usuario");
+                    ViewData["ErrorMensaje"] = "El Nombre de Usuario ingresado ya está en uso, intente con otro";
+                    return View();
                 }
 
                 var respuesta = adminService.AgregarAdministrador(usuario);
@@ -76,18 +77,32 @@ namespace ProyectoTFI.Controllers
         [HttpPost]
         public ActionResult EditarAdministrador(UsuarioViewModel usuario)
         {
+            bool Palanca = false; //Si está en false, no permito que modifique. Si está en true sí.
             adminService = new AdminService();
             usuarioService = new UsuarioService();
             if (ModelState.IsValid)
             {
-                //si el resultado es false existe, por lo tanto no se puede usar
-                if (usuarioService.VerificarNombreUsuario(usuario) == false)
+                if (!(usuarioService.ObtenerUsername(usuario.ID) == usuario.Username)) //Primero verificamos que el Nombre de Usuario no se haya modificado. Si no se modificó, no validamos el username
                 {
-                    return View("Error", model: "Ya existe ese nombre de usuario");
+                    //si el resultado es false existe, por lo tanto no se puede usar
+                    if (usuarioService.VerificarNombreUsuario(usuario) == false)
+                    {
+                        ViewData["ErrorMensaje"] = "El Nombre de Usuario ingresado ya está en uso, intente con otro";
+                    }
+                    else { Palanca = true; } //Si todo ok, habilitamos la palanca
+                }
+                else { Palanca = true; } //Si todo ok, habilitamos la palanca
+
+                if (Palanca) //Si no hay problemas de nombre o lo que sea, permitimos Editar
+                {
+                    adminService.EditarAdministrador(usuario);
+                    return RedirectToAction("VerAdministradores", "Admin");
+                }
+                else
+                {
+                    return View();
                 }
 
-                adminService.EditarAdministrador(usuario);
-                return RedirectToAction("VerAdministradores", "Admin");
             }
             else
             {
@@ -96,26 +111,36 @@ namespace ProyectoTFI.Controllers
         }
 
         // GET: Admin/Delete/5
-        public ActionResult BajaAdministrador()
+        public ActionResult BajaAdministrador(int id)
         {
-            return View();
+            adminService = new AdminService();
+            var usuario = adminService.VerAdministrador(id);
+            return View(usuario);
         }
 
         // POST: Admin/Delete/5
         [HttpPost]
-        public ActionResult BajaAdministrador(int id)
+        public ActionResult BajaAdministrador(UsuarioViewModel pUser)
         {
             adminService = new AdminService();
-            var baja = adminService.BajaAdministrador(id);
-            if (baja == true)
+
+            if (pUser.ID == 1)
             {
-                return RedirectToAction("VerAdministradores", "Admin");
+                ViewData["ErrorMensaje"] = "No se puede eliminar al Administrador Principal";
+                return View();
             }
             else
             {
-                return View("Error", model: "No se encuentra logueado");
+                bool baja = adminService.BajaAdministrador(pUser.ID);
+                if (baja == true)
+                {
+                    return RedirectToAction("VerAdministradores", "Admin");
+                }
+                else
+                {
+                    return View("Error", model: "No se encuentra logueado");
+                }
             }
-
         }
     }
 }
