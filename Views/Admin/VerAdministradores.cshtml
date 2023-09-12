@@ -2,10 +2,47 @@
 @model PagedList.IPagedList<ProyectoTFI.Entities.Usuario>
 @using PagedList.Mvc;
 
-@{ ViewBag.Title = "Gestión Administradores";
-    Layout = "~/Views/Shared/_LayoutInterno.cshtml"; }
+@{  ViewBag.Title = "Gestión Administradores";
+    Layout = "~/Views/Shared/_LayoutInterno.cshtml";
+    
+ }
 
 <!DOCTYPE html>
+
+<style>
+    .pagination {
+        display: flex;
+        list-style: none;
+        padding: 0;
+    }
+
+        .pagination li {
+            margin-right: 10px; /* Espacio entre elementos de paginación */
+        }
+
+        .pagination a {
+            display: inline-block;
+            width: 30px; /* Ancho del círculo */
+            height: 30px; /* Altura del círculo */
+            border-radius: 50%; /* Hace que sea un círculo */
+            background-color: white; /* Fondo blanco por defecto */
+            color: #333;
+            text-align: center;
+            line-height: 30px; /* Centra el contenido verticalmente */
+            text-decoration: none;
+            transition: background-color 0.3s ease; /* Agrega una transición de color suave */
+        }
+
+            .pagination a:hover {
+                background-color: #ddd; /* Cambia el fondo a gris cuando pasas el mouse */
+            }
+
+        .pagination .active a {
+            background-color: #f90; /* Cambia el fondo a naranja cuando está activo */
+            color: white;
+        }
+
+</style>
 
 <html>
 <head>
@@ -67,15 +104,25 @@
                 @Html.ActionLink("🗑", "BajaAdministrador", new { id = admin.ID }, new { @class = "btn btn-danger" })
             </div>
         </td>
-    </tr>}
+    </tr>
+}
 
             </tbody>
 
         </table>
         Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
         <br />
+        @*@Html.PagedListPager(Model, page => Url.Action("VerAdministradores",
+        new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))*@
+
         @Html.PagedListPager(Model, page => Url.Action("VerAdministradores",
-                     new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+         new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }),
+         new PagedListRenderOptions
+         {
+             LiElementClasses = new[] { "page-item" },
+             DisplayLinkToPreviousPage = PagedListDisplayMode.Always,
+             DisplayLinkToNextPage = PagedListDisplayMode.Always,
+         })
     </div>
 
 </body>
