@@ -1,15 +1,16 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Educar Igualdad</title>
+    <link href="~/Images/EI.ico" rel="shortcut icon" type="image/x-icon" />
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm", style="background-color: orange;">        
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm" , style="background-color: orange;">
         <div class="container">
             <a class="navbar-brand" href="@Url.Action("Index", "Home")">
                 <img src="~/Images/EIBLUEWHITE.png" alt="" height="24" class="d-inline-block align-text-top">
@@ -35,7 +36,7 @@
         <footer>
             <p>&copy; @DateTime.Now.Year - Educar Igualdad</p>
         </footer>
-    </div>   
+    </div>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")

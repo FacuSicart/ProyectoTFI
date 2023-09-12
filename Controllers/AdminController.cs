@@ -26,22 +26,22 @@ namespace ProyectoTFI.Controllers
             return View();
         }
 
-        public ActionResult VerAdministradores()
+        public ActionResult VerAdministradores(string pBuscar)
         {
             adminService = new AdminService();
-            var listaAdmins = adminService.ListarAdministradores();
+            var listaAdmins = adminService.ListarAdministradores(pBuscar);
             return View(listaAdmins);
         }
 
         // GET: Admin/Create
-        public ActionResult CrearAdministrador()
+        public ActionResult AgregarAdministrador()
         {
             return View();
         }
 
         // POST: Admin/Create
         [HttpPost]
-        public ActionResult CrearAdministrador(UsuarioViewModel usuario)
+        public ActionResult AgregarAdministrador(UsuarioViewModel usuario)
         {
             adminService = new AdminService();
             usuarioService = new UsuarioService();
@@ -53,7 +53,7 @@ namespace ProyectoTFI.Controllers
                     return View("Error", model: "Ya existe ese nombre de usuario");
                 }
 
-                var respuesta = adminService.CrearAdministrador(usuario);
+                var respuesta = adminService.AgregarAdministrador(usuario);
                 return RedirectToAction("VerAdministradores", "Admin");
             }
             else
@@ -96,7 +96,7 @@ namespace ProyectoTFI.Controllers
         {
             adminService = new AdminService();
             var baja = adminService.BajaAdministrador(id);
-            if(baja == true)
+            if (baja == true)
             {
                 return RedirectToAction("VerAdministradores", "Admin");
             }
