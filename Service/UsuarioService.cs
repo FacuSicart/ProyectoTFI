@@ -31,6 +31,11 @@ namespace ProyectoTFI.Service
             return existe;
         }
 
+        public string ObtenerUsername(int pID)
+        {
+            return usuarioRepository.ObtenerUsername(pID);
+        }
+
         public bool CrearAlumno(UsuarioViewModel usuario)
         {
             Usuario UsuarioReal = new Usuario(usuario);

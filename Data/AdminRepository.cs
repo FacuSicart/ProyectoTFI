@@ -15,10 +15,10 @@ namespace ProyectoTFI.Data
             context = new TFIContext();
         }
 
-        public List<Usuario> ListarUsuarios(string pBusqueda)
+        public List<Usuario> ListarUsuarios()
         {
-            //return context.Usuario.Where(u => u.RolID == 2).ToList();
-            return context.Usuario.Where(u => u.RolID == 2 && (u.Nombre.Contains(pBusqueda) || u.Apellido.Contains(pBusqueda) || u.Username.Contains(pBusqueda)) || pBusqueda == null).ToList();
+            return context.Usuario.Where(u => u.RolID == 2 && u.Activo == true).ToList();
+            //return context.Usuario.Where(u => u.RolID == 2 && (u.Nombre.Contains(pBusqueda) || u.Apellido.Contains(pBusqueda) || u.Username.Contains(pBusqueda)) || pBusqueda == null).ToList();
         }
 
         public bool AgregarAdministrador(Usuario usuario)
@@ -32,7 +32,7 @@ namespace ProyectoTFI.Data
         }
         public void BajaAdministrador(int id)
         {
-            Usuario user = context.Usuario.Include("Rol").Where(u => u.ID == id).FirstOrDefault();
+            Usuario user = context.Usuario.Where(u => u.ID == id).FirstOrDefault();
             user.Activo = false;
             context.SaveChanges();
         }
@@ -52,7 +52,6 @@ namespace ProyectoTFI.Data
             user.Email = usuario.Email;
             user.Nombre = usuario.Nombre;
             user.Apellido = usuario.Apellido;
-            user.Activo = usuario.Activo;
             user.DNI = usuario.DNI;
             user.FechaNacimiento = usuario.FechaNacimiento;
             context.SaveChanges();
