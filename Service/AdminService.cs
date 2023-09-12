@@ -17,9 +17,9 @@ namespace ProyectoTFI.Service
         }
 
 
-        public List<Usuario> ListarAdministradores()
+        public List<Usuario> ListarAdministradores(string pBusqueda)
         {
-            return adminRepository.ListarUsuarios();
+            return adminRepository.ListarUsuarios(pBusqueda);
         }
 
         public bool AgregarAdministrador(UsuarioViewModel usuario)

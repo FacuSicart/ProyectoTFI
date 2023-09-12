@@ -1,4 +1,5 @@
-﻿using ProyectoTFI.Entities;
+﻿using PagedList;
+using ProyectoTFI.Entities;
 using ProyectoTFI.Models;
 using ProyectoTFI.Service;
 using System;
@@ -28,11 +29,14 @@ namespace ProyectoTFI.Controllers
             return View(usuario);
         }
 
-        public ActionResult VerAdministradores()
+        public ActionResult VerAdministradores(string pBusqueda, int? page)
         {
             adminService = new AdminService();
-            var listaAdmins = adminService.ListarAdministradores();
-            return View(listaAdmins);
+            var listaAdmins = adminService.ListarAdministradores(pBusqueda);
+
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+            return View(listaAdmins.ToPagedList(pageNumber,pageSize));
         }
 
         // GET: Admin/Create

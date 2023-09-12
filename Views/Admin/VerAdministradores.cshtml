@@ -1,9 +1,9 @@
-﻿@model IEnumerable<ProyectoTFI.Entities.Usuario>
+﻿@*@model IEnumerable<ProyectoTFI.Entities.Usuario>*@
+@model PagedList.IPagedList<ProyectoTFI.Entities.Usuario>
+@using PagedList.Mvc;
 
-@{
-    ViewBag.Title = "Gestión Administradores";
-    Layout = "~/Views/Shared/_LayoutInterno.cshtml";
-}
+@{ ViewBag.Title = "Gestión Administradores";
+    Layout = "~/Views/Shared/_LayoutInterno.cshtml"; }
 
 <!DOCTYPE html>
 
@@ -17,6 +17,16 @@
     <hr />
     @*@Html.ActionLink("Agregar", "AgregarAdministrador", "Admin", new { area = "" }, new { @class = "btn", @style = "background-color: blue;color:white;border-color:blue;", @onmouseover = "this.style.backgroundColor='blue';", @onmouseout = "this.style.backgroundColor='white'; this.style.color: blue;" })*@
     @Html.ActionLink("Agregar", "AgregarAdministrador", "Admin", new { area = "" }, new { @class = "btn btn-info", @style = "color:white;font-weight:bold;" })
+    <div style="display: inline-block; vertical-align: middle;">
+        @using (Html.BeginForm())
+        {
+<p style="display: inline-block;" placerholder="hola">
+    @Html.TextBox("pBusqueda", null, new { placeholder = "Escriba aquí para buscar" })
+</p>
+                <p style="display: inline-block;">
+                    <input type="submit" value="Buscar" class="btn btn-info" style="color: white; font-weight: bold;" />
+                </p>}
+    </div>
     <div class="contentTable">
         <table class="table table-hover" aria-describedby="admin" style="padding-top:20px;">
             <thead style="background-color: #ffd800;">
@@ -34,35 +44,38 @@
 
                 @foreach (var admin in Model)
                 {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => admin.ID)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => admin.Nombre)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => admin.Apellido)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => admin.Username)
-                        </td>
-                        @*<td>
-                                @Html.DisplayFor(modelItem => admin.Activo)
-                            </td>*@
-                        <td>
-                            <div class="d-flex justify-content-between">
-                                @Html.ActionLink("🔍", "DetalleAdministrador", new { id = admin.ID }, new { @class = "btn btn-primary" })
-                                @Html.ActionLink("✏", "EditarAdministrador", new { id = admin.ID }, new { @class = "btn btn-success" })
-                                @Html.ActionLink("🗑", "BajaAdministrador", new { id = admin.ID }, new { @class = "btn btn-danger" })
-                            </div>
-                        </td>
-                    </tr>
-                }
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => admin.ID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => admin.Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => admin.Apellido)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => admin.Username)
+        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => admin.Activo)
+        </td>*@
+        <td>
+            <div class="d-flex justify-content-between">
+                @Html.ActionLink("🔍", "DetalleAdministrador", new { id = admin.ID }, new { @class = "btn btn-primary" })
+                @Html.ActionLink("✏", "EditarAdministrador", new { id = admin.ID }, new { @class = "btn btn-success" })
+                @Html.ActionLink("🗑", "BajaAdministrador", new { id = admin.ID }, new { @class = "btn btn-danger" })
+            </div>
+        </td>
+    </tr>}
 
             </tbody>
 
         </table>
+        Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
+        <br />
+        @Html.PagedListPager(Model, page => Url.Action("VerAdministradores",
+                     new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
     </div>
 
 </body>
