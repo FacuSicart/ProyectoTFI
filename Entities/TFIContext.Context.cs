@@ -45,5 +45,7 @@ namespace ProyectoTFI.Entities
         public virtual DbSet<Solicitud_Soporte> Solicitud_Soporte { get; set; }
         public virtual DbSet<Tarjeta> Tarjeta { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
+
+        public System.Data.Entity.DbSet<ProyectoTFI.Models.UsuarioViewModel> UsuarioViewModels { get; set; }
     }
 }

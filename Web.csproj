@@ -188,6 +188,9 @@
     <Compile Include="Entities\Solicitud_Soporte.cs">
       <DependentUpon>TFIContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entities\sysdiagrams.cs">
+      <DependentUpon>TFIContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entities\Tarjeta.cs">
       <DependentUpon>TFIContext.tt</DependentUpon>
     </Compile>
@@ -310,6 +313,8 @@
     <Content Include="Views\Shared\Gracias.cshtml" />
     <Content Include="Views\Admin\AgregarAdministrador.cshtml" />
     <Content Include="Views\Admin\VerAdministradores.cshtml" />
+    <Content Include="Views\Admin\EditarAdministrador.cshtml" />
+    <Content Include="Views\Admin\DetalleAdministrador.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
