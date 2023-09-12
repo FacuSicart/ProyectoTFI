@@ -212,6 +212,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AdministradorViewModel.cs" />
     <Compile Include="Models\DonacionViewModel.cs" />
     <Compile Include="Models\UsuarioViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -308,7 +309,6 @@
     <Content Include="Views\Shared\Gracias.cshtml" />
     <Content Include="Views\Admin\CrearAdministrador.cshtml" />
     <Content Include="Views\Admin\VerAdministradores.cshtml" />
-    <Content Include="Views\Admin\EditarAdministrador.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
