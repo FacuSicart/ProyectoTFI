@@ -96,7 +96,7 @@ namespace ProyectoTFI.Controllers
         }
 
         // GET: Admin/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult BajaAdministrador()
         {
             return View();
         }

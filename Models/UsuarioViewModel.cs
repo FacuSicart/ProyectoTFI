@@ -20,6 +20,7 @@ namespace ProyectoTFI.Models
             ID = pUsuario.ID;
             Username = pUsuario.Username;
             Password = pUsuario.Password;
+            ConfirmarPassword = pUsuario.Password;
             Nombre = pUsuario.Nombre;
             Apellido = pUsuario.Apellido;
             DNI = pUsuario.DNI;

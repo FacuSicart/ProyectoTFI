@@ -5,15 +5,12 @@
     Layout = "~/Views/Shared/_LayoutInterno.cshtml";
 }
 
-<h2>EditarAdministrador</h2>
-
-
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Usuario</h4>
+        <h4>Editar Administrador</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.ID)
