@@ -291,6 +291,11 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Content\D.css" />
+    <Content Include="SQLScripts\scriptTFI.sql" />
+    <Content Include="SQLScripts\scriptTFIV2.sql" />
+    <Content Include="SQLScripts\scriptTFIV3.sql" />
+    <Content Include="SQLScripts\scriptTFIV4.sql" />
+    <Content Include="SQLScripts\scriptTFIV5.sql" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
