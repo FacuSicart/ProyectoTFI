@@ -27,7 +27,9 @@ namespace ProyectoTFI.Controllers
                 //si el resultado es false existe, por lo tanto no se puede usar
                 if (usuarioService.VerificarNombreUsuario(usuario) == false)
                 {
-                    return View("Error", model: "Ya existe ese nombre de usuario");
+                    ViewData["ErrorMensaje"] = "El Nombre de Usuario ingresado ya está en uso, intente con otro";
+                    return View();
+                    //return View("Error", model: "Ya existe ese nombre de usuario");
                 }
 
                 var respuesta = usuarioService.CrearAlumno(usuario);
