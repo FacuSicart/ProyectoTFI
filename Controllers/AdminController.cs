@@ -21,9 +21,11 @@ namespace ProyectoTFI.Controllers
         }
 
         // GET: Admin/Details/5
-        public ActionResult Details(int id)
+        public ActionResult DetalleAdministrador(int id)
         {
-            return View();
+            adminService = new AdminService();
+            var usuario = adminService.VerAdministrador(id);
+            return View(usuario);
         }
 
         public ActionResult VerAdministradores(string pBuscar)
@@ -65,22 +67,31 @@ namespace ProyectoTFI.Controllers
         // GET: Admin/Edit/5
         public ActionResult EditarAdministrador(int id)
         {
-            return View();
+            adminService = new AdminService();
+            var usuario = adminService.VerAdministrador(id);
+            return View(usuario);
         }
 
         // POST: Admin/Edit/5
         [HttpPost]
-        public ActionResult EditarAdministrador(int id, FormCollection collection)
+        public ActionResult EditarAdministrador(UsuarioViewModel usuario)
         {
-            try
+            adminService = new AdminService();
+            usuarioService = new UsuarioService();
+            if (ModelState.IsValid)
             {
-                // TODO: Add update logic here
+                //si el resultado es false existe, por lo tanto no se puede usar
+                if (usuarioService.VerificarNombreUsuario(usuario) == false)
+                {
+                    return View("Error", model: "Ya existe ese nombre de usuario");
+                }
 
-                return RedirectToAction("Index");
+                adminService.EditarAdministrador(usuario);
+                return RedirectToAction("VerAdministradores", "Admin");
             }
-            catch
+            else
             {
-                return View();
+                return View("Error", model: "No se encuentra logueado");
             }
         }
 

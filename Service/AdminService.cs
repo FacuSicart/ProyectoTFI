@@ -33,5 +33,18 @@ namespace ProyectoTFI.Service
             adminRepository.BajaAdministrador(id);
             return true;
         }
+
+        public UsuarioViewModel VerAdministrador(int id)
+        {
+            Usuario user = adminRepository.VerAdministrador(id);
+            UsuarioViewModel usuario = new UsuarioViewModel(user);
+            return usuario;
+        }
+
+        public void EditarAdministrador(UsuarioViewModel usuario)
+        {
+            Usuario u = new Usuario(usuario);
+            adminRepository.EditarAdministrador(u);
+        }
     }
 }

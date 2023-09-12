@@ -51,7 +51,7 @@
                             </td>*@
                         <td>
                             <div class="d-flex justify-content-between">
-                                @Html.ActionLink("🔍", "Details", new { id = admin.ID }, new { @class = "btn btn-info" })
+                                @Html.ActionLink("🔍", "DetalleAdministrador", new { id = admin.ID }, new { @class = "btn btn-info" })
                                 @Html.ActionLink("✏", "EditarAdministrador", new { id = admin.ID }, new { @class = "btn btn-primary" })
                                 @Html.ActionLink("🗑", "BajaAdministrador", new { id = admin.ID }, new { @class = "btn btn-danger" })
                             </div>
@@ -63,6 +63,6 @@
 
         </table>
     </div>
-
+    
 </body>
 </html>
