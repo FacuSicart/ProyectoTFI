@@ -29,6 +29,16 @@
                 @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
                 @*<input type="password" class="form-control" id="txtPwd" name="password" value="admin" placeholder="Contraseña" />*@
             </div>
+
+            <br />
+
+            @if (Session["Mensaje"] != null)
+            {
+                <div class="alert alert-danger" role="alert">
+                    @Session["Mensaje"]
+                </div>
+            }
+
             <div class="text-center mt-2">
                 <input style="background-color: orange;border-color:black; ;color: black;" type="submit" name="" value="Ingresar" class="btn btn-warning w-200" onmouseover="this.style.backgroundColor = 'yellow';" onmouseout="this.style.backgroundColor = 'orange';" />
             </div>

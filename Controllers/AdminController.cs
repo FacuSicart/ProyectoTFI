@@ -54,7 +54,7 @@ namespace ProyectoTFI.Controllers
                 }
 
                 var respuesta = adminService.CrearAdministrador(usuario);
-                return RedirectToAction("MenuPrincipal", "Home");
+                return RedirectToAction("VerAdministradores", "Admin");
             }
             else
             {
@@ -63,14 +63,14 @@ namespace ProyectoTFI.Controllers
         }
 
         // GET: Admin/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult EditarAdministrador(int id)
         {
             return View();
         }
 
         // POST: Admin/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult EditarAdministrador(int id, FormCollection collection)
         {
             try
             {
@@ -92,18 +92,19 @@ namespace ProyectoTFI.Controllers
 
         // POST: Admin/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult BajaAdministrador(int id)
         {
-            try
+            adminService = new AdminService();
+            var baja = adminService.BajaAdministrador(id);
+            if(baja == true)
             {
-                // TODO: Add delete logic here
+                return RedirectToAction("VerAdministradores", "Admin");
+            }
+            else
+            {
+                return View("Error", model: "No se encuentra logueado");
+            }
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
         }
     }
 }

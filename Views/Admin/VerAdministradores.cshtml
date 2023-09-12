@@ -22,6 +22,7 @@
                     <th scope="col" class="col-2 order">Nombre</th>
                     <th scope="col" class="col-2 ">Apellido</th>
                     <th scope="col" class="col-1 ">Nombre Usuario</th>
+                    <th scope="col" class="col-1 ">Activo</th>
                 </tr>
             </thead>
 
@@ -43,9 +44,12 @@
                             @Html.DisplayFor(modelItem => admin.Username)
                         </td>
                         <td>
-                            @Html.ActionLink("Edit", "Edit", new { id = admin.ID }) |
+                            @Html.DisplayFor(modelItem => admin.Activo)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "EditarAdministrador", new { id = admin.ID }) |
                             @Html.ActionLink("Details", "Details", new { id = admin.ID }) |
-                            @Html.ActionLink("Delete", "Delete", new { id = admin.ID })
+                            @Html.ActionLink("Delete", "BajaAdministrador", new { id = admin.ID })
                         </td>
                     </tr>
                 }

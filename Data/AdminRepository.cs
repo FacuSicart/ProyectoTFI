@@ -29,5 +29,11 @@ namespace ProyectoTFI.Data
 
             return context.SaveChanges() > 0;
         }
+        public void BajaAdministrador(int id)
+        {
+            Usuario user = context.Usuario.Include("Rol").Where(u => u.ID == id).FirstOrDefault();
+            user.Activo = false;
+            context.SaveChanges();
+        }
     }
 }

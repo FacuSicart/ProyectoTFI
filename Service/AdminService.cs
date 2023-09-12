@@ -27,5 +27,11 @@ namespace ProyectoTFI.Service
             bool Respuesta = adminRepository.CrearAdministrador(UsuarioReal);
             return Respuesta;
         }
+
+        public bool BajaAdministrador(int id)
+        {
+            adminRepository.BajaAdministrador(id);
+            return true;
+        }
     }
 }
