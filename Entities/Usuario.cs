@@ -39,6 +39,7 @@ namespace ProyectoTFI.Entities
             this.Alumno = new HashSet<Alumno>();
             this.Bitacora = new HashSet<Bitacora>();
             this.Docente = new HashSet<Docente>();
+            this.Administrador = new HashSet<Administrador>();
         }
 
         public int ID { get; set; }
