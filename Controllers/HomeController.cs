@@ -47,9 +47,18 @@ namespace ProyectoTFI.Controllers
 
             if (user != null)
             {
-                Session["user"] = user;
-                Session["Mensaje"] = null; //Limpiamos la variable de Sesion de Mensaje de Error si se logea correctamente
-                return RedirectToAction("MenuPrincipal", "Home");
+                if (user.Activo == false)
+                {
+                    Session["Mensaje"] = "El Usuario se encuentra deshabilitado";
+                    return RedirectToAction("Login", "Home");
+                }
+                else
+                {
+                    Session["user"] = user;
+                    Session["Mensaje"] = null; //Limpiamos la variable de Sesion de Mensaje de Error si se logea correctamente
+                    return RedirectToAction("MenuPrincipal", "Home");
+                }
+
             }
             else
             {

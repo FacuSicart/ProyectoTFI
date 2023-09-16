@@ -1,7 +1,7 @@
 ﻿@model ProyectoTFI.Models.UsuarioViewModel
 
 @{
-    ViewBag.Title = "Deshabilitar Administrador";
+    ViewBag.Title = "Rehabilitar Administrador";
     Layout = "~/Views/Shared/_LayoutInterno.cshtml";
 }
 
@@ -14,9 +14,9 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>Deshabilitar Administrador</h4>
+        <h4>Rehabilitar Administrador</h4>
         <hr />
-        <h5>¿Está seguro que quiere deshabilitar al Administrador seleccionado?</h5>
+        <h5>¿Está seguro que quiere rehabilitar al Administrador seleccionado?</h5>
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.ID)
 
@@ -101,7 +101,7 @@
         <div class="row gy-5">
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Deshabilitar" id="btnSubmit" class="btn btn-success" />
+                    <input type="submit" value="Rehabilitar" id="btnSubmit" class="btn btn-success" />
                     @Html.ActionLink("Volver", "VerAdministradores", "Admin", new { area = "" }, new { @class = "btn btn-success" })
                 </div>
 
