@@ -9,11 +9,13 @@
 {
     @Html.AntiForgeryToken()
     
-    <div class="form-horizontal">
-        <h4>Editar Administrador</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.ID)
+<div class="form-horizontal">
+    <h4>Editar Administrador</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.ID)
+    @Html.HiddenFor(model => model.Password)
+    @Html.HiddenFor(model => model.ConfirmarPassword)
 
     <div class="" style="background-color: antiquewhite; border-radius:10px;padding:10px;">
         @if (ViewData["ErrorMensaje"] != null)
@@ -39,26 +41,6 @@
                     <div class="col-md-10">
                         @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label" })
-                    <div class="col-md-10">
-                        @Html.PasswordFor(model => model.Password, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    @Html.LabelFor(model => model.ConfirmarPassword, htmlAttributes: new { @class = "control-label" })
-                    <div class="col-md-10">
-                        @Html.PasswordFor(model => model.ConfirmarPassword, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.ConfirmarPassword, "", new { @class = "text-danger" })
                     </div>
                 </div>
             </div>
@@ -108,13 +90,14 @@
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
                     <input type="submit" value="Guardar" id="btnSubmit" class="btn btn-success" />
+                    @Html.ActionLink("Reestablecer Contraseña", "ReestablecerPassword", "Admin", new { area = "", id = Model.ID }, new { @class = "btn btn-success" })
                     @Html.ActionLink("Volver", "VerAdministradores", "Admin", new { area = "" }, new { @class = "btn btn-success" })
                 </div>
 
             </div>
         </div>
     </div>
-    </div>
+</div>
 }
 
 @section Scripts {

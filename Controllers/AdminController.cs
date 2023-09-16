@@ -29,10 +29,10 @@ namespace ProyectoTFI.Controllers
             return View(usuario);
         }
 
-        public ActionResult VerAdministradores(string pBusqueda, int? page)
+        public ActionResult VerAdministradores(string pBusqueda, string pTipoUsuario, int? page)
         {
             adminService = new AdminService();
-            var listaAdmins = adminService.ListarAdministradores(pBusqueda);
+            var listaAdmins = adminService.ListarAdministradores(pBusqueda, pTipoUsuario);
 
             int pageSize = 10;
             int pageNumber = (page ?? 1);
@@ -144,6 +144,49 @@ namespace ProyectoTFI.Controllers
                 {
                     return View("Error", model: "No se encuentra logueado");
                 }
+            }
+        }
+
+        public ActionResult RehabilitarAdministrador(int id)
+        {
+            adminService = new AdminService();
+            var usuario = adminService.VerAdministrador(id);
+            return View(usuario);
+        }
+
+        // POST: Admin/Delete/5
+        [HttpPost]
+        public ActionResult RehabilitarAdministrador(UsuarioViewModel pUser)
+        {
+            adminService = new AdminService();
+            adminService.RehabilitarAdministrador(pUser.ID);
+            return RedirectToAction("VerAdministradores", "Admin");
+        }
+
+        // GET: Admin/Edit/5
+        public ActionResult ReestablecerPassword(int id)
+        {
+            adminService = new AdminService();
+            var usuario = adminService.VerAdministrador(id);
+            return View(usuario);
+        }
+
+        // POST: Admin/Edit/5
+        [HttpPost]
+        public ActionResult ReestablecerPassword(UsuarioViewModel usuario)
+        {
+            adminService = new AdminService();
+            usuarioService = new UsuarioService();
+            //if (adminService.VerAdministrador(usuario.ID) != null) //No podemos usar el IsValid debido a que no contamos con los otros campos.
+
+            if (ModelState.IsValid)
+            {
+                adminService.ReestablecerPassword(usuario);
+                return RedirectToAction("VerAdministradores", "Admin");
+            }
+            else
+            {
+                return View("Error", model: "No se encuentra logueado");
             }
         }
     }

@@ -17,9 +17,9 @@ namespace ProyectoTFI.Service
         }
 
 
-        public List<Usuario> ListarAdministradores(string pBusqueda)
+        public List<Usuario> ListarAdministradores(string pBusqueda, string pTipoUsuario)
         {
-            return adminRepository.ListarUsuarios(pBusqueda);
+            return adminRepository.ListarUsuarios(pBusqueda, pTipoUsuario);
         }
 
         public bool AgregarAdministrador(UsuarioViewModel usuario)
@@ -46,6 +46,17 @@ namespace ProyectoTFI.Service
         {
             Usuario u = new Usuario(usuario);
             adminRepository.EditarAdministrador(u);
+        }
+
+        public void RehabilitarAdministrador(int pID)
+        {
+            adminRepository.RehabilitarAdministrador(pID);
+        }
+
+        public void ReestablecerPassword(UsuarioViewModel usuario)
+        {
+            Usuario u = new Usuario(usuario);
+            adminRepository.ReestablecerPassword(u);
         }
     }
 }

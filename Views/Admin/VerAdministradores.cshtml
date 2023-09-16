@@ -8,62 +8,48 @@
  }
 
 <!DOCTYPE html>
-
-<style>
-    .pagination {
-        display: flex;
-        list-style: none;
-        padding: 0;
-    }
-
-        .pagination li {
-            margin-right: 10px; /* Espacio entre elementos de paginación */
-        }
-
-        .pagination a {
-            display: inline-block;
-            width: 30px; /* Ancho del círculo */
-            height: 30px; /* Altura del círculo */
-            border-radius: 50%; /* Hace que sea un círculo */
-            background-color: white; /* Fondo blanco por defecto */
-            color: #333;
-            text-align: center;
-            line-height: 30px; /* Centra el contenido verticalmente */
-            text-decoration: none;
-            transition: background-color 0.3s ease; /* Agrega una transición de color suave */
-        }
-
-            .pagination a:hover {
-                background-color: #ddd; /* Cambia el fondo a gris cuando pasas el mouse */
-            }
-
-        .pagination .active a {
-            background-color: #f90; /* Cambia el fondo a naranja cuando está activo */
-            color: white;
-        }
-
-</style>
-
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>VerAdministradores</title>
+    <link href="~/Scripts/pagedListStyles.css" rel="stylesheet" />
 </head>
 <body>
     <h4>Gestión de Administradores</h4>
     <hr />
     @*@Html.ActionLink("Agregar", "AgregarAdministrador", "Admin", new { area = "" }, new { @class = "btn", @style = "background-color: blue;color:white;border-color:blue;", @onmouseover = "this.style.backgroundColor='blue';", @onmouseout = "this.style.backgroundColor='white'; this.style.color: blue;" })*@
-    @Html.ActionLink("Agregar", "AgregarAdministrador", "Admin", new { area = "" }, new { @class = "btn btn-info", @style = "color:white;font-weight:bold;" })
-    <div style="display: inline-block; vertical-align: middle;">
-        @using (Html.BeginForm())
-        {
-<p style="display: inline-block;" placerholder="hola">
-    @Html.TextBox("pBusqueda", null, new { placeholder = "Escriba aquí para buscar" })
-</p>
-                <p style="display: inline-block;">
-                    <input type="submit" value="Buscar" class="btn btn-info" style="color: white; font-weight: bold;" />
-                </p>}
+<div style="display: flex; align-items: center;">
+    <div style="border-right: thin solid black;">
+        @Html.ActionLink("Agregar", "AgregarAdministrador", "Admin", new { area = "" }, new { @class = "btn btn-info", @style = "color:white;font-weight:bold; margin-right: 10px;" })
     </div>
+    @using (Html.BeginForm())
+    {
+        <div style="margin-left:15px;">
+            <div>
+                <b>Estado:</b>
+                @Html.RadioButton("pTipoUsuario", "Activo", true) <text>Activos</text>
+                @Html.RadioButton("pTipoUsuario", "Inactivo") <text>Inactivos</text>
+            </div>
+            <div>
+                @Html.TextBox("pBusqueda", null, new { placeholder = "Escriba aquí para buscar", style = "width: 210px;" })
+                <input type="submit" value="Buscar" class="btn btn-info" style="color: white; font-weight: bold;" />
+            </div>
+        </div>
+
+
+        @*<div style="display: flex; align-items: center; margin-left: 7%;">
+                <p style="display: inline-block; margin-right: 10px; margin-bottom: 0;">
+                    <b>Buscar por Usuarios:</b>
+                    @Html.RadioButton("TipoUsuario", "Activos", true) <text>Activos</text>
+                    @Html.RadioButton("TipoUsuario", "Inactivos") <text>Inactivos</text>
+                    @Html.TextBox("pBusqueda", null, new { placeholder = "Escriba aquí para buscar" })
+                </p>
+                <p style="display: inline-block; margin-bottom: 0;">
+                    <input type="submit" value="Buscar" class="btn btn-info" style="color: white; font-weight: bold;" />
+                </p>
+            </div>*@
+    }
+</div>
     <div class="contentTable">
         <table class="table table-hover" aria-describedby="admin" style="padding-top:20px;">
             <thead style="background-color: #ffd800;">
@@ -72,49 +58,62 @@
                     <th scope="col" class="col-2 order" style="border: 2px solid #fff;">Nombre</th>
                     <th scope="col" class="col-2" style="border: 2px solid #fff;">Apellido</th>
                     <th scope="col" class="col-1" style="border: 2px solid #fff;">Usuario</th>
-                    @*<th scope="col" class="col-1 ">Activo</th>*@
+                    <th scope="col" class="col-1 ">Activo</th>
                     <th scope="col" class="col-1" style="border: 2px solid #fff;">Acciones</th>
                 </tr>
             </thead>
-
             <tbody id="bodyTable">
 
-                @foreach (var admin in Model)
+                @if (Model.Count() == 0)
                 {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => admin.ID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => admin.Nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => admin.Apellido)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => admin.Username)
-        </td>
-        @*<td>
-            @Html.DisplayFor(modelItem => admin.Activo)
-        </td>*@
-        <td>
-            <div class="d-flex justify-content-between">
-                @Html.ActionLink("🔍", "DetalleAdministrador", new { id = admin.ID }, new { @class = "btn btn-primary" })
-                @Html.ActionLink("✏", "EditarAdministrador", new { id = admin.ID }, new { @class = "btn btn-success" })
-                @Html.ActionLink("🗑", "BajaAdministrador", new { id = admin.ID }, new { @class = "btn btn-danger" })
-            </div>
-        </td>
-    </tr>
-}
-
+                    <tr>
+                        <td colspan="6" class="text-danger fw-bold">No se han encontrado registros</td>
+                    </tr>
+                }
+                else
+                {
+                    foreach (var admin in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => admin.ID)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => admin.Nombre)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => admin.Apellido)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => admin.Username)
+                            </td>
+                            <td style="text-align: center;">
+                                @if ((bool)admin.Activo)
+                                {<text>✅</text>}
+                            else
+                            { <text>❌</text>}
+                            </td>
+                            <td>
+                                <div class="d-flex justify-content-between">
+                                    @Html.ActionLink("🔍", "DetalleAdministrador", new { id = admin.ID }, new { @class = "btn btn-primary" })
+                                    @Html.ActionLink("✏", "EditarAdministrador", new { id = admin.ID }, new { @class = "btn btn-success" })
+                                    @if ((bool)admin.Activo == true)
+                                    {
+                                        @Html.ActionLink("🗑", "BajaAdministrador", new { id = admin.ID }, new { @class = "btn btn-danger" })
+                                    }
+                                    else
+                                    {@Html.ActionLink("⬆", "RehabilitarAdministrador", new { id = admin.ID }, new { @class = "btn btn-danger" })}
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                }
             </tbody>
-
         </table>
-        Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
+        @*Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount*@
         <br />
         @*@Html.PagedListPager(Model, page => Url.Action("VerAdministradores",
-        new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))*@
-
+            new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))*@
         @Html.PagedListPager(Model, page => Url.Action("VerAdministradores",
          new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }),
          new PagedListRenderOptions
@@ -124,6 +123,5 @@
              DisplayLinkToNextPage = PagedListDisplayMode.Always,
          })
     </div>
-
 </body>
 </html>

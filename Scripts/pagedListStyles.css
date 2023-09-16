@@ -1,0 +1,31 @@
+﻿.pagination {
+    display: flex;
+    list-style: none;
+    padding: 0;
+}
+
+    .pagination li {
+        margin-right: 10px;
+    }
+
+    .pagination a {
+        display: inline-block;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background-color: white;
+        color: #333;
+        text-align: center;
+        line-height: 30px;
+        text-decoration: none;
+        transition: background-color 0.3s ease; 
+    }
+
+        .pagination a:hover {
+            background-color: #ddd;
+        }
+
+    .pagination .active a {
+        background-color: #f90;
+        color: white;
+    }

@@ -15,16 +15,30 @@ namespace ProyectoTFI.Data
             context = new TFIContext();
         }
 
-        public List<Usuario> ListarUsuarios(string pBusqueda)
+        public List<Usuario> ListarUsuarios(string pBusqueda, string pTipoUsuario)
         {
             List<Usuario> LU = new List<Usuario>();
             if (!String.IsNullOrEmpty(pBusqueda))
             {
-                LU = context.Usuario.Where((u => (u.RolID == 2 && u.Activo == true) && (u.Nombre.Contains(pBusqueda) || u.Username.Contains(pBusqueda) || u.Apellido.Contains(pBusqueda)))).ToList();
+                if (pTipoUsuario == "Activo" || pTipoUsuario is null)
+                {
+                    LU = context.Usuario.Where((u => (u.RolID == 2 && u.Activo == true) && (u.Nombre.Contains(pBusqueda) || u.Username.Contains(pBusqueda) || u.Apellido.Contains(pBusqueda)))).ToList();
+                }
+                else
+                {
+                    LU = context.Usuario.Where((u => (u.RolID == 2 && u.Activo == false) && (u.Nombre.Contains(pBusqueda) || u.Username.Contains(pBusqueda) || u.Apellido.Contains(pBusqueda)))).ToList();
+                }
             }
             else
-            { 
-                LU = context.Usuario.Where(u => u.RolID == 2 && u.Activo == true).ToList();
+            {
+                if (pTipoUsuario == "Activo" || pTipoUsuario is null)
+                {
+                    LU = context.Usuario.Where(u => u.RolID == 2 && u.Activo == true).ToList();
+                }
+                else
+                {
+                    LU = context.Usuario.Where(u => u.RolID == 2 && u.Activo == false).ToList();
+                }
             }
             return LU;
             //return context.Usuario.Where(u => u.RolID == 2 && (u.Nombre.Contains(pBusqueda) || u.Apellido.Contains(pBusqueda) || u.Username.Contains(pBusqueda)) || pBusqueda == null).ToList();
@@ -57,12 +71,25 @@ namespace ProyectoTFI.Data
         {
             Usuario user = context.Usuario.Include("Rol").Where(u => u.ID == usuario.ID).FirstOrDefault();
             user.Username = usuario.Username;
-            user.Password = usuario.Password;
             user.Email = usuario.Email;
             user.Nombre = usuario.Nombre;
             user.Apellido = usuario.Apellido;
             user.DNI = usuario.DNI;
             user.FechaNacimiento = usuario.FechaNacimiento;
+            context.SaveChanges();
+        }
+
+        public void RehabilitarAdministrador(int id)
+        {
+            Usuario user = context.Usuario.Where(u => u.ID == id).FirstOrDefault();
+            user.Activo = true;
+            context.SaveChanges();
+        }
+
+        public void ReestablecerPassword(Usuario usuario)
+        {
+            Usuario user = context.Usuario.Include("Rol").Where(u => u.ID == usuario.ID).FirstOrDefault();
+            user.Password = usuario.Password;
             context.SaveChanges();
         }
     }
