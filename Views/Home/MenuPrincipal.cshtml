@@ -1,13 +1,36 @@
-﻿@model ProyectoTFI.Entities.Usuario
+﻿@{
+    ProyectoTFI.Entities.Usuario usuario = (ProyectoTFI.Entities.Usuario)Session["user"];
+}
 
 @{
-    ViewBag.Title = "MenuPrincipal";
+    ViewBag.Title = "Menú Principal";
     Layout = "~/Views/Shared/_LayoutInterno.cshtml";
 }
 
-<h2>Bienvenido!</h2>
-
-<p>@Model.DNI</p>
-<p>@Model.Nombre</p>
-<p>@Model.Apellido</p>
-<p>@Model.Rol.Nombre</p>
+<div class="form-horizontal">
+    <br /><br />
+    <div class="d-flex" style="background-color: antiquewhite; border-radius: 10px; padding:10px;">
+        <div class="col-md-8">
+            <h2>¡Bienvenido a Educar Igualdad!</h2>
+            @if (usuario.Rol.ID == 1) //WebMaster
+            {
+                <p>¡Bienvenido, @usuario.Nombre!<br /><br />Para administrar aspectos relacionados a los Administradores, puedes dirigirte a "Gestión Administradores".<br /><br />Si gustas ver la bitácora de Eventos, selecciona "Bitácora".<br /><br />Si deseas modificar tu información personal, ve a "Mi Perfil".</p>
+            }
+            @if (usuario.Rol.ID == 2) //Administrador
+            {
+                <p>¡Bienvenido, @usuario.Nombre!<br /><br />Para administrar aspectos relacionados a los Docentes, puedes dirigirte a "Gestión Docentes".<br /><br />Para gestionar cuestiones ligadas a los Cursos, selecciona "Gestión Cursos".<br /><br />Para responder Solicitudes de Ayuda, dirígete a "Soporte".<br /><br />Si deseas modificar tu información personal, ve a "Mi Perfil".</p>
+            }
+            @if (usuario.Rol.ID == 3) //Docente
+            {
+                <p>¡Bienvenido, @usuario.Nombre!<br /><br />Para administrar aspectos relacionados a los Cursos que se te asignaron, puedes dirigirte a "Mis Cursos".<br /><br />Si gustas ver detalles de Rendimiento, selecciona "Rendimiento" .<br /><br />Si deseas modificar tu información personal, ve a "Mi Perfil".</p>
+            }
+            @if (usuario.Rol.ID == 4) //Alumno
+            {
+                <p>¡Bienvenido, @usuario.Nombre!<br /><br />Para ver todos los Cursos disponibles, puedes dirigirte a "Cursos".<br /><br />Si ya comenzaste algún curso y quieres continuarlo, selecciona "Mis Cursos".<br /><br />Si tienes alguna consulta o problema, selecciona "Soporte" para comunicarte con un Administrador.<br /><br />Si deseas modificar tu información personal, ve a "Mi Perfil".</p>
+            }
+        </div>
+        <div class="col-md-4">
+            <img src="~/Images/menuprincipalimage.png" style="width:100%;height:100%;" alt="Alternate Text" />
+        </div>
+    </div>
+</div>
