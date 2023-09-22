@@ -1,10 +1,9 @@
 ﻿@*@model IEnumerable<ProyectoTFI.Entities.Usuario>*@
-@model PagedList.IPagedList<ProyectoTFI.Entities.Usuario>
+@model PagedList.IPagedList<ProyectoTFI.Entities.Solicitud_Soporte>
 @using PagedList.Mvc;
 
-@{  ViewBag.Title = "Gestión Docentes";
-    Layout = "~/Views/Shared/_LayoutInterno.cshtml";
-    
+@{  ViewBag.Title = "Mis Solicitudes";
+    Layout = "~/Views/Shared/_LayoutInterno.cshtml";   
  }
 
 <!DOCTYPE html>
@@ -15,20 +14,19 @@
     <link href="~/Scripts/pagedListStyles.css" rel="stylesheet" />
 </head>
 <body>
-    <h4>Gestión de Docentes</h4>
+    <h4>Mis Solicitudes</h4>
     <hr />
-    @*@Html.ActionLink("Agregar", "AgregarAdministrador", "Admin", new { area = "" }, new { @class = "btn", @style = "background-color: blue;color:white;border-color:blue;", @onmouseover = "this.style.backgroundColor='blue';", @onmouseout = "this.style.backgroundColor='white'; this.style.color: blue;" })*@
     <div style="display: flex; align-items: center;">
         <div style="border-right: thin solid black;">
-            @Html.ActionLink("Agregar", "Agregar", "Docente", new { area = "" }, new { @class = "btn btn-info", @style = "color:white;font-weight:bold; margin-right: 10px;" })
+            @Html.ActionLink("Agregar", "Agregar", "Solicitud_Soporte", new { area = "" }, new { @class = "btn btn-info", @style = "color:white;font-weight:bold; margin-right: 10px;" })
         </div>
         @using (Html.BeginForm())
         {
             <div style="margin-left:15px;">
                 <div>
                     <b>Estado:</b>
-                    @Html.RadioButton("pTipoUsuario", "Activo", true) <text>Activos</text>
-                    @Html.RadioButton("pTipoUsuario", "Inactivo") <text>Inactivos</text>
+                    @Html.RadioButton("pEstado", "Abierto", true) <text>Abierto</text>
+                    @Html.RadioButton("pEstado", "Cerrado") <text>Cerrado</text>
                 </div>
             <div>
                 @Html.TextBox("pBusqueda", null, new { placeholder = "Escriba aquí para buscar", style = "width: 210px;" })
@@ -42,9 +40,9 @@
                 <thead style="background-color: #ffd800;">
                     <tr>
                         <th scope="col" class="col-2 order" style="border: 2px solid #fff;">ID</th>
-                        <th scope="col" class="col-2 order" style="border: 2px solid #fff;">Nombre</th>
-                        <th scope="col" class="col-2" style="border: 2px solid #fff;">Apellido</th>
-                        <th scope="col" class="col-1" style="border: 2px solid #fff;">Usuario</th>
+                        <th scope="col" class="col-2 order" style="border: 2px solid #fff;">Asunto</th>
+                        <th scope="col" class="col-2" style="border: 2px solid #fff;">Tipo de Consulta</th>
+                        <th scope="col" class="col-1" style="border: 2px solid #fff;">Fecha</th>
                         <th scope="col" class="col-1 ">Activo</th>
                         <th scope="col" class="col-1" style="border: 2px solid #fff;">Acciones</th>
                     </tr>
@@ -58,37 +56,30 @@
                     }
                     else
                     {
-                        foreach (var docente in Model)
+                        foreach (var solicitud in Model)
                         {
                             <tr>
                                 <td>
-                                    @Html.DisplayFor(modelItem => docente.ID)
+                                    @Html.DisplayFor(modelItem => solicitud.ID)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => docente.Nombre)
+                                    @Html.DisplayFor(modelItem => solicitud.Asunto)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => docente.Apellido)
+                                    @Html.DisplayFor(modelItem => solicitud.TipoConsulta)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => docente.Username)
+                                    @Html.DisplayFor(modelItem => solicitud.Fecha)
                                 </td>
                                 <td style="text-align: center;">
-                                    @if ((bool)docente.Activo)
+                                    @if ((bool)solicitud.Activo)
                                     {<text>✅</text>}
                                 else
                                 { <text>❌</text>}
                                 </td>
                                 <td>
                                     <div class="d-flex justify-content-between">
-                                        @Html.ActionLink("🔍", "Detalle", new { id = docente.ID }, new { @class = "btn btn-primary" })
-                                        @Html.ActionLink("✏", "Editar", new { id = docente.ID }, new { @class = "btn btn-success" })
-                                        @if ((bool)docente.Activo == true)
-                                        {
-                                            @Html.ActionLink("🗑", "Baja", new { id = docente.ID }, new { @class = "btn btn-danger" })
-                                        }
-                                        else
-                                        {@Html.ActionLink("⬆", "Rehabilitar", new { id = docente.ID }, new { @class = "btn btn-danger" })}
+                                        @Html.ActionLink("🔍", "Detalle", new { id = solicitud.ID }, new { @class = "btn btn-primary" })
                                     </div>
                                 </td>
                             </tr>

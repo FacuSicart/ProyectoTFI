@@ -18,38 +18,25 @@
     <h4>Gestión de Administradores</h4>
     <hr />
     @*@Html.ActionLink("Agregar", "AgregarAdministrador", "Admin", new { area = "" }, new { @class = "btn", @style = "background-color: blue;color:white;border-color:blue;", @onmouseover = "this.style.backgroundColor='blue';", @onmouseout = "this.style.backgroundColor='white'; this.style.color: blue;" })*@
-<div style="display: flex; align-items: center;">
-    <div style="border-right: thin solid black;">
-        @Html.ActionLink("Agregar", "AgregarAdministrador", "Admin", new { area = "" }, new { @class = "btn btn-info", @style = "color:white;font-weight:bold; margin-right: 10px;" })
-    </div>
-    @using (Html.BeginForm())
-    {
-        <div style="margin-left:15px;">
-            <div>
-                <b>Estado:</b>
-                @Html.RadioButton("pTipoUsuario", "Activo", true) <text>Activos</text>
-                @Html.RadioButton("pTipoUsuario", "Inactivo") <text>Inactivos</text>
-            </div>
-            <div>
-                @Html.TextBox("pBusqueda", null, new { placeholder = "Escriba aquí para buscar", style = "width: 210px;" })
-                <input type="submit" value="Buscar" class="btn btn-info" style="color: white; font-weight: bold;" />
-            </div>
+    <div style="display: flex; align-items: center;">
+        <div style="border-right: thin solid black;">
+            @Html.ActionLink("Agregar", "AgregarAdministrador", "Admin", new { area = "" }, new { @class = "btn btn-info", @style = "color:white;font-weight:bold; margin-right: 10px;" })
         </div>
-
-
-        @*<div style="display: flex; align-items: center; margin-left: 7%;">
-                <p style="display: inline-block; margin-right: 10px; margin-bottom: 0;">
-                    <b>Buscar por Usuarios:</b>
-                    @Html.RadioButton("TipoUsuario", "Activos", true) <text>Activos</text>
-                    @Html.RadioButton("TipoUsuario", "Inactivos") <text>Inactivos</text>
-                    @Html.TextBox("pBusqueda", null, new { placeholder = "Escriba aquí para buscar" })
-                </p>
-                <p style="display: inline-block; margin-bottom: 0;">
+        @using (Html.BeginForm())
+        {
+            <div style="margin-left:15px;">
+                <div>
+                    <b>Estado:</b>
+                    @Html.RadioButton("pTipoUsuario", "Activo", true) <text>Activos</text>
+                    @Html.RadioButton("pTipoUsuario", "Inactivo") <text>Inactivos</text>
+                </div>
+                <div>
+                    @Html.TextBox("pBusqueda", null, new { placeholder = "Escriba aquí para buscar", style = "width: 210px;" })
                     <input type="submit" value="Buscar" class="btn btn-info" style="color: white; font-weight: bold;" />
-                </p>
-            </div>*@
-    }
-</div>
+                </div>
+            </div>
+        }
+    </div>
     <div class="contentTable">
         <table class="table table-hover" aria-describedby="admin" style="padding-top:20px;">
             <thead style="background-color: #ffd800;">
@@ -63,7 +50,6 @@
                 </tr>
             </thead>
             <tbody id="bodyTable">
-
                 @if (Model.Count() == 0)
                 {
                     <tr>
@@ -113,15 +99,15 @@
         @*Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount*@
         <br />
         @*@Html.PagedListPager(Model, page => Url.Action("VerAdministradores",
-            new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))*@
+        new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))*@
         @Html.PagedListPager(Model, page => Url.Action("VerAdministradores",
-         new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }),
-         new PagedListRenderOptions
-         {
-             LiElementClasses = new[] { "page-item" },
-             DisplayLinkToPreviousPage = PagedListDisplayMode.Always,
-             DisplayLinkToNextPage = PagedListDisplayMode.Always,
-         })
+        new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }),
+        new PagedListRenderOptions
+        {
+            LiElementClasses = new[] { "page-item" },
+            DisplayLinkToPreviousPage = PagedListDisplayMode.Always,
+            DisplayLinkToNextPage = PagedListDisplayMode.Always,
+        })
     </div>
 </body>
 </html>
