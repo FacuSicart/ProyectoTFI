@@ -11,12 +11,26 @@ namespace ProyectoTFI.Entities
 {
     using System;
     using System.Collections.Generic;
-    
+    using ProyectoTFI.Models;
+
     public partial class Solicitud_Soporte
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Solicitud_Soporte()
         {
+            this.Solicitud_Respuesta = new HashSet<Solicitud_Respuesta>();
+        }
+
+        public Solicitud_Soporte(Solicitud_SoporteViewModel pSoliSoporteVM)
+        {
+            ID = pSoliSoporteVM.ID;
+            Asunto = pSoliSoporteVM.Asunto;
+            TipoConsulta = pSoliSoporteVM.TipoConsulta;
+            Descripcion = pSoliSoporteVM.Descripcion;
+            Fecha = pSoliSoporteVM.Fecha;
+            Activo = pSoliSoporteVM.Activo;
+            AlumnoID = pSoliSoporteVM.AlumnoID;
+
             this.Solicitud_Respuesta = new HashSet<Solicitud_Respuesta>();
         }
     
