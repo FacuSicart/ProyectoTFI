@@ -16,9 +16,9 @@ namespace ProyectoTFI.Service
             solicitud_soporteRepository = new Solicitud_SoporteRepository();
         }
 
-        public List<Solicitud_Soporte> ListarSolicitudesSoporte(string pBusqueda, string pTipoUsuario, int pAlumnoID)
+        public List<Solicitud_Soporte> ListarSolicitudesSoporte(string pBusqueda, string pEstado, int pAlumnoID)
         {
-            return solicitud_soporteRepository.ListarSolicitudes(pBusqueda, pTipoUsuario, pAlumnoID);
+            return solicitud_soporteRepository.ListarSolicitudes(pBusqueda, pEstado, pAlumnoID);
         }
 
         public bool AgregarSolicitudSoporte(Solicitud_SoporteViewModel solicitud)
@@ -33,6 +33,18 @@ namespace ProyectoTFI.Service
             Solicitud_Soporte solicitud = solicitud_soporteRepository.VerSolicitud(id);
             Solicitud_SoporteViewModel solicitudV = new Solicitud_SoporteViewModel(solicitud);
             return solicitudV;
+        }
+        public List<Solicitud_Soporte> ListarSolicitudesAdministrador(string pBusqueda, string pEstado)
+        {
+            return solicitud_soporteRepository.ListarSolicitudesAdministrador(pBusqueda, pEstado);
+        }
+
+        public bool ResponderSolicitudSoporte(Solicitud_SoporteViewModel solicitud)
+        {
+            Solicitud_Soporte SolicitudReal = new Solicitud_Soporte(solicitud);
+            SolicitudReal.Solicitud_Respuesta.Add(solicitud.Solicitud_Respuesta.FirstOrDefault());
+            bool Respuesta = solicitud_soporteRepository.ResponderSolicitudSoporte(SolicitudReal);
+            return Respuesta;
         }
     }
 }
