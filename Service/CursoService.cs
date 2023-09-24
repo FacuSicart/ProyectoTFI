@@ -16,13 +16,13 @@ namespace ProyectoTFI.Service
             cursoRepository = new CursoRepository();
         }
 
-        public List<Curso> ListarCursos(string pBusqueda, string pTipoUsuario)
+        public List<Curso> ListarCursos(string pBusqueda)
         {
-            return cursoRepository.ListarCursos(pBusqueda, pTipoUsuario);
+            return cursoRepository.ListarCursos(pBusqueda);
         }
-        public List<Curso> ListarCursosUsuario(int id, string pBusqueda, string pTipoUsuario)
+        public List<Curso> ListarCursosUsuario(int id, string pBusqueda)
         {
-            return cursoRepository.ListarCursosUsuario(id, pBusqueda, pTipoUsuario);
+            return cursoRepository.ListarCursosUsuario(id, pBusqueda);
         }
         public CursoViewModel VerCurso(int id)
         {

@@ -19,17 +19,17 @@ namespace ProyectoTFI.Controllers
         AlumnoService alumnoService;
         ClaseService claseService;
 
-        public ActionResult VerCursos(string pBusqueda, string pActivo, int? page)
+        public ActionResult VerCursos(string pBusqueda, int? page)
         {
             cursoService = new CursoService();
-            var listaCursos = cursoService.ListarCursos(pBusqueda, pActivo);
+            var listaCursos = cursoService.ListarCursos(pBusqueda);
 
             int pageSize = 10;
             int pageNumber = (page ?? 1);
             return View(listaCursos.ToPagedList(pageNumber, pageSize));
         }
 
-        public ActionResult VerCursosUsuario(string pBusqueda, string pActivo, int? page)
+        public ActionResult VerCursosUsuario(string pBusqueda, int? page)
         {
             if (Session["user"] != null)
             {
@@ -39,7 +39,7 @@ namespace ProyectoTFI.Controllers
                 cursoService = new CursoService();
                 alumnoService = new AlumnoService();
                 var idAlumno = alumnoService.ObtenterIdAlumno(usuarioSesion.ID);
-                var listaCursos = cursoService.ListarCursosUsuario(idAlumno, pBusqueda, pActivo);
+                var listaCursos = cursoService.ListarCursosUsuario(idAlumno, pBusqueda);
 
                 int pageSize = 10;
                 int pageNumber = (page ?? 1);
