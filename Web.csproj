@@ -377,9 +377,10 @@
     <Content Include="Views\Usuario\ReestablecerPassword.cshtml" />
     <Content Include="Views\Usuario\Edit.cshtml" />
     <Content Include="Views\Usuario\Details.cshtml" />
-    <Content Include="Views\Curso\VerCursos.cshtml" />
+    <Content Include="Views\Curso\VerCursosDocente.cshtml" />
     <Content Include="Views\Curso\VerCursosUsuario.cshtml" />
     <Content Include="Views\Curso\VerClasesCurso.cshtml" />
+    <Content Include="Views\Curso\VerCursos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

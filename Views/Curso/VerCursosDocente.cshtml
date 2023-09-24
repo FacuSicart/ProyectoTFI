@@ -2,7 +2,7 @@
 @model PagedList.IPagedList<ProyectoTFI.Entities.Curso>
 @using PagedList.Mvc;
 
-@{ ViewBag.Title = "Ver Cursos";
+@{ ViewBag.Title = "Gestión Cursos";
     Layout = "~/Views/Shared/_LayoutInterno.cshtml";
 
 }
@@ -15,10 +15,13 @@
     <link href="~/Scripts/pagedListStyles.css" rel="stylesheet" />
 </head>
 <body>
-    <h4>Ver Cursos</h4>
+    <h4>Gestión de Cursos</h4>
     <hr />
     @*@Html.ActionLink("Agregar", "AgregarAdministrador", "Admin", new { area = "" }, new { @class = "btn", @style = "background-color: blue;color:white;border-color:blue;", @onmouseover = "this.style.backgroundColor='blue';", @onmouseout = "this.style.backgroundColor='white'; this.style.color: blue;" })*@
     <div style="display: flex; align-items: center;">
+        <div style="border-right: thin solid black;">
+            @Html.ActionLink("Agregar", "AgregarCurso", "Curso", new { area = "" }, new { @class = "btn btn-info", @style = "color:white;font-weight:bold; margin-right: 10px;" })
+        </div>
         @using (Html.BeginForm())
         {
             <div style="margin-left:15px;">
@@ -59,6 +62,14 @@
                             <td>
                                 <div class="d-flex justify-content-between">
                                     @Html.ActionLink("🔍", "VerClasesCurso", new { id = curso.ID }, new { @class = "btn btn-primary" })
+                                    @Html.ActionLink("✏", "EditarCurso", new { id = curso.ID }, new { @class = "btn btn-success" })
+                                    @if ((bool)curso.Activo == true)
+                                    {
+                                        @Html.ActionLink("🗑", "BajaCurso", new { id = curso.ID }, new { @class = "btn btn-danger" })
+                                    }
+                                    else
+                                    {@Html.ActionLink("⬆", "RehabilitarCurso", new { id = curso.ID }, new { @class = "btn btn-danger" })}
+                                </div>
                             </td>
                         </tr>
                     }

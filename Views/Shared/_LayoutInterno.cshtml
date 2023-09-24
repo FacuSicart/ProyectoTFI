@@ -45,7 +45,7 @@
                     @if (usuario.Rol.ID == 3) //Docente
                     {
                         <li style="margin-right: 45px; font-weight: bold; font-size: 16px;">@Html.ActionLink("Mi Perfil", "Details", "Usuario", new { area = "" }, new { @class = "nav-link" })</li>
-                        <li style="margin-right: 45px; font-weight: bold; font-size: 16px;">@Html.ActionLink("Mis Cursos", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li style="margin-right: 45px; font-weight: bold; font-size: 16px;">@Html.ActionLink("Mis Cursos", "VerCursosDocente", "Curso", new { area = "" }, new { @class = "nav-link" })</li>
                         <li style="margin-right: 45px; font-weight: bold; font-size: 16px;">@Html.ActionLink("Rendimiento", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
                     }
                     @if (usuario.Rol.ID == 4) //Alumno

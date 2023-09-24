@@ -18,7 +18,30 @@ namespace ProyectoTFI.Controllers
         CursoService cursoService;
         AlumnoService alumnoService;
         ClaseService claseService;
+        DocenteService docenteService;
 
+        public ActionResult VerCursosDocente(string pBusqueda, int? page)
+        {
+            if (Session["user"] != null)
+            {
+                Usuario usuarioSesion = (Usuario)Session["user"];
+                //UsuarioViewModel usuarioModel = new UsuarioViewModel(usuarioSesion);
+                usarioService = new UsuarioService();
+                cursoService = new CursoService();
+                alumnoService = new AlumnoService();
+                docenteService = new DocenteService();
+                var idDocente = docenteService.VerDocente(usuarioSesion.ID).ID;
+                var listaCursos = cursoService.ListarCursosUsuario(idDocente, pBusqueda);
+
+                int pageSize = 10;
+                int pageNumber = (page ?? 1);
+                return View(listaCursos.ToPagedList(pageNumber, pageSize));
+            }
+            else
+            {
+                return View("Error", model: "No se encuentra logueado");
+            }
+        }
         public ActionResult VerCursos(string pBusqueda, int? page)
         {
             cursoService = new CursoService();
