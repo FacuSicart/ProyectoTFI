@@ -20,14 +20,22 @@ namespace ProyectoTFI.Data
             List<Curso> LC = new List<Curso>();
             if (!String.IsNullOrEmpty(pBusqueda))
             {
-                LC = context.Curso.Where((c => (c.Activo == true) && (c.Nombre.Contains(pBusqueda)))).ToList();
+                LC = context.Curso
+                    .Include("Cursada_de_Alumno")
+                    .Where(c => c.Activo == true && c.Nombre.Contains(pBusqueda) &&
+                                !context.Cursada_de_Alumno.Any(ca => ca.CursoID == c.ID))
+                    .ToList();
             }
             else
             {
-                LC = context.Curso.Where(c => c.Activo == true).ToList();
+                LC = context.Curso
+                    .Include("Cursada_de_Alumno")
+                    .Where(c => c.Activo == true &&
+                                !context.Cursada_de_Alumno.Any(ca => ca.CursoID == c.ID))
+                    .ToList();
             }
             return LC;
-            //return context.Usuario.Where(u => u.RolID == 2 && (u.Nombre.Contains(pBusqueda) || u.Apellido.Contains(pBusqueda) || u.Username.Contains(pBusqueda)) || pBusqueda == null).ToList();
+            
         }
         public List<Curso> ListarCursosUsuario(int id, string pBusqueda)
         {
@@ -41,7 +49,7 @@ namespace ProyectoTFI.Data
                  LC = context.Curso.Where(c => c.Activo == true).ToList();
             }
             return LC;
-            //return context.Usuario.Where(u => u.RolID == 2 && (u.Nombre.Contains(pBusqueda) || u.Apellido.Contains(pBusqueda) || u.Username.Contains(pBusqueda)) || pBusqueda == null).ToList();
+            
         }
 
         public Curso VerCurso(int id)
@@ -49,6 +57,16 @@ namespace ProyectoTFI.Data
             Curso curso = context.Curso.Where(c => c.ID == id).FirstOrDefault();
 
             return curso;
+        }
+
+        public bool AltaCurso(int id, int idAlumno)
+        {
+            Cursada_de_Alumno a = new Cursada_de_Alumno();
+            a.AlumnoID = idAlumno;
+            a.CursoID = id;
+            context.Set<Cursada_de_Alumno>().Add(a);
+
+            return context.SaveChanges() > 0;
         }
     }
 }

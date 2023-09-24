@@ -30,5 +30,11 @@ namespace ProyectoTFI.Service
             CursoViewModel cursovm = new CursoViewModel(curso);
             return cursovm;
         }
+
+        public bool AltaCurso(int idCurso, int idAlumno)
+        {
+            bool alta = cursoRepository.AltaCurso(idCurso, idAlumno);
+            return alta;
+        }
     }
 }
