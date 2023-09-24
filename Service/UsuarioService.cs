@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -50,6 +50,25 @@ namespace ProyectoTFI.Service
             usuarios = usuarioRepository.ListarUsuarios();
 
             return usuarios;
+        }
+
+        public UsuarioViewModel VerPerfil(int id)
+        {
+            Usuario user = usuarioRepository.VerPerfil(id);
+            UsuarioViewModel usuario = new UsuarioViewModel(user);
+            return usuario;
+        }
+
+        public void EditarUsuario(UsuarioViewModel usuario)
+        {
+            Usuario u = new Usuario(usuario);
+            usuarioRepository.EditarUsuario(u);
+        }
+
+        public void ReestablecerPassword(UsuarioViewModel usuario)
+        {
+            Usuario u = new Usuario(usuario);
+            usuarioRepository.ReestablecerPassword(u);
         }
     }
 }
