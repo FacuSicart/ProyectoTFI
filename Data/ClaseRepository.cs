@@ -42,7 +42,14 @@ namespace ProyectoTFI.Data
             }
             return LC;
         }
+        public List<Clase> ListarClasesAlumno(int pCurso)
+        {
+            List<Clase> LC = new List<Clase>();
 
+            LC = context.Clase.Where(x => ((x.Curso.ID == pCurso))).ToList();
+
+            return LC;
+        }
         public bool AgregarClase(Clase pClase)
         {
             context.Clase.Add(pClase);
