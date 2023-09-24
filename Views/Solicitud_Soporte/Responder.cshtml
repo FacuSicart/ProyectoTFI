@@ -1,0 +1,114 @@
+﻿@model ProyectoTFI.Models.Solicitud_SoporteViewModel
+
+@{ ViewBag.Title = "Responder Solicitud";
+    Layout = "~/Views/Shared/_LayoutInterno.cshtml"; }
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Responder Solicitud</title>
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.ID)
+    @Html.HiddenFor(model => model.Asunto)
+    @Html.HiddenFor(model => model.TipoConsulta)
+    @Html.HiddenFor(model => model.Descripcion)
+</head>
+<body>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-horizontal">
+            <h4>Responder Solicitud</h4>
+            <hr />
+            <div class="" style="background-color: antiquewhite; border-radius:10px;padding:10px;">
+                @if (ViewData["ErrorMensaje"] != null)
+                {
+                    <div class="alert alert-danger" role="alert">
+                        @ViewData["ErrorMensaje"]
+                    </div>
+                }
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Asunto, htmlAttributes: new { @class = "control-label" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Asunto, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                            @Html.ValidationMessageFor(model => model.Asunto, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Fecha, htmlAttributes: new { @class = "control-label " })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Fecha, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                            @Html.ValidationMessageFor(model => model.Fecha, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.TipoConsulta, htmlAttributes: new { @class = "control-label " })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.TipoConsulta, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                            @Html.ValidationMessageFor(model => model.TipoConsulta, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Descripcion, htmlAttributes: new { @class = "control-label" })
+                        <div class="col-md-10">
+                            <textarea id="Descripcion" name="Descripcion" rows="4" class="form-control" disabled>@Model.Descripcion</textarea>
+                            @Html.ValidationMessageFor(model => model.Descripcion, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <hr style="margin-top:2%; width:95%; margin-left:2%;" />
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @*@Html.LabelFor(model => model.Solicitud_Respuesta.FirstOrDefault().Descripcion, htmlAttributes: new { @class = "control-label " })*@
+                        Descripción de Respuesta
+                        <div class="col-md-10">
+                            @Html.TextAreaFor(model => model.DescripcionRespuesta, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.DescripcionRespuesta, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+                <br />
+                <div class="row gy-5">
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Enviar" id="btnSubmit" class="btn btn-success" />
+                            @Html.ActionLink("Volver", "VerPendientes", "Solicitud_Soporte", new { area = "" }, new { @class = "btn btn-success" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    <script type="text/javascript">
+        function validateInput() {
+
+        }
+
+        $('#btnSubmit').click(function () {
+            $.ajax({
+
+            });
+        });
+    </script>
+</body>
+
+</html>

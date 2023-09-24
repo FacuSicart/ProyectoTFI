@@ -1,0 +1,109 @@
+﻿@*@model IEnumerable<ProyectoTFI.Entities.Usuario>*@
+@model PagedList.IPagedList<ProyectoTFI.Entities.Solicitud_Soporte>
+@using PagedList.Mvc;
+
+@{ ViewBag.Title = "Ver Solicitudes Pendientes";
+    Layout = "~/Views/Shared/_LayoutInterno.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Ver Solicitudes Pendientes</title>
+    <link href="~/Scripts/pagedListStyles.css" rel="stylesheet" />
+</head>
+<body>
+    <h4>Ver Solicitudes Pendientes</h4>
+    <hr />
+    <div style="display: flex; align-items: center;">
+        @using (Html.BeginForm())
+        {
+            <div style="margin-left:15px;">
+                <div>
+                    <b>Estado:</b>
+                    @Html.RadioButton("pEstado", "Abierto", true) <text>Pendiente</text>
+                    @Html.RadioButton("pEstado", "Cerrado") <text>Respondido</text>
+                </div>
+                <div>
+                    @Html.TextBox("pBusqueda", null, new { placeholder = "Escriba aquí para buscar", style = "width: 210px;" })
+                    <input type="submit" value="Buscar" class="btn btn-info" style="color: white; font-weight: bold;" />
+                </div>
+            </div>
+        }
+    </div>
+    <div class="contentTable">
+        <table class="table table-hover" aria-describedby="admin" style="padding-top:20px;">
+            <thead style="background-color: #ffd800;">
+                <tr>
+                    <th scope="col" class="col-2 order" style="border: 2px solid #fff;">ID</th>
+                    <th scope="col" class="col-2 order" style="border: 2px solid #fff;">Asunto</th>
+                    <th scope="col" class="col-2" style="border: 2px solid #fff;">Tipo de Consulta</th>
+                    <th scope="col" class="col-1" style="border: 2px solid #fff;">Fecha de Emisión</th>
+                    <th scope="col" class="col-1" style="border: 2px solid #fff;">Usuario</th>
+                    <th scope="col" class="col-1 ">Activo</th>
+                    <th scope="col" class="col-1" style="border: 2px solid #fff;">Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="bodyTable">
+                @if (Model.Count() == 0)
+                {
+                    <tr>
+                        <td colspan="6" class="text-danger fw-bold">No se han encontrado registros</td>
+                    </tr>
+                }
+                else
+                {
+                    foreach (var solicitud in Model)
+                    {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => solicitud.ID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => solicitud.Asunto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => solicitud.TipoConsulta)
+                </td>
+                <td>
+                    @solicitud.Fecha.ToShortDateString()
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => solicitud.Alumno.Usuario.Username)
+                </td>
+                <td style="text-align: center;">
+                    @if ((bool)solicitud.Activo)
+                    {<text>✅</text>}
+                else
+                { <text>❌</text>}
+                </td>
+                <td>
+                    <div class="d-flex justify-content-between">
+                        @if ((bool)solicitud.Activo == true)
+                        {
+                            @Html.ActionLink("✏", "Responder", new { id = solicitud.ID }, new { @class = "btn btn-success" })
+                        }
+                        @Html.ActionLink("🔍", "DetalleRespondido", new { id = solicitud.ID }, new { @class = "btn btn-primary" })
+                    </div>
+                </td>
+            </tr>
+                    }
+                }
+            </tbody>
+        </table>
+        @*Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount*@
+        <br />
+        @*@Html.PagedListPager(Model, page => Url.Action("VerAdministradores",
+            new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))*@
+        @Html.PagedListPager(Model, page => Url.Action("Ver",
+         new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }),
+         new PagedListRenderOptions
+         {
+             LiElementClasses = new[] { "page-item" },
+             DisplayLinkToPreviousPage = PagedListDisplayMode.Always,
+             DisplayLinkToNextPage = PagedListDisplayMode.Always,
+         })
+    </div>
+</body>
+</html>

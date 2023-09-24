@@ -11,12 +11,41 @@ namespace ProyectoTFI.Entities
 {
     using System;
     using System.Collections.Generic;
-    
+    using ProyectoTFI.Models;
+
     public partial class Solicitud_Soporte
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Solicitud_Soporte()
         {
+            this.Solicitud_Respuesta = new HashSet<Solicitud_Respuesta>();
+        }
+
+        public Solicitud_Soporte(int pID, string pAsunto, string pTipo, string pDesc, DateTime pFecha, bool pActivo, int pAlumnoID, Alumno pAlumno)
+        {
+            ID = pID;
+            Asunto = pAsunto;
+            TipoConsulta = pTipo;
+            Descripcion = pDesc;
+            Fecha = pFecha;
+            Activo = pActivo;
+            AlumnoID = pAlumnoID;
+            Alumno = pAlumno;
+
+            this.Solicitud_Respuesta = new HashSet<Solicitud_Respuesta>();
+        }
+
+        public Solicitud_Soporte(Solicitud_SoporteViewModel pSoliSoporteVM)
+        {
+            ID = pSoliSoporteVM.ID;
+            Asunto = pSoliSoporteVM.Asunto;
+            TipoConsulta = pSoliSoporteVM.TipoConsulta;
+            Descripcion = pSoliSoporteVM.Descripcion;
+            Fecha = pSoliSoporteVM.Fecha;
+            Activo = pSoliSoporteVM.Activo;
+            AlumnoID = pSoliSoporteVM.AlumnoID;
+            Alumno = pSoliSoporteVM.Alumno;
+
             this.Solicitud_Respuesta = new HashSet<Solicitud_Respuesta>();
         }
     
@@ -30,6 +59,6 @@ namespace ProyectoTFI.Entities
     
         public virtual Alumno Alumno { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Solicitud_Respuesta> Solicitud_Respuesta { get; set; }
+        public ICollection<Solicitud_Respuesta> Solicitud_Respuesta { get; set; }
     }
 }
