@@ -40,7 +40,7 @@
                         <li style="margin-right: 45px; font-weight: bold; font-size: 16px;">@Html.ActionLink("Mi Perfil", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
                         <li style="margin-right: 45px; font-weight: bold; font-size: 16px;">@Html.ActionLink("Gestión Docentes", "Ver", "Docente", new { area = "" }, new { @class = "nav-link" })</li>
                         <li style="margin-right: 45px; font-weight: bold; font-size: 16px;">@Html.ActionLink("Gestión Cursos", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                        <li style="margin-right: 45px; font-weight: bold; font-size: 16px;">@Html.ActionLink("Soporte", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li style="margin-right: 45px; font-weight: bold; font-size: 16px;">@Html.ActionLink("Soporte", "VerPendientes", "Solicitud_Soporte", new { area = "" }, new { @class = "nav-link" })</li>
                     }
                     @if (usuario.Rol.ID == 3) //Docente
                     {

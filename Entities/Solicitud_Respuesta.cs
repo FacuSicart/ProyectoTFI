@@ -20,6 +20,14 @@ namespace ProyectoTFI.Entities
 
         }
 
+        public Solicitud_Respuesta(string pDescripcion, DateTime pFecha, int pSoliID, int pAdminID)
+        {
+            Descripcion = pDescripcion;
+            Fecha = pFecha;
+            SolicitudID = pSoliID;
+            AdministradorID = pAdminID;
+        }
+
         public Solicitud_Respuesta(Solicitud_RespuestaViewModel pSoliRespVM)
         {
             ID = pSoliRespVM.ID;
@@ -27,6 +35,7 @@ namespace ProyectoTFI.Entities
             Fecha = pSoliRespVM.Fecha;
             SolicitudID = pSoliRespVM.SolicitudID;
             AdministradorID = pSoliRespVM.AdministradorID;
+            Administrador = pSoliRespVM.Administrador;
         }
 
         public int ID { get; set; }

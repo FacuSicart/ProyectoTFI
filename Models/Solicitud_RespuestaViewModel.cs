@@ -21,6 +21,7 @@ namespace ProyectoTFI.Models
             Descripcion = pSoliRespuesta.Descripcion;
             Fecha = pSoliRespuesta.Fecha;
             SolicitudID = pSoliRespuesta.SolicitudID;
+            Administrador = pSoliRespuesta.Administrador;
             AdministradorID = pSoliRespuesta.AdministradorID;
 
             this.Solicitud_Soporte = new Solicitud_Soporte();
@@ -28,11 +29,18 @@ namespace ProyectoTFI.Models
 
 
         public int ID { get; set; }
+        [Required]
+        [Display(Name = "Descripción de Respuesta")]
         public string Descripcion { get; set; }
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Fecha de Respuesta")]
         public System.DateTime Fecha { get; set; }
         public int SolicitudID { get; set; }
         public int AdministradorID { get; set; }
+        public virtual Administrador Administrador { get; set; }
         public virtual Solicitud_Soporte Solicitud_Soporte { get; set; }
+        [Display(Name = "Respondido por")]
+        public string AdministradorUsername { get; set; }
 
     }
 }
