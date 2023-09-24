@@ -52,6 +52,7 @@ namespace ProyectoTFI.Models
         public ICollection<Solicitud_Respuesta> Solicitud_Respuesta { get; set; }
         public virtual Alumno Alumno { get; set; }
         [Required]
+        [Display(Name = "Descripción de Respuesta")]
         public virtual string DescripcionRespuesta { get; set; }
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         [Display(Name = "Fecha de Respuesta")]
