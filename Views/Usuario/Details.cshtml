@@ -1,0 +1,100 @@
+﻿@model ProyectoTFI.Models.UsuarioViewModel
+@{
+    ProyectoTFI.Entities.Usuario usuario = (ProyectoTFI.Entities.Usuario)Session["user"];
+}
+@{
+    ViewBag.Title = "DetalleAdministrador";
+    Layout = "~/Views/Shared/_LayoutInterno.cshtml";
+}
+
+@{
+    string estadoMostrado = (bool)Model.Activo ? "Activo" : "Inactivo";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Detalle Administrador</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ID)
+
+        <div class="" style="background-color: antiquewhite; border-radius:10px;padding:10px;">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Username, htmlAttributes: new { @class = "control-label" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label " })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Nombre, htmlAttributes: new { @class = "control-label" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Apellido, htmlAttributes: new { @class = "control-label" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Apellido, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.DNI, htmlAttributes: new { @class = "control-label " })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.DNI, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.FechaNacimiento, htmlAttributes: new { @class = "control-label " })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.FechaNacimiento, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @*Estado: @Html.LabelFor(model => model.Activo, htmlAttributes: new { @class = "control-label " })*@
+                        Estado
+                        <input disabled="disabled" type="text" id="Activo" name="Activo" class="form-control" value="@estadoMostrado" )" readonly />
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="row gy-5">
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        @Html.ActionLink("Editar", "Edit", new { }, new { @class = "btn btn-success" })
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+}
