@@ -3,7 +3,7 @@
     ProyectoTFI.Entities.Usuario usuario = (ProyectoTFI.Entities.Usuario)Session["user"];
 }
 @{
-    ViewBag.Title = "DetalleAdministrador";
+    ViewBag.Title = "Mi Perfil";
     Layout = "~/Views/Shared/_LayoutInterno.cshtml";
 }
 
@@ -16,7 +16,7 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>Detalle Administrador</h4>
+        <h4>Mi Perfil</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.ID)
