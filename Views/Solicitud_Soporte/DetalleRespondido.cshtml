@@ -116,7 +116,7 @@
                             @*@Html.LabelFor(model => model.Solicitud_Respuesta.FirstOrDefault().Descripcion, htmlAttributes: new { @class = "control-label " })*@
                             Descripción de Respuesta
                             <div class="col-md-10">
-                                @Html.TextAreaFor(model => model.Solicitud_Respuesta.FirstOrDefault().Descripcion, new { @class = "form-control", @disabled = "disabled" })
+                                @Html.TextAreaFor(model => model.Solicitud_Respuesta.FirstOrDefault().Descripcion, new { @class = "form-control", @disabled = "disabled", @rows = 4 })
                                 @Html.ValidationMessageFor(model => model.Solicitud_Respuesta.FirstOrDefault().Descripcion, "", new { @class = "text-danger" })
                             </div>
                         </div>
