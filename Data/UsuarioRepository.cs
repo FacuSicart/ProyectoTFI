@@ -59,5 +59,31 @@ namespace ProyectoTFI.Data
         {
             return context.Usuario.ToList();
         }
+
+        public Usuario VerPerfil(int id)
+        {
+            Usuario user = context.Usuario.Where(u => u.ID == id).FirstOrDefault();
+
+            return user;
+        }
+
+        public void EditarUsuario(Usuario usuario)
+        {
+            Usuario user = context.Usuario.Where(u => u.ID == usuario.ID).FirstOrDefault();
+            user.Username = usuario.Username;
+            user.Email = usuario.Email;
+            user.Nombre = usuario.Nombre;
+            user.Apellido = usuario.Apellido;
+            user.DNI = usuario.DNI;
+            user.FechaNacimiento = usuario.FechaNacimiento;
+            context.SaveChanges();
+        }
+
+        public void ReestablecerPassword(Usuario usuario)
+        {
+            Usuario user = context.Usuario.Include("Rol").Where(u => u.ID == usuario.ID).FirstOrDefault();
+            user.Password = usuario.Password;
+            context.SaveChanges();
+        }
     }
 }
