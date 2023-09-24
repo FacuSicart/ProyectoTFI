@@ -8,6 +8,7 @@ using ProyectoTFI.Service;
 using ProyectoTFI.Models;
 using PagedList;
 using System.Web.UI;
+using Antlr.Runtime;
 
 namespace ProyectoTFI.Controllers
 {
@@ -26,12 +27,8 @@ namespace ProyectoTFI.Controllers
             {
                 Usuario usuarioSesion = (Usuario)Session["user"];
                 //UsuarioViewModel usuarioModel = new UsuarioViewModel(usuarioSesion);
-                usarioService = new UsuarioService();
                 cursoService = new CursoService();
-                alumnoService = new AlumnoService();
-                docenteService = new DocenteService();
-                var idDocente = docenteService.VerDocente(usuarioSesion.ID).ID;
-                var listaCursos = cursoService.ListarCursosUsuario(idDocente, pBusqueda);
+                var listaCursos = cursoService.ListarCursosUsuario(usuarioSesion.Docente.FirstOrDefault().ID, pBusqueda);
 
                 int pageSize = 10;
                 int pageNumber = (page ?? 1);
@@ -58,11 +55,8 @@ namespace ProyectoTFI.Controllers
             {
                 Usuario usuarioSesion = (Usuario)Session["user"];
                 //UsuarioViewModel usuarioModel = new UsuarioViewModel(usuarioSesion);
-                usarioService = new UsuarioService();
                 cursoService = new CursoService();
-                alumnoService = new AlumnoService();
-                var idAlumno = alumnoService.ObtenterIdAlumno(usuarioSesion.ID);
-                var listaCursos = cursoService.ListarCursosUsuario(idAlumno, pBusqueda);
+                var listaCursos = cursoService.ListarCursosUsuario(usuarioSesion.Alumno.FirstOrDefault().ID, pBusqueda);
 
                 int pageSize = 10;
                 int pageNumber = (page ?? 1);
@@ -84,6 +78,36 @@ namespace ProyectoTFI.Controllers
                 int pageSize = 10;
                 int pageNumber = (page ?? 1);
                 return View(listaClases.ToPagedList(pageNumber, pageSize));
+            }
+            else
+            {
+                return View("Error", model: "No se encuentra logueado");
+            }
+        }
+        public ActionResult RegistrarCurso(int id)
+        {
+            if (Session["user"] != null)
+            {
+                cursoService = new CursoService();
+                var curso = cursoService.VerCurso(id);
+                return View(curso);
+            }
+            else
+            {
+                return View("Error", model: "No se encuentra logueado");
+            }
+        }
+        [HttpPost]
+        public ActionResult RegistrarCurso(CursoViewModel curso)
+        {
+            if (Session["user"] != null)
+            {
+                Usuario usuarioSesion = (Usuario)Session["user"];
+                cursoService = new CursoService();
+                alumnoService = new AlumnoService();
+                cursoService.AltaCurso(curso.ID, usuarioSesion.Alumno.FirstOrDefault().ID);
+                
+                return RedirectToAction("VerCursos", "Curso");
             }
             else
             {
