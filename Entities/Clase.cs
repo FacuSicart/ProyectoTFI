@@ -11,7 +11,8 @@ namespace ProyectoTFI.Entities
 {
     using System;
     using System.Collections.Generic;
-    
+    using ProyectoTFI.Models;
+
     public partial class Clase
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,7 +20,19 @@ namespace ProyectoTFI.Entities
         {
             this.Quiz = new HashSet<Quiz>();
         }
-    
+
+        public Clase(ClaseViewModel pClaseViewModel)
+        {
+            ID = pClaseViewModel.ID;
+            Descripcion = pClaseViewModel.Descripcion;
+            LinkVideo = pClaseViewModel.LinkVideo;
+            Activo = pClaseViewModel.Activo;
+            CursoID = pClaseViewModel.CursoID;
+
+            this.Quiz = new HashSet<Quiz>();
+
+        }
+
         public int ID { get; set; }
         public string Descripcion { get; set; }
         public string LinkVideo { get; set; }

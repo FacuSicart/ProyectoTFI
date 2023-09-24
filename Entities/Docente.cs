@@ -19,7 +19,13 @@ namespace ProyectoTFI.Entities
         {
             this.Docente_Curso = new HashSet<Docente_Curso>();
         }
-    
+
+        public Docente(Usuario pUsuario)
+        {
+            Usuario = pUsuario;
+            this.Docente_Curso = new HashSet<Docente_Curso>();
+        }
+
         public int ID { get; set; }
         public Nullable<int> UsuarioID { get; set; }
     
