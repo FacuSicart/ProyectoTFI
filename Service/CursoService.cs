@@ -16,14 +16,69 @@ namespace ProyectoTFI.Service
             cursoRepository = new CursoRepository();
         }
 
-        public List<Curso> ListarCursos(string pBusqueda)
+        public List<CursoViewModel> ListarCursos(string pBusqueda)
         {
-            return cursoRepository.ListarCursos(pBusqueda);
+            List<CursoViewModel> lresult = new List<CursoViewModel>();
+            try
+            {
+                List<Curso> cursos = cursoRepository.ListarCursos(pBusqueda);
+
+                foreach (Curso c in cursos)
+                {
+                    lresult.Add(new CursoViewModel(c));
+                }
+                return lresult;
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
         }
-        public List<Curso> ListarCursosUsuario(int id, string pBusqueda)
+        public List<CursoViewModel> ListarCursosDocente(int id, string pBusqueda)
         {
-            return cursoRepository.ListarCursosUsuario(id, pBusqueda);
+            List<CursoViewModel> lresult = new List<CursoViewModel>();
+            try
+            {
+                List<Curso> cursos = cursoRepository.ListarCursosDocente(id, pBusqueda);
+
+                foreach (Curso c in cursos)
+                {
+                    lresult.Add(new CursoViewModel(c));
+                }
+                return lresult;
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
         }
+
+        public List<CursoViewModel> ListarCursosAlumno(int id, string pBusqueda)
+        {
+            List<CursoViewModel> lresult = new List<CursoViewModel>();
+            try
+            {
+                List<Curso> cursos = cursoRepository.ListarCursosAlumno(id, pBusqueda);
+
+                foreach (Curso c in cursos)
+                {
+                    lresult.Add(new CursoViewModel(c));
+                }
+                return lresult;
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+        }
+
+        public List<CursoViewModel> ListarCursosDisponiblesAlumno(int id, string pBusqueda)
+        {
+            List<CursoViewModel> lresult = new List<CursoViewModel>();
+            try
+            {
+                List<Curso> cursos = cursoRepository.ListarCursosDisponiblesAlumno(id, pBusqueda);
+
+                foreach (Curso c in cursos)
+                {
+                    lresult.Add(new CursoViewModel(c));
+                }
+                return lresult;
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+        }
+
         public CursoViewModel VerCurso(int id)
         {
             Curso curso = cursoRepository.VerCurso(id);

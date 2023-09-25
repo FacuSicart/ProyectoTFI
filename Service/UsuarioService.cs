@@ -38,7 +38,18 @@ namespace ProyectoTFI.Service
 
         public bool CrearAlumno(UsuarioViewModel usuario)
         {
-            Usuario UsuarioReal = new Usuario(usuario);
+            Usuario UsuarioReal = new Usuario
+            {
+                ID = usuario.ID,
+                Username = usuario.Username,
+                Password = usuario.Password,
+                Nombre = usuario.Nombre,
+                Apellido = usuario.Apellido,
+                DNI = usuario.DNI,
+                FechaNacimiento = usuario.FechaNacimiento,
+                Email = usuario.Email,
+                Activo = usuario.Activo
+            };
             bool Respuesta = usuarioRepository.CrearAlumno(UsuarioReal);
             return Respuesta;
         }
@@ -61,13 +72,35 @@ namespace ProyectoTFI.Service
 
         public void EditarUsuario(UsuarioViewModel usuario)
         {
-            Usuario u = new Usuario(usuario);
+            Usuario u = new Usuario
+            {
+                ID = usuario.ID,
+                Username = usuario.Username,
+                Password = usuario.Password,
+                Nombre = usuario.Nombre,
+                Apellido = usuario.Apellido,
+                DNI = usuario.DNI,
+                FechaNacimiento = usuario.FechaNacimiento,
+                Email = usuario.Email,
+                Activo = usuario.Activo
+            };
             usuarioRepository.EditarUsuario(u);
         }
 
         public void ReestablecerPassword(UsuarioViewModel usuario)
         {
-            Usuario u = new Usuario(usuario);
+            Usuario u = new Usuario
+            {
+                ID = usuario.ID,
+                Username = usuario.Username,
+                Password = usuario.Password,
+                Nombre = usuario.Nombre,
+                Apellido = usuario.Apellido,
+                DNI = usuario.DNI,
+                FechaNacimiento = usuario.FechaNacimiento,
+                Email = usuario.Email,
+                Activo = usuario.Activo
+            };
             usuarioRepository.ReestablecerPassword(u);
         }
     }

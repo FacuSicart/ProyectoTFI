@@ -9,10 +9,10 @@ namespace ProyectoTFI.Data
 {
     public class UsuarioRepository
     {
-        TFIContext context;
+        ProyectoTFI.Entities.ProyectoTFI context;
         public UsuarioRepository()
         {
-            context = new TFIContext();
+            context = new ProyectoTFI.Entities.ProyectoTFI();
         }
 
         public Usuario VerificarUsuario(string username, string password)
@@ -47,7 +47,7 @@ namespace ProyectoTFI.Data
 
         public bool CrearAlumno(Usuario usuario)
         {
-            Alumno a = new Alumno(usuario);
+            Alumno a = new Alumno { Usuario = usuario };
             usuario.RolID = 4;
             usuario.Activo = true;
             context.Set<Alumno>().Add(a);

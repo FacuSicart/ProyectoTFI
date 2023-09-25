@@ -1,5 +1,4 @@
-﻿@*@model IEnumerable<ProyectoTFI.Entities.Usuario>*@
-@model PagedList.IPagedList<ProyectoTFI.Entities.Curso>
+﻿@model PagedList.IPagedList<ProyectoTFI.Models.CursoViewModel>
 @using PagedList.Mvc;
 
 @{ ViewBag.Title = "Gestión Cursos";
@@ -11,17 +10,14 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Ver Cursos</title>
+    <title>Mis Cursos</title>
     <link href="~/Scripts/pagedListStyles.css" rel="stylesheet" />
 </head>
 <body>
-    <h4>Gestión de Cursos</h4>
+    <h4>Mis Cursos</h4>
     <hr />
     @*@Html.ActionLink("Agregar", "AgregarAdministrador", "Admin", new { area = "" }, new { @class = "btn", @style = "background-color: blue;color:white;border-color:blue;", @onmouseover = "this.style.backgroundColor='blue';", @onmouseout = "this.style.backgroundColor='white'; this.style.color: blue;" })*@
     <div style="display: flex; align-items: center;">
-        <div style="border-right: thin solid black;">
-            @Html.ActionLink("Agregar", "AgregarCurso", "Curso", new { area = "" }, new { @class = "btn btn-info", @style = "color:white;font-weight:bold; margin-right: 10px;" })
-        </div>
         @using (Html.BeginForm())
         {
             <div style="margin-left:15px;">

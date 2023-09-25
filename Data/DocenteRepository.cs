@@ -9,10 +9,10 @@ namespace ProyectoTFI.Data
 {
     public class DocenteRepository
     {
-        TFIContext context;
+        ProyectoTFI.Entities.ProyectoTFI context;
         public DocenteRepository()
         {
-            context = new TFIContext();
+            context = new ProyectoTFI.Entities.ProyectoTFI();
         }
 
         public List<Usuario> ListarDocentes(string pBusqueda, string pTipoUsuario)
@@ -45,7 +45,7 @@ namespace ProyectoTFI.Data
 
         public bool AgregarDocente(Usuario usuario)
         {
-            Docente Docente = new Docente(usuario);
+            Docente Docente = new Docente { Usuario = usuario };
             usuario.RolID = 3;
             usuario.Activo = true;
             context.Set<Docente>().Add(Docente);

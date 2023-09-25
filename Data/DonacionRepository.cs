@@ -10,10 +10,10 @@ namespace ProyectoTFI.Data
 {
     public class DonacionRepository
     {
-        TFIContext context;
+        ProyectoTFI.Entities.ProyectoTFI context;
         public DonacionRepository()
         {
-            context = new TFIContext();
+            context = new ProyectoTFI.Entities.ProyectoTFI();
         }
 
         public bool RealizarDonacion(Donacion pDonacion)

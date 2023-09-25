@@ -47,6 +47,7 @@
         <AssociationConnector Association="TFIContext.FK_Quiz_Respuesta_Quiz_Pregunta_Opcion" ManuallyRouted="false" />
         <AssociationConnector Association="TFIContext.FK_Usuario_Rol" ManuallyRouted="false" />
         <AssociationConnector Association="TFIContext.FK_Solicitud_Respuesta_Solicitud_Soporte" ManuallyRouted="false" />
+        <AssociationConnector Association="TFIContext.FK_Docente_Curso_Curso" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -9,6 +9,7 @@ using ProyectoTFI.Models;
 using PagedList;
 using System.Web.UI;
 using Antlr.Runtime;
+using log4net;
 
 namespace ProyectoTFI.Controllers
 {
@@ -21,24 +22,6 @@ namespace ProyectoTFI.Controllers
         ClaseService claseService;
         DocenteService docenteService;
 
-        public ActionResult VerCursosDocente(string pBusqueda, int? page)
-        {
-            if (Session["user"] != null)
-            {
-                Usuario usuarioSesion = (Usuario)Session["user"];
-                //UsuarioViewModel usuarioModel = new UsuarioViewModel(usuarioSesion);
-                cursoService = new CursoService();
-                var listaCursos = cursoService.ListarCursosUsuario(usuarioSesion.Docente.FirstOrDefault().ID, pBusqueda);
-
-                int pageSize = 10;
-                int pageNumber = (page ?? 1);
-                return View(listaCursos.ToPagedList(pageNumber, pageSize));
-            }
-            else
-            {
-                return View("Error", model: "No se encuentra logueado");
-            }
-        }
         public ActionResult VerCursos(string pBusqueda, int? page)
         {
             cursoService = new CursoService();
@@ -49,14 +32,37 @@ namespace ProyectoTFI.Controllers
             return View(listaCursos.ToPagedList(pageNumber, pageSize));
         }
 
-        public ActionResult VerCursosUsuario(string pBusqueda, int? page)
+        public ActionResult VerCursosDocente(string pBusqueda, int? page)
+        {
+            try
+            {
+                if (Session["user"] != null)
+                {
+                    Usuario usuarioSesion = (Usuario)Session["user"];
+                    cursoService = new CursoService();
+
+                    List<CursoViewModel> listaCursos = cursoService.ListarCursosDocente(usuarioSesion.Docente.FirstOrDefault().ID, pBusqueda);
+
+                    int pageSize = 10;
+                    int pageNumber = (page ?? 1);
+                    return View(listaCursos.ToPagedList(pageNumber, pageSize));
+                }
+                else
+                {
+                    return View("Error", model: "No se encuentra logueado");
+                }
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+        }
+
+        public ActionResult VerCursosAlumno(string pBusqueda, int? page)
         {
             if (Session["user"] != null)
             {
                 Usuario usuarioSesion = (Usuario)Session["user"];
-                //UsuarioViewModel usuarioModel = new UsuarioViewModel(usuarioSesion);
                 cursoService = new CursoService();
-                var listaCursos = cursoService.ListarCursosUsuario(usuarioSesion.Alumno.FirstOrDefault().ID, pBusqueda);
+
+                List<CursoViewModel> listaCursos = cursoService.ListarCursosAlumno(usuarioSesion.Alumno.FirstOrDefault().ID, pBusqueda);
 
                 int pageSize = 10;
                 int pageNumber = (page ?? 1);
@@ -66,9 +72,32 @@ namespace ProyectoTFI.Controllers
             {
                 return View("Error", model: "No se encuentra logueado");
             }
-            
         }
-        
+
+        public ActionResult VerCursosDisponibles(string pBusqueda, int? page)
+        {
+            try
+            {
+                if (Session["user"] != null)
+                {
+                    Usuario usuarioSesion = (Usuario)Session["user"];
+                    cursoService = new CursoService();
+
+                    List<CursoViewModel> listaCursos = cursoService.ListarCursosDisponiblesAlumno(usuarioSesion.Alumno.FirstOrDefault().ID, pBusqueda);
+
+                    int pageSize = 10;
+                    int pageNumber = (page ?? 1);
+                    return View(listaCursos.ToPagedList(pageNumber, pageSize));
+                }
+                else
+                {
+                    return View("Error", model: "No se encuentra logueado");
+                }
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+        }
+
+
         public ActionResult VerClasesCurso(int ID, int? page)
         {
             if (Session["user"] != null)
@@ -107,7 +136,7 @@ namespace ProyectoTFI.Controllers
                 alumnoService = new AlumnoService();
                 cursoService.AltaCurso(curso.ID, usuarioSesion.Alumno.FirstOrDefault().ID);
                 
-                return RedirectToAction("VerCursos", "Curso");
+                return RedirectToAction("VerCursosDisponibles", "Curso");
             }
             else
             {

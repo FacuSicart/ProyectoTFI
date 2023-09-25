@@ -9,10 +9,10 @@ namespace ProyectoTFI.Data
 {
     public class Solicitud_RespuestaRepository
     {
-        TFIContext context;
+        ProyectoTFI.Entities.ProyectoTFI context;
         public Solicitud_RespuestaRepository()
         {
-            context = new TFIContext();
+            context = new ProyectoTFI.Entities.ProyectoTFI();
         }
 
         public List<Solicitud_Respuesta> ListarSolicitudes(string pBusqueda, string pEstado)

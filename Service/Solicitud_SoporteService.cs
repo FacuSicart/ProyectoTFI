@@ -23,7 +23,17 @@ namespace ProyectoTFI.Service
 
         public bool AgregarSolicitudSoporte(Solicitud_SoporteViewModel solicitud)
         {
-            Solicitud_Soporte SolicitudReal = new Solicitud_Soporte(solicitud);
+            Solicitud_Soporte SolicitudReal = new Solicitud_Soporte 
+            {
+                ID = solicitud.ID,
+                Asunto = solicitud.Asunto,
+                TipoConsulta = solicitud.TipoConsulta,
+                Descripcion = solicitud.Descripcion,
+                Fecha = solicitud.Fecha,
+                Activo = solicitud.Activo,
+                AlumnoID = solicitud.AlumnoID,
+                Alumno = solicitud.Alumno
+            };
             bool Respuesta = solicitud_soporteRepository.AgregarSolicitudSoporte(SolicitudReal);
             return Respuesta;
         }
@@ -41,7 +51,17 @@ namespace ProyectoTFI.Service
 
         public bool ResponderSolicitudSoporte(Solicitud_SoporteViewModel solicitud)
         {
-            Solicitud_Soporte SolicitudReal = new Solicitud_Soporte(solicitud);
+            Solicitud_Soporte SolicitudReal = new Solicitud_Soporte
+            {
+                ID = solicitud.ID,
+                Asunto = solicitud.Asunto,
+                TipoConsulta = solicitud.TipoConsulta,
+                Descripcion = solicitud.Descripcion,
+                Fecha = solicitud.Fecha,
+                Activo = solicitud.Activo,
+                AlumnoID = solicitud.AlumnoID,
+                Alumno = solicitud.Alumno
+            };
             SolicitudReal.Solicitud_Respuesta.Add(solicitud.Solicitud_Respuesta.FirstOrDefault());
             bool Respuesta = solicitud_soporteRepository.ResponderSolicitudSoporte(SolicitudReal);
             return Respuesta;

@@ -24,8 +24,19 @@ namespace ProyectoTFI.Service
 
         public bool AgregarAdministrador(UsuarioViewModel usuario)
         {
-            Usuario UsuarioReal = new Usuario(usuario);
-            bool Respuesta = adminRepository.AgregarAdministrador(UsuarioReal);
+            Usuario u = new Usuario
+            {
+                ID = usuario.ID,
+                Username = usuario.Username,
+                Password = usuario.Password,
+                Nombre = usuario.Nombre,
+                Apellido = usuario.Apellido,
+                DNI = usuario.DNI,
+                FechaNacimiento = usuario.FechaNacimiento,
+                Email = usuario.Email,
+                Activo = usuario.Activo
+            };
+            bool Respuesta = adminRepository.AgregarAdministrador(u);
             return Respuesta;
         }
 
@@ -44,7 +55,18 @@ namespace ProyectoTFI.Service
 
         public void EditarAdministrador(UsuarioViewModel usuario)
         {
-            Usuario u = new Usuario(usuario);
+            Usuario u = new Usuario
+            {
+                ID = usuario.ID,
+                Username = usuario.Username,
+                Password = usuario.Password,
+                Nombre = usuario.Nombre,
+                Apellido = usuario.Apellido,
+                DNI = usuario.DNI,
+                FechaNacimiento = usuario.FechaNacimiento,
+                Email = usuario.Email,
+                Activo = usuario.Activo
+            };
             adminRepository.EditarAdministrador(u);
         }
 
@@ -55,7 +77,18 @@ namespace ProyectoTFI.Service
 
         public void ReestablecerPassword(UsuarioViewModel usuario)
         {
-            Usuario u = new Usuario(usuario);
+            Usuario u = new Usuario
+            {
+                ID = usuario.ID,
+                Username = usuario.Username,
+                Password = usuario.Password,
+                Nombre = usuario.Nombre,
+                Apellido = usuario.Apellido,
+                DNI = usuario.DNI,
+                FechaNacimiento = usuario.FechaNacimiento,
+                Email = usuario.Email,
+                Activo = usuario.Activo
+            };
             adminRepository.ReestablecerPassword(u);
         }
     }

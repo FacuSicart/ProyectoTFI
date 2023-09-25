@@ -1,5 +1,5 @@
 ﻿@*@model IEnumerable<ProyectoTFI.Entities.Usuario>*@
-@model PagedList.IPagedList<ProyectoTFI.Entities.Curso>
+@model PagedList.IPagedList<ProyectoTFI.Models.CursoViewModel>
 @using PagedList.Mvc;
 
 @{ ViewBag.Title = "Ver Cursos";
@@ -58,7 +58,7 @@
                             </td>
                             <td>
                                 <div class="d-flex justify-content-between">
-                                    @Html.ActionLink("Registrar", "RegistrarCurso", new { id = curso.ID }, new { @class = "btn btn-info", @style = "color:white;font-weight:bold; margin-right: 10px;" })
+                                    @Html.ActionLink("🔍", "VerClasesCurso", new { id = curso.ID }, new { @class = "btn btn-primary" })
                                 </div>
                             </td>
                         </tr>

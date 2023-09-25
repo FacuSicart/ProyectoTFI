@@ -39,7 +39,7 @@
                     {
                         <li style="margin-right: 45px; font-weight: bold; font-size: 16px;">@Html.ActionLink("Mi Perfil", "Details", "Usuario", new { area = "" }, new { @class = "nav-link" })</li>
                         <li style="margin-right: 45px; font-weight: bold; font-size: 16px;">@Html.ActionLink("Gestión Docentes", "Ver", "Docente", new { area = "" }, new { @class = "nav-link" })</li>
-                        <li style="margin-right: 45px; font-weight: bold; font-size: 16px;">@Html.ActionLink("Gestión Cursos", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li style="margin-right: 45px; font-weight: bold; font-size: 16px;">@Html.ActionLink("Gestión Cursos", "VerCursos", "Curso", new { area = "" }, new { @class = "nav-link" })</li>
                         <li style="margin-right: 45px; font-weight: bold; font-size: 16px;">@Html.ActionLink("Soporte", "VerPendientes", "Solicitud_Soporte", new { area = "" }, new { @class = "nav-link" })</li>
                     }
                     @if (usuario.Rol.ID == 3) //Docente
@@ -51,8 +51,8 @@
                     @if (usuario.Rol.ID == 4) //Alumno
                     {
                         <li style="margin-right: 45px; font-weight: bold; font-size: 16px;">@Html.ActionLink("Mi Perfil", "Details", "Usuario", new { area = "" }, new { @class = "nav-link" })</li>
-                        <li style="margin-right: 45px; font-weight: bold; font-size: 16px;">@Html.ActionLink("Cursos", "VerCursos", "Curso", new { area = "" }, new { @class = "nav-link" })</li>
-                        <li style="margin-right: 45px; font-weight: bold; font-size: 16px;">@Html.ActionLink("Mis Cursos", "VerCursosUsuario", "Curso", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li style="margin-right: 45px; font-weight: bold; font-size: 16px;">@Html.ActionLink("Cursos", "VerCursosDisponibles", "Curso", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li style="margin-right: 45px; font-weight: bold; font-size: 16px;">@Html.ActionLink("Mis Cursos", "VerCursosAlumno", "Curso", new { area = "" }, new { @class = "nav-link" })</li>
                         <li style="margin-right: 45px; font-weight: bold; font-size: 16px;">@Html.ActionLink("Soporte", "Ver", "Solicitud_Soporte", new { area = "" }, new { @class = "nav-link" })</li>
                     }
                     <li style="margin-right: 45px; font-weight: bold; font-size: 16px;">@Html.ActionLink("Cerrar Sesión", "CerrarSesion", "Home", new { area = "" }, new { @class = "nav-link" })</li>

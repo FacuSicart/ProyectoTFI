@@ -9,10 +9,10 @@ namespace ProyectoTFI.Data
 {
     public class ClaseRepository
     {
-        TFIContext context;
+        ProyectoTFI.Entities.ProyectoTFI context;
         public ClaseRepository()
         {
-            context = new TFIContext();
+            context = new ProyectoTFI.Entities.ProyectoTFI();
         }
 
         public List<Clase> ListarClases(string pBusqueda, string pEstado, int pCurso)
