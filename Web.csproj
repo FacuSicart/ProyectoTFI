@@ -333,6 +333,7 @@
     <Content Include="SQLScripts\scriptTFIV4.sql" />
     <Content Include="SQLScripts\scriptTFIV5.sql" />
     <Content Include="SQLScripts\scriptTFIV6.sql" />
+    <Content Include="SQLScripts\scriptTFIV7.sql" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
