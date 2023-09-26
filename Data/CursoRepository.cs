@@ -94,5 +94,15 @@ namespace ProyectoTFI.Data
 
             return context.SaveChanges() > 0;
         }
+
+        public bool AgregarCurso(Curso C)
+        {
+            try
+            {
+                context.Curso.Add(C);
+                return context.SaveChanges() > 0;
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+        }
     }
 }

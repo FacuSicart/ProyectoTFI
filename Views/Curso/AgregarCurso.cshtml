@@ -1,4 +1,4 @@
-﻿@model ProyectoTFI.Models.CursoViewModel
+﻿@model ProyectoTFI.Models.AgregarCursoViewModel
 
 @{
     ViewBag.Title = "Agregar Curso";
@@ -7,7 +7,7 @@
 
 <h2>Agregar Curso</h2>
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm("AgregarCurso", "Curso", FormMethod.Post, Model)) 
 {
     @Html.AntiForgeryToken()
     
@@ -15,24 +15,31 @@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            @Html.LabelFor(model => model.Nombre, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Curso.Nombre, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Curso.Nombre, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Curso.Nombre, "", new { @class = "text-danger" })
             </div>
         </div>
-
         <div class="form-group">
-            @Html.LabelFor(model => model.Descripcion, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Curso.Descripcion, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Descripcion, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Descripcion, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Curso.Descripcion, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Curso.Descripcion, "", new { @class = "text-danger" })
             </div>
         </div>
-
+        <label for="cboDocente">Docente</label>
+        <select id="cboDocente" class="form-select" multiple>
+            @foreach (var u in Model.Docentes)
+            {
+                <option value="@u.Docente.FirstOrDefault().ID">@u.Apellido, @u.Nombre</option> 
+            }
+        </select>
+        @Html.ListBoxFor(m => m.SelectedDocentes, new MultiSelectList(Model.Docentes, "Nombre", "nombre"))
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Agregar" class="btn btn-default" />
+                @*<button id="btnAgregar">Agregar</button>*@
             </div>
         </div>
     </div>

@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using ProyectoTFI.Entities;
 using ProyectoTFI.Service;
 using ProyectoTFI.Models;
+using Newtonsoft.Json;
 using PagedList;
 using System.Web.UI;
 using Antlr.Runtime;
@@ -21,6 +22,19 @@ namespace ProyectoTFI.Controllers
         AlumnoService alumnoService;
         ClaseService claseService;
         DocenteService docenteService;
+
+        public List<Usuario> ListarDocentes()
+        {
+            try
+            {
+                docenteService = new DocenteService();
+                var rta = docenteService.ListarDocentes("", "Activo");
+                //string json = JsonConvert.SerializeObject(rta);
+
+                return rta;
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+        }
 
         public ActionResult VerCursos(string pBusqueda, int? page)
         {
@@ -152,7 +166,11 @@ namespace ProyectoTFI.Controllers
                 {
                     Usuario usuarioSesion = (Usuario)Session["user"];
                     if (usuarioSesion.Rol.Nombre != "Administrador") { return View("Error", model: "Error de permisos, intente de nuevo"); }
-                    return View();
+
+                    AgregarCursoViewModel viewModel = new AgregarCursoViewModel();
+                    viewModel.Docentes = ListarDocentes();
+
+                    return View(viewModel);
                 }
                 else
                 {
@@ -163,7 +181,7 @@ namespace ProyectoTFI.Controllers
         }
 
         [HttpPost]
-        public ActionResult AgregarCurso(CursoViewModel Curso)
+        public ActionResult AgregarCurso(AgregarCursoViewModel viewModel)//(string pNombre, string pDesc)//, string[] pDocentes)
         {
             try
             {
@@ -173,7 +191,7 @@ namespace ProyectoTFI.Controllers
                     if (usuarioSesion.Rol.Nombre != "Administrador") { return View("Error", model: "Error de permisos, intente de nuevo"); }
 
                     cursoService = new CursoService();
-                    cursoService.AgregarCurso(Curso, usuarioSesion);
+                    //cursoService.AgregarCurso(viewModel, usuarioSesion);
 
                     return RedirectToAction("VerCursosDisponibles", "Curso");
                 }

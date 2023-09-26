@@ -236,6 +236,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AdministradorViewModel.cs" />
+    <Compile Include="Models\AgregarCursoViewModel.cs" />
     <Compile Include="Models\CursoViewModel.cs" />
     <Compile Include="Models\Solicitud_RespuestaViewModel.cs" />
     <Compile Include="Models\Solicitud_SoporteViewModel.cs" />
