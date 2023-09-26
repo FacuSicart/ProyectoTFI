@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="TFIContext.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="TFIContext.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Administrador">
           <Key>
             <PropertyRef Name="ID" />
@@ -35,6 +35,7 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Descripcion" Type="varchar" MaxLength="500" />
+          <Property Name="LinkVideo" Type="varchar" MaxLength="500" />
           <Property Name="Activo" Type="bit" />
           <Property Name="CursoID" Type="int" />
         </EntityType>
@@ -285,6 +286,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Docente_Curso_Curso">
+          <End Role="Curso" Type="Self.Curso" Multiplicity="0..1" />
+          <End Role="Docente_Curso" Type="Self.Docente_Curso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Curso">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Docente_Curso">
+              <PropertyRef Name="CursoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Docente_Curso_Docente">
           <End Role="Docente" Type="Self.Docente" Multiplicity="0..1" />
           <End Role="Docente_Curso" Type="Self.Docente_Curso" Multiplicity="*" />
@@ -503,6 +516,10 @@
             <End Role="Administrador" EntitySet="Administrador" />
             <End Role="Curso" EntitySet="Curso" />
           </AssociationSet>
+          <AssociationSet Name="FK_Docente_Curso_Curso" Association="Self.FK_Docente_Curso_Curso">
+            <End Role="Curso" EntitySet="Curso" />
+            <End Role="Docente_Curso" EntitySet="Docente_Curso" />
+          </AssociationSet>
           <AssociationSet Name="FK_Docente_Curso_Docente" Association="Self.FK_Docente_Curso_Docente">
             <End Role="Docente" EntitySet="Docente" />
             <End Role="Docente_Curso" EntitySet="Docente_Curso" />
@@ -560,8 +577,7 @@
             <End Role="Usuario" EntitySet="Usuario" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="TFIContext" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -606,6 +622,7 @@
           <Property Name="CursoID" Type="Int32" />
           <NavigationProperty Name="Curso" Relationship="Self.FK_Clase_Curso" FromRole="Clase" ToRole="Curso" />
           <NavigationProperty Name="Quiz" Relationship="Self.FK_Quiz_Clase" FromRole="Clase" ToRole="Quiz" />
+          <Property Name="LinkVideo" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Cursada_de_Alumno">
           <Key>
@@ -630,6 +647,7 @@
           <NavigationProperty Name="Administrador" Relationship="Self.FK_Curso_Administrador" FromRole="Curso" ToRole="Administrador" />
           <NavigationProperty Name="Clase" Relationship="Self.FK_Clase_Curso" FromRole="Curso" ToRole="Clase" />
           <NavigationProperty Name="Cursada_de_Alumno" Relationship="Self.FK_Cursada_de_Alumno_Curso" FromRole="Curso" ToRole="Cursada_de_Alumno" />
+          <NavigationProperty Name="Docente_Curso" Relationship="TFIContext.FK_Docente_Curso_Curso" FromRole="Curso" ToRole="Docente_Curso" />
         </EntityType>
         <EntityType Name="Docente">
           <Key>
@@ -649,6 +667,7 @@
           <Property Name="CursoID" Type="Int32" />
           <Property Name="DocenteID" Type="Int32" />
           <NavigationProperty Name="Docente" Relationship="Self.FK_Docente_Curso_Docente" FromRole="Docente_Curso" ToRole="Docente" />
+          <NavigationProperty Name="Curso" Relationship="TFIContext.FK_Docente_Curso_Curso" FromRole="Docente_Curso" ToRole="Curso" />
         </EntityType>
         <EntityType Name="Donacion">
           <Key>
@@ -1161,7 +1180,23 @@
             <End Role="Solicitud_Soporte" EntitySet="Solicitud_Soporte" />
             <End Role="Solicitud_Respuesta" EntitySet="Solicitud_Respuesta" />
           </AssociationSet>
+          <AssociationSet Name="FK_Docente_Curso_Curso" Association="TFIContext.FK_Docente_Curso_Curso">
+            <End Role="Curso" EntitySet="Curso" />
+            <End Role="Docente_Curso" EntitySet="Docente_Curso" />
+          </AssociationSet>
         </EntityContainer>
+        <Association Name="FK_Docente_Curso_Curso">
+          <End Type="TFIContext.Curso" Role="Curso" Multiplicity="0..1" />
+          <End Type="TFIContext.Docente_Curso" Role="Docente_Curso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Curso">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Docente_Curso">
+              <PropertyRef Name="CursoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1198,6 +1233,7 @@
           <EntitySetMapping Name="Clase">
             <EntityTypeMapping TypeName="TFIContext.Clase">
               <MappingFragment StoreEntitySet="Clase">
+                <ScalarProperty Name="LinkVideo" ColumnName="LinkVideo" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="Activo" ColumnName="Activo" />

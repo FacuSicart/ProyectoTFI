@@ -8,6 +8,8 @@ using ProyectoTFI.Service;
 using ProyectoTFI.Models;
 using PagedList;
 using System.Web.UI;
+using Antlr.Runtime;
+using log4net;
 
 namespace ProyectoTFI.Controllers
 {
@@ -18,28 +20,49 @@ namespace ProyectoTFI.Controllers
         CursoService cursoService;
         AlumnoService alumnoService;
         ClaseService claseService;
+        DocenteService docenteService;
 
-        public ActionResult VerCursos(string pBusqueda, string pActivo, int? page)
+        public ActionResult VerCursos(string pBusqueda, int? page)
         {
             cursoService = new CursoService();
-            var listaCursos = cursoService.ListarCursos(pBusqueda, pActivo);
+            var listaCursos = cursoService.ListarCursos(pBusqueda);
 
             int pageSize = 10;
             int pageNumber = (page ?? 1);
             return View(listaCursos.ToPagedList(pageNumber, pageSize));
         }
 
-        public ActionResult VerCursosUsuario(string pBusqueda, string pActivo, int? page)
+        public ActionResult VerCursosDocente(string pBusqueda, int? page)
+        {
+            try
+            {
+                if (Session["user"] != null)
+                {
+                    Usuario usuarioSesion = (Usuario)Session["user"];
+                    cursoService = new CursoService();
+
+                    List<CursoViewModel> listaCursos = cursoService.ListarCursosDocente(usuarioSesion.Docente.FirstOrDefault().ID, pBusqueda);
+
+                    int pageSize = 10;
+                    int pageNumber = (page ?? 1);
+                    return View(listaCursos.ToPagedList(pageNumber, pageSize));
+                }
+                else
+                {
+                    return View("Error", model: "No se encuentra logueado");
+                }
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+        }
+
+        public ActionResult VerCursosAlumno(string pBusqueda, int? page)
         {
             if (Session["user"] != null)
             {
                 Usuario usuarioSesion = (Usuario)Session["user"];
-                //UsuarioViewModel usuarioModel = new UsuarioViewModel(usuarioSesion);
-                usarioService = new UsuarioService();
                 cursoService = new CursoService();
-                alumnoService = new AlumnoService();
-                var idAlumno = alumnoService.ObtenterIdAlumno(usuarioSesion.ID);
-                var listaCursos = cursoService.ListarCursosUsuario(idAlumno, pBusqueda, pActivo);
+
+                List<CursoViewModel> listaCursos = cursoService.ListarCursosAlumno(usuarioSesion.Alumno.FirstOrDefault().ID, pBusqueda);
 
                 int pageSize = 10;
                 int pageNumber = (page ?? 1);
@@ -49,9 +72,32 @@ namespace ProyectoTFI.Controllers
             {
                 return View("Error", model: "No se encuentra logueado");
             }
-            
         }
-        
+
+        public ActionResult VerCursosDisponibles(string pBusqueda, int? page)
+        {
+            try
+            {
+                if (Session["user"] != null)
+                {
+                    Usuario usuarioSesion = (Usuario)Session["user"];
+                    cursoService = new CursoService();
+
+                    List<CursoViewModel> listaCursos = cursoService.ListarCursosDisponiblesAlumno(usuarioSesion.Alumno.FirstOrDefault().ID, pBusqueda);
+
+                    int pageSize = 10;
+                    int pageNumber = (page ?? 1);
+                    return View(listaCursos.ToPagedList(pageNumber, pageSize));
+                }
+                else
+                {
+                    return View("Error", model: "No se encuentra logueado");
+                }
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+        }
+
+
         public ActionResult VerClasesCurso(int ID, int? page)
         {
             if (Session["user"] != null)
@@ -67,6 +113,78 @@ namespace ProyectoTFI.Controllers
                 return View("Error", model: "No se encuentra logueado");
             }
         }
+        public ActionResult RegistrarCurso(int id)
+        {
+            if (Session["user"] != null)
+            {
+                cursoService = new CursoService();
+                var curso = cursoService.VerCurso(id);
+                return View(curso);
+            }
+            else
+            {
+                return View("Error", model: "No se encuentra logueado");
+            }
+        }
+        [HttpPost]
+        public ActionResult RegistrarCurso(CursoViewModel curso)
+        {
+            if (Session["user"] != null)
+            {
+                Usuario usuarioSesion = (Usuario)Session["user"];
+                cursoService = new CursoService();
+                alumnoService = new AlumnoService();
+                cursoService.AltaCurso(curso.ID, usuarioSesion.Alumno.FirstOrDefault().ID);
+                
+                return RedirectToAction("VerCursosDisponibles", "Curso");
+            }
+            else
+            {
+                return View("Error", model: "No se encuentra logueado");
+            }
+        }
+
+        public ActionResult AgregarCurso()
+        {
+            try
+            {
+                if (Session["user"] != null)
+                {
+                    Usuario usuarioSesion = (Usuario)Session["user"];
+                    if (usuarioSesion.Rol.Nombre != "Administrador") { return View("Error", model: "Error de permisos, intente de nuevo"); }
+                    return View();
+                }
+                else
+                {
+                    return View("Error", model: "No se encuentra logueado");
+                }
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+        }
+
+        [HttpPost]
+        public ActionResult AgregarCurso(CursoViewModel Curso)
+        {
+            try
+            {
+                if (Session["user"] != null)
+                {
+                    Usuario usuarioSesion = (Usuario)Session["user"];
+                    if (usuarioSesion.Rol.Nombre != "Administrador") { return View("Error", model: "Error de permisos, intente de nuevo"); }
+
+                    cursoService = new CursoService();
+                    cursoService.AgregarCurso(Curso, usuarioSesion);
+
+                    return RedirectToAction("VerCursosDisponibles", "Curso");
+                }
+                else
+                {
+                    return View("Error", model: "No se encuentra logueado");
+                }
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+        }
+
         // GET: Curso/Details/5
         public ActionResult Details(int id)
         {

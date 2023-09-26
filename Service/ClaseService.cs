@@ -27,7 +27,14 @@ namespace ProyectoTFI.Service
         }
         public bool AgregarClase(ClaseViewModel clase)
         {
-            Clase ClaseReal = new Clase(clase);
+            Clase ClaseReal = new Clase 
+            {
+                ID = clase.ID,
+                Descripcion = clase.Descripcion,
+                LinkVideo = clase.LinkVideo,
+                Activo = clase.Activo,
+                CursoID = clase.CursoID
+            };
             bool Respuesta = claseRepository.AgregarClase(ClaseReal);
             return Respuesta;
         }
@@ -47,7 +54,14 @@ namespace ProyectoTFI.Service
 
         public void EditarClase(ClaseViewModel clase)
         {
-            Clase Clase = new Clase(clase);
+            Clase Clase = new Clase
+            {
+                ID = clase.ID,
+                Descripcion = clase.Descripcion,
+                LinkVideo = clase.LinkVideo,
+                Activo = clase.Activo,
+                CursoID = clase.CursoID
+            };
             claseRepository.EditarClase(Clase);
         }
 

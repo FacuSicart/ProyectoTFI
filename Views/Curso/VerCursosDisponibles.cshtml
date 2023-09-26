@@ -1,0 +1,57 @@
+﻿@model IEnumerable<ProyectoTFI.Models.CursoViewModel>
+
+@{
+    ViewBag.Title = "VerCursosDisponibles";
+    Layout = "~/Views/Shared/_LayoutInterno.cshtml";
+}
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Mis Cursos</title>
+    <link href="~/Scripts/pagedListStyles.css" rel="stylesheet" />
+</head>
+
+<h4>Cursos Disponibles</h4>
+<div style="display: flex; align-items: center;">
+    @using (Html.BeginForm())
+    {
+        <div style="margin-left:15px;">
+            <div>
+                @Html.TextBox("pBusqueda", null, new { placeholder = "Escriba aquí para buscar", style = "width: 210px;" })
+                <input type="submit" value="Buscar" class="btn btn-info" style="color: white; font-weight: bold;" />
+            </div>
+        </div>
+    }
+</div>
+<div class="contentTable">
+    <table class="table table-hover" aria-describedby="curso" style="padding-top:20px;">
+        <thead style="background-color: #ffd800;">
+
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Nombre)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Descripcion)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descripcion)
+                </td>
+                <td>
+                    <div class="d-flex justify-content-between">
+                        @Html.ActionLink("Registrar", "RegistrarCurso", new { id = item.ID }, new { @class = "btn btn-info", @style = "color:white;font-weight:bold; margin-right: 10px;" })
+                    </div>
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

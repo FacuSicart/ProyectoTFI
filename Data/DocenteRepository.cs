@@ -9,10 +9,10 @@ namespace ProyectoTFI.Data
 {
     public class DocenteRepository
     {
-        TFIContext context;
+        ProyectoTFI.Entities.ProyectoTFI context;
         public DocenteRepository()
         {
-            context = new TFIContext();
+            context = new ProyectoTFI.Entities.ProyectoTFI();
         }
 
         public List<Usuario> ListarDocentes(string pBusqueda, string pTipoUsuario)
@@ -22,22 +22,22 @@ namespace ProyectoTFI.Data
             {
                 if (pTipoUsuario == "Activo" || pTipoUsuario is null)
                 {
-                    LU = context.Usuario.Where((u => (u.RolID == 3 && u.Activo == true) && (u.Nombre.Contains(pBusqueda) || u.Username.Contains(pBusqueda) || u.Apellido.Contains(pBusqueda)))).ToList();
+                    LU = context.Usuario.Include("Docente").Where((u => (u.RolID == 3 && u.Activo == true) && (u.Nombre.Contains(pBusqueda) || u.Username.Contains(pBusqueda) || u.Apellido.Contains(pBusqueda)))).ToList();
                 }
                 else
                 {
-                    LU = context.Usuario.Where((u => (u.RolID == 3 && u.Activo == false) && (u.Nombre.Contains(pBusqueda) || u.Username.Contains(pBusqueda) || u.Apellido.Contains(pBusqueda)))).ToList();
+                    LU = context.Usuario.Include("Docente").Where((u => (u.RolID == 3 && u.Activo == false) && (u.Nombre.Contains(pBusqueda) || u.Username.Contains(pBusqueda) || u.Apellido.Contains(pBusqueda)))).ToList();
                 }
             }
             else
             {
                 if (pTipoUsuario == "Activo" || pTipoUsuario is null)
                 {
-                    LU = context.Usuario.Where(u => u.RolID == 3 && u.Activo == true).ToList();
+                    LU = context.Usuario.Include("Docente").Where(u => u.RolID == 3 && u.Activo == true).ToList();
                 }
                 else
                 {
-                    LU = context.Usuario.Where(u => u.RolID == 3 && u.Activo == false).ToList();
+                    LU = context.Usuario.Include("Docente").Where(u => u.RolID == 3 && u.Activo == false).ToList();
                 }
             }
             return LU;
@@ -45,7 +45,7 @@ namespace ProyectoTFI.Data
 
         public bool AgregarDocente(Usuario usuario)
         {
-            Docente Docente = new Docente(usuario);
+            Docente Docente = new Docente { Usuario = usuario };
             usuario.RolID = 3;
             usuario.Activo = true;
             context.Set<Docente>().Add(Docente);

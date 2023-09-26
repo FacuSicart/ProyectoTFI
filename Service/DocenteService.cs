@@ -23,7 +23,18 @@ namespace ProyectoTFI.Service
 
         public bool AgregarDocente(UsuarioViewModel usuario)
         {
-            Usuario UsuarioReal = new Usuario(usuario);
+            Usuario UsuarioReal = new Usuario
+            {
+                ID = usuario.ID,
+                Username = usuario.Username,
+                Password = usuario.Password,
+                Nombre = usuario.Nombre,
+                Apellido = usuario.Apellido,
+                DNI = usuario.DNI,
+                FechaNacimiento = usuario.FechaNacimiento,
+                Email = usuario.Email,
+                Activo = usuario.Activo
+            };
             bool Respuesta = docenteRepository.AgregarDocente(UsuarioReal);
             return Respuesta;
         }
@@ -43,7 +54,18 @@ namespace ProyectoTFI.Service
 
         public void EditarDocente(UsuarioViewModel usuario)
         {
-            Usuario u = new Usuario(usuario);
+            Usuario u = new Usuario
+            {
+                ID = usuario.ID,
+                Username = usuario.Username,
+                Password = usuario.Password,
+                Nombre = usuario.Nombre,
+                Apellido = usuario.Apellido,
+                DNI = usuario.DNI,
+                FechaNacimiento = usuario.FechaNacimiento,
+                Email = usuario.Email,
+                Activo = usuario.Activo
+            };
             docenteRepository.EditarDocente(u);
         }
 
@@ -54,7 +76,18 @@ namespace ProyectoTFI.Service
 
         public void ReestablecerPassword(UsuarioViewModel usuario)
         {
-            Usuario u = new Usuario(usuario);
+            Usuario u = new Usuario
+            {
+                ID = usuario.ID,
+                Username = usuario.Username,
+                Password = usuario.Password,
+                Nombre = usuario.Nombre,
+                Apellido = usuario.Apellido,
+                DNI = usuario.DNI,
+                FechaNacimiento = usuario.FechaNacimiento,
+                Email = usuario.Email,
+                Activo = usuario.Activo
+            };
             docenteRepository.ReestablecerPassword(u);
         }
     }

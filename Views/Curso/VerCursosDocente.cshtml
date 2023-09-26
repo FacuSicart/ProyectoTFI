@@ -1,8 +1,7 @@
-﻿@*@model IEnumerable<ProyectoTFI.Entities.Usuario>*@
-@model PagedList.IPagedList<ProyectoTFI.Models.CursoViewModel>
+﻿@model PagedList.IPagedList<ProyectoTFI.Models.CursoViewModel>
 @using PagedList.Mvc;
 
-@{ ViewBag.Title = "Ver Cursos";
+@{ ViewBag.Title = "Gestión Cursos";
     Layout = "~/Views/Shared/_LayoutInterno.cshtml";
 
 }
@@ -11,13 +10,13 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Ver Cursos</title>
+    <title>Mis Cursos</title>
     <link href="~/Scripts/pagedListStyles.css" rel="stylesheet" />
 </head>
 <body>
-    <h4>Ver Cursos</h4>
+    <h4>Mis Cursos</h4>
     <hr />
-    @Html.ActionLink("Agregar", "AgregarCurso", "Curso", new { area = "" }, new { @class = "btn", @style = "background-color: blue;color:white;border-color:blue;", @onmouseover = "this.style.backgroundColor='blue';", @onmouseout = "this.style.backgroundColor='white'; this.style.color: blue;" })
+    @*@Html.ActionLink("Agregar", "AgregarAdministrador", "Admin", new { area = "" }, new { @class = "btn", @style = "background-color: blue;color:white;border-color:blue;", @onmouseover = "this.style.backgroundColor='blue';", @onmouseout = "this.style.backgroundColor='white'; this.style.color: blue;" })*@
     <div style="display: flex; align-items: center;">
         @using (Html.BeginForm())
         {
@@ -59,6 +58,13 @@
                             <td>
                                 <div class="d-flex justify-content-between">
                                     @Html.ActionLink("🔍", "VerClasesCurso", new { id = curso.ID }, new { @class = "btn btn-primary" })
+                                    @Html.ActionLink("✏", "EditarCurso", new { id = curso.ID }, new { @class = "btn btn-success" })
+                                    @if ((bool)curso.Activo == true)
+                                    {
+                                        @Html.ActionLink("🗑", "BajaCurso", new { id = curso.ID }, new { @class = "btn btn-danger" })
+                                    }
+                                    else
+                                    {@Html.ActionLink("⬆", "RehabilitarCurso", new { id = curso.ID }, new { @class = "btn btn-danger" })}
                                 </div>
                             </td>
                         </tr>

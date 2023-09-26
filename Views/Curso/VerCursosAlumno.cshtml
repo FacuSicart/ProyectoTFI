@@ -1,6 +1,7 @@
 ﻿@*@model IEnumerable<ProyectoTFI.Entities.Usuario>*@
-@model PagedList.IPagedList<ProyectoTFI.Entities.Curso>
+@model PagedList.IPagedList<ProyectoTFI.Models.CursoViewModel>
 @using PagedList.Mvc;
+
 
 @{ ViewBag.Title = "Cursos Registrados";
     Layout = "~/Views/Shared/_LayoutInterno.cshtml";
@@ -11,22 +12,16 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Ver Cursos Usuario</title>
+    <title>Mis Cursos</title>
     <link href="~/Scripts/pagedListStyles.css" rel="stylesheet" />
 </head>
 <body>
-    <h4>Gestión de Cursos</h4>
+    <h4>Mis Cursos</h4>
     <hr />
-    @*@Html.ActionLink("Agregar", "AgregarAdministrador", "Admin", new { area = "" }, new { @class = "btn", @style = "background-color: blue;color:white;border-color:blue;", @onmouseover = "this.style.backgroundColor='blue';", @onmouseout = "this.style.backgroundColor='white'; this.style.color: blue;" })*@
     <div style="display: flex; align-items: center;">
         @using (Html.BeginForm())
         {
             <div style="margin-left:15px;">
-                <div>
-                    <b>Estado:</b>
-                    @Html.RadioButton("pActivo", "Activo", true) <text>Activos</text>
-                    @Html.RadioButton("pActivo", "Inactivo") <text>Inactivos</text>
-                </div>
                 <div>
                     @Html.TextBox("pBusqueda", null, new { placeholder = "Escriba aquí para buscar", style = "width: 210px;" })
                     <input type="submit" value="Buscar" class="btn btn-info" style="color: white; font-weight: bold;" />
@@ -40,7 +35,6 @@
                 <tr>
                     <th scope="col" class="col-2 order" style="border: 2px solid #fff;">ID</th>
                     <th scope="col" class="col-2 order" style="border: 2px solid #fff;">Nombre</th>
-                    <th scope="col" class="col-1 ">Activo</th>
                     <th scope="col" class="col-1" style="border: 2px solid #fff;">Acciones</th>
                 </tr>
             </thead>
@@ -61,12 +55,6 @@
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => curso.Nombre)
-                            </td>
-                            <td style="text-align: center;">
-                                @if ((bool)curso.Activo)
-                                {<text>✅</text>}
-                            else
-                            { <text>❌</text>}
                             </td>
                             <td>
                                 <div class="d-flex justify-content-between">

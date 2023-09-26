@@ -19,7 +19,21 @@ namespace ProyectoTFI.Service
 
         public bool RealizarDonacion(DonacionViewModel pDonacion)
         {
-            Donacion DonacionReal = new Donacion(pDonacion);
+            Donacion DonacionReal = new Donacion 
+            {
+                NombreEmpresa = pDonacion.NombreEmpresa,
+                Email = pDonacion.Email,
+                PrefijoTelefono = pDonacion.PrefijoTelefono,
+                Telefono = pDonacion.Telefono,
+                Monto = pDonacion.Monto,
+                Tarjeta = new Tarjeta 
+                {
+                    Tipo = pDonacion.TipoTarjeta == "Débito" ? false : true,
+                    Numero = pDonacion.Numero,
+                    FechaCaducidad = pDonacion.FechaCaducidad,
+                    CVV = pDonacion.CVV
+                }
+            };
             bool Respuesta = donacionRepository.RealizarDonacion(DonacionReal);
             return Respuesta;
         }

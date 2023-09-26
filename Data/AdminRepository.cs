@@ -9,10 +9,10 @@ namespace ProyectoTFI.Data
 {
     public class AdminRepository
     {
-        TFIContext context;
+        ProyectoTFI.Entities.ProyectoTFI context;
         public AdminRepository()
         {
-            context = new TFIContext();
+            context = new ProyectoTFI.Entities.ProyectoTFI();
         }
 
         public List<Usuario> ListarUsuarios(string pBusqueda, string pTipoUsuario)
@@ -46,7 +46,7 @@ namespace ProyectoTFI.Data
 
         public bool AgregarAdministrador(Usuario usuario)
         {
-            Administrador a = new Administrador(usuario);
+            Administrador a = new Administrador { Usuario = usuario };
             usuario.RolID = 2;
             usuario.Activo = true;
             context.Set<Administrador>().Add(a);

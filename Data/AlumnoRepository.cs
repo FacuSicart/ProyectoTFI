@@ -9,10 +9,10 @@ namespace ProyectoTFI.Data
 {
     public class AlumnoRepository
     {
-        TFIContext context;
+        ProyectoTFI.Entities.ProyectoTFI context;
         public AlumnoRepository()
         {
-            context = new TFIContext();
+            context = new ProyectoTFI.Entities.ProyectoTFI();
         }
 
         public int ObtenterIdAlumno(int id)

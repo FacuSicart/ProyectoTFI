@@ -23,7 +23,15 @@ namespace ProyectoTFI.Service
 
         public bool AgregarSolicitudRespuesta(Solicitud_RespuestaViewModel solicitud)
         {
-            Solicitud_Respuesta SolicitudReal = new Solicitud_Respuesta(solicitud);
+            Solicitud_Respuesta SolicitudReal = new Solicitud_Respuesta
+            {
+                ID = solicitud.ID,
+                Descripcion = solicitud.Descripcion,
+                Fecha = solicitud.Fecha,
+                SolicitudID = solicitud.SolicitudID,
+                AdministradorID = solicitud.AdministradorID,
+                Administrador = solicitud.Administrador
+            };
             bool Respuesta = solicitud_respuestaRepository.AgregarSolicitudRespuesta(SolicitudReal);
             return Respuesta;
         }
