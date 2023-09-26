@@ -387,6 +387,7 @@
     <Content Include="Views\Curso\VerCursos.cshtml" />
     <Content Include="Views\Curso\RegistrarCurso.cshtml" />
     <Content Include="Views\Curso\VerCursosDisponibles.cshtml" />
+    <Content Include="Views\Curso\AgregarCurso.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

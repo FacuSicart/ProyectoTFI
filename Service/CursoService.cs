@@ -86,10 +86,31 @@ namespace ProyectoTFI.Service
             return cursovm;
         }
 
+        /// <summary>
+        /// Agregar al alumno al curso
+        /// </summary>
+        /// <param name="idCurso"></param>
+        /// <param name="idAlumno"></param>
+        /// <returns></returns>
         public bool AltaCurso(int idCurso, int idAlumno)
         {
             bool alta = cursoRepository.AltaCurso(idCurso, idAlumno);
             return alta;
+        }
+
+        public bool AgregarCurso(CursoViewModel curso, Usuario user)
+        {
+            try
+            {
+                Curso c = new Curso()
+                {
+                    Nombre = curso.Nombre,
+                    Descripcion = curso.Descripcion,
+                    Administrador = user.Administrador.FirstOrDefault(),
+                    Activo = true
+                };
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
         }
     }
 }

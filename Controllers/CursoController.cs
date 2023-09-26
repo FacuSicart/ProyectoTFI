@@ -143,6 +143,48 @@ namespace ProyectoTFI.Controllers
                 return View("Error", model: "No se encuentra logueado");
             }
         }
+
+        public ActionResult AgregarCurso()
+        {
+            try
+            {
+                if (Session["user"] != null)
+                {
+                    Usuario usuarioSesion = (Usuario)Session["user"];
+                    if (usuarioSesion.Rol.Nombre != "Administrador") { return View("Error", model: "Error de permisos, intente de nuevo"); }
+                    return View();
+                }
+                else
+                {
+                    return View("Error", model: "No se encuentra logueado");
+                }
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+        }
+
+        [HttpPost]
+        public ActionResult AgregarCurso(CursoViewModel Curso)
+        {
+            try
+            {
+                if (Session["user"] != null)
+                {
+                    Usuario usuarioSesion = (Usuario)Session["user"];
+                    if (usuarioSesion.Rol.Nombre != "Administrador") { return View("Error", model: "Error de permisos, intente de nuevo"); }
+
+                    cursoService = new CursoService();
+                    cursoService.AgregarCurso(Curso, usuarioSesion);
+
+                    return RedirectToAction("VerCursosDisponibles", "Curso");
+                }
+                else
+                {
+                    return View("Error", model: "No se encuentra logueado");
+                }
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+        }
+
         // GET: Curso/Details/5
         public ActionResult Details(int id)
         {
