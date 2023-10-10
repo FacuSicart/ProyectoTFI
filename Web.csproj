@@ -236,6 +236,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AdministradorViewModel.cs" />
+    <Compile Include="Models\AgregarCursoViewModel.cs" />
     <Compile Include="Models\CursoViewModel.cs" />
     <Compile Include="Models\Solicitud_RespuestaViewModel.cs" />
     <Compile Include="Models\Solicitud_SoporteViewModel.cs" />
@@ -332,6 +333,8 @@
     <Content Include="SQLScripts\scriptTFIV4.sql" />
     <Content Include="SQLScripts\scriptTFIV5.sql" />
     <Content Include="SQLScripts\scriptTFIV6.sql" />
+    <Content Include="SQLScripts\scriptTFIV7.sql" />
+    <Content Include="SQLScripts\scriptTFIV8.sql" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

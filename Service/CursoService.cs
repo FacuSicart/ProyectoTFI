@@ -98,17 +98,20 @@ namespace ProyectoTFI.Service
             return alta;
         }
 
-        public void AgregarCurso(CursoViewModel curso, Usuario user)
+
+
+        public bool AgregarCurso(AgregarCursoViewModel viewModel, Usuario user)
         {
             try
             {
                 Curso c = new Curso()
                 {
-                    Nombre = curso.Nombre,
-                    Descripcion = curso.Descripcion,
+                    Nombre = viewModel.Curso.Nombre,
+                    Descripcion = viewModel.Curso.Descripcion,
                     Administrador = user.Administrador.FirstOrDefault(),
                     Activo = true
                 };
+                return cursoRepository.AgregarCurso(c);
             }
             catch (Exception ex) { throw new Exception(ex.Message); }
         }
