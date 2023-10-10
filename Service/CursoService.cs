@@ -98,7 +98,7 @@ namespace ProyectoTFI.Service
             return alta;
         }
 
-        public bool AgregarCurso(CursoViewModel curso, Usuario user)
+        public void AgregarCurso(CursoViewModel curso, Usuario user)
         {
             try
             {
