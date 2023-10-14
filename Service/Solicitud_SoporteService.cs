@@ -28,12 +28,17 @@ namespace ProyectoTFI.Service
                 ID = solicitud.ID,
                 Asunto = solicitud.Asunto,
                 TipoConsulta = solicitud.TipoConsulta,
-                Descripcion = solicitud.Descripcion,
                 Fecha = solicitud.Fecha,
                 Activo = solicitud.Activo,
                 AlumnoID = solicitud.AlumnoID,
                 Alumno = solicitud.Alumno
             };
+            Solicitud_Mensaje PrimerMensaje = new Solicitud_Mensaje
+            {
+                DescripcionAlumno = solicitud.Descripcion,
+                FechaEmision = solicitud.Fecha
+            };
+            SolicitudReal.Solicitud_Mensaje.Add(PrimerMensaje);
             bool Respuesta = solicitud_soporteRepository.AgregarSolicitudSoporte(SolicitudReal);
             return Respuesta;
         }
@@ -56,15 +61,21 @@ namespace ProyectoTFI.Service
                 ID = solicitud.ID,
                 Asunto = solicitud.Asunto,
                 TipoConsulta = solicitud.TipoConsulta,
-                Descripcion = solicitud.Descripcion,
+                //Descripcion = solicitud.Descripcion,
                 Fecha = solicitud.Fecha,
                 Activo = solicitud.Activo,
                 AlumnoID = solicitud.AlumnoID,
                 Alumno = solicitud.Alumno
             };
-            SolicitudReal.Solicitud_Respuesta.Add(solicitud.Solicitud_Respuesta.FirstOrDefault());
-            bool Respuesta = solicitud_soporteRepository.ResponderSolicitudSoporte(SolicitudReal);
-            return Respuesta;
+            //SolicitudReal.Solicitud_Respuesta.Add(solicitud.Solicitud_Respuesta.FirstOrDefault());
+            //bool Respuesta = solicitud_soporteRepository.ResponderSolicitudSoporte(SolicitudReal);
+            //return Respuesta;
+            return true;
+        }
+
+        public void FinalizarCaso(Solicitud_MensajeViewModel solicitud)
+        {
+            solicitud_soporteRepository.FinalizarCaso(solicitud.ID);
         }
     }
 }

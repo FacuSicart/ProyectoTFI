@@ -21,14 +21,11 @@
         <EntityTypeShape EntityType="TFIContext.Quiz_Pregunta_Opcion" Width="1.5" PointX="16.5" PointY="9.25" IsExpanded="true" />
         <EntityTypeShape EntityType="TFIContext.Quiz_Respuesta" Width="1.5" PointX="18.75" PointY="7.875" IsExpanded="true" />
         <EntityTypeShape EntityType="TFIContext.Rol" Width="1.5" PointX="0.75" PointY="11.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="TFIContext.Solicitud_Respuesta" Width="1.5" PointX="12.75" PointY="12.125" IsExpanded="true" />
         <EntityTypeShape EntityType="TFIContext.Solicitud_Soporte" Width="1.5" PointX="7.5" PointY="9.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="TFIContext.sysdiagrams" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="TFIContext.Tarjeta" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
         <EntityTypeShape EntityType="TFIContext.Usuario" Width="1.5" PointX="3" PointY="10" IsExpanded="true" />
         <AssociationConnector Association="TFIContext.FK_Administrador_Usuario" ManuallyRouted="false" />
         <AssociationConnector Association="TFIContext.FK_Curso_Administrador" ManuallyRouted="false" />
-        <AssociationConnector Association="TFIContext.FK_Solicitud_Respuesta_Administrador" ManuallyRouted="false" />
         <AssociationConnector Association="TFIContext.FK_Alumno_Usuario" ManuallyRouted="false" />
         <AssociationConnector Association="TFIContext.FK_Cursada_de_Alumno_Alumno" ManuallyRouted="false" />
         <AssociationConnector Association="TFIContext.FK_Solicitud_Soporte_Alumno" ManuallyRouted="false" />
@@ -46,8 +43,10 @@
         <AssociationConnector Association="TFIContext.FK_Quiz_Pregunta_Opcion_Quiz_Pregunta" ManuallyRouted="false" />
         <AssociationConnector Association="TFIContext.FK_Quiz_Respuesta_Quiz_Pregunta_Opcion" ManuallyRouted="false" />
         <AssociationConnector Association="TFIContext.FK_Usuario_Rol" ManuallyRouted="false" />
-        <AssociationConnector Association="TFIContext.FK_Solicitud_Respuesta_Solicitud_Soporte" ManuallyRouted="false" />
         <AssociationConnector Association="TFIContext.FK_Docente_Curso_Curso" />
+        <EntityTypeShape EntityType="TFIContext.Solicitud_Mensaje" Width="1.5" PointX="9.75" PointY="13" />
+        <AssociationConnector Association="TFIContext.FK_Solicitud_Respuesta_Administrador1" />
+        <AssociationConnector Association="TFIContext.FK_Solicitud_Respuesta_Solicitud_Soporte1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

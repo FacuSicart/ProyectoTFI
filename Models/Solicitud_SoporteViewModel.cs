@@ -12,7 +12,7 @@ namespace ProyectoTFI.Models
     {
         public Solicitud_SoporteViewModel()
         {
-            this.Solicitud_Respuesta = new HashSet<Solicitud_Respuesta>();
+            this.Solicitud_Mensaje = new HashSet<Solicitud_Mensaje>();
         }
 
         public Solicitud_SoporteViewModel(Solicitud_Soporte pSoliSoporte)
@@ -20,17 +20,16 @@ namespace ProyectoTFI.Models
             ID = pSoliSoporte.ID;
             Asunto = pSoliSoporte.Asunto;
             TipoConsulta = pSoliSoporte.TipoConsulta;
-            Descripcion = pSoliSoporte.Descripcion;
             Fecha = pSoliSoporte.Fecha;
             Activo = pSoliSoporte.Activo;
             AlumnoID = pSoliSoporte.AlumnoID;
             Alumno = pSoliSoporte.Alumno;
 
-            this.Solicitud_Respuesta = new HashSet<Solicitud_Respuesta>();
-            if (pSoliSoporte.Solicitud_Respuesta.Count>0)
+            this.Solicitud_Mensaje = new HashSet<Solicitud_Mensaje>();
+            if (pSoliSoporte.Solicitud_Mensaje.Count>0)
             {
-                this.Solicitud_Respuesta.Add(pSoliSoporte.Solicitud_Respuesta.FirstOrDefault());
-                FechaRespuesta = Solicitud_Respuesta.FirstOrDefault().Fecha;
+                this.Solicitud_Mensaje.Add(pSoliSoporte.Solicitud_Mensaje.FirstOrDefault());
+                //FechaRespuesta = Solicitud_Mensaje.FirstOrDefault().Fecha;
             }
         }
 
@@ -49,7 +48,7 @@ namespace ProyectoTFI.Models
         public System.DateTime Fecha { get; set; }
         public bool Activo { get; set; }
         public int AlumnoID { get; set; }
-        public ICollection<Solicitud_Respuesta> Solicitud_Respuesta { get; set; }
+        public ICollection<Solicitud_Mensaje> Solicitud_Mensaje { get; set; }
         public virtual Alumno Alumno { get; set; }
         [Required]
         [Display(Name = "Descripción de Respuesta")]

@@ -54,11 +54,11 @@ namespace ProyectoTFI.Data
         public Solicitud_Soporte VerSolicitud(int id)
         {
             Solicitud_Soporte Solicitud = context.Solicitud_Soporte.Where(u => u.ID == id).FirstOrDefault();
-            Solicitud_Respuesta Respuesta = context.Solicitud_Respuesta.Where(u => u.SolicitudID == Solicitud.ID).FirstOrDefault();
-            if (Respuesta != null)
-            {
-                Solicitud.Solicitud_Respuesta.Add(Respuesta);
-            }
+            //Solicitud_Respuesta Respuesta = context.Solicitud_Respuesta.Where(u => u.SolicitudID == Solicitud.ID).FirstOrDefault();
+            //if (Respuesta != null)
+            //{
+            //    Solicitud.Solicitud_Respuesta.Add(Respuesta);
+            //}
 
             return Solicitud;
         }
@@ -93,10 +93,17 @@ namespace ProyectoTFI.Data
 
         public bool ResponderSolicitudSoporte(Solicitud_Soporte pSolicitud_Soporte)
         {
-            context.Solicitud_Respuesta.Add(pSolicitud_Soporte.Solicitud_Respuesta.FirstOrDefault());
+            //context.Solicitud_Respuesta.Add(pSolicitud_Soporte.Solicitud_Respuesta.FirstOrDefault());
             Solicitud_Soporte Solicitud = context.Solicitud_Soporte.Where(u => u.ID == pSolicitud_Soporte.ID).FirstOrDefault();
             Solicitud.Activo = false;
 
+            return context.SaveChanges() > 0;
+        }
+
+        public bool FinalizarCaso(int pID)
+        {
+            Solicitud_Mensaje Mensaje = context.Solicitud_Mensaje.Where(u => u.ID == pID).FirstOrDefault();
+            Mensaje.Solicitud_Soporte.Activo = false;
             return context.SaveChanges() > 0;
         }
     }

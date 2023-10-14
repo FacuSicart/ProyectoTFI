@@ -12,7 +12,7 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Ver Solicitud</title>
+    <title>Ver Mensaje de Solicitud</title>
 </head>
 <body>
     @Scripts.Render("~/bundles/jquery")
@@ -104,8 +104,8 @@
                         <div class="form-group">
                             Respondido Por
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.Solicitud_Respuesta.FirstOrDefault().Administrador.Usuario.Username, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
-                                @Html.ValidationMessageFor(model => model.Solicitud_Respuesta.FirstOrDefault().Administrador.Usuario.Username, "", new { @class = "text-danger" })
+                                @Html.EditorFor(model => model.Solicitud_Mensaje.FirstOrDefault().Administrador.Usuario.Username, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                                @Html.ValidationMessageFor(model => model.Solicitud_Mensaje.FirstOrDefault().Administrador.Usuario.Username, "", new { @class = "text-danger" })
                             </div>
                         </div>
                     </div>
@@ -116,8 +116,8 @@
                             @*@Html.LabelFor(model => model.Solicitud_Respuesta.FirstOrDefault().Descripcion, htmlAttributes: new { @class = "control-label " })*@
                             Descripción de Respuesta
                             <div class="col-md-10">
-                                @Html.TextAreaFor(model => model.Solicitud_Respuesta.FirstOrDefault().Descripcion, new { @class = "form-control", @disabled = "disabled", @rows = 4 })
-                                @Html.ValidationMessageFor(model => model.Solicitud_Respuesta.FirstOrDefault().Descripcion, "", new { @class = "text-danger" })
+                                @Html.TextAreaFor(model => model.Solicitud_Mensaje.FirstOrDefault().RespuestaAdministrador, new { @class = "form-control", @disabled = "disabled", @rows = 4 })
+                                @Html.ValidationMessageFor(model => model.Solicitud_Mensaje.FirstOrDefault().RespuestaAdministrador, "", new { @class = "text-danger" })
                             </div>
                         </div>
                     </div>

@@ -12,14 +12,17 @@ namespace ProyectoTFI.Entities
     using System;
     using System.Collections.Generic;
     
-    public partial class Docente_Curso
+    public partial class Solicitud_Mensaje
     {
         public int ID { get; set; }
-        public Nullable<bool> Activo { get; set; }
-        public Nullable<int> CursoID { get; set; }
-        public Nullable<int> DocenteID { get; set; }
+        public string DescripcionAlumno { get; set; }
+        public string RespuestaAdministrador { get; set; }
+        public System.DateTime FechaEmision { get; set; }
+        public Nullable<System.DateTime> FechaRespuesta { get; set; }
+        public int SolicitudID { get; set; }
+        public Nullable<int> AdministradorID { get; set; }
     
-        public virtual Docente Docente { get; set; }
-        public virtual Curso Curso { get; set; }
+        public virtual Administrador Administrador { get; set; }
+        public virtual Solicitud_Soporte Solicitud_Soporte { get; set; }
     }
 }

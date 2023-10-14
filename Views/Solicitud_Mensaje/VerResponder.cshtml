@@ -1,8 +1,7 @@
-﻿@*@model IEnumerable<ProyectoTFI.Entities.Usuario>*@
-@model PagedList.IPagedList<ProyectoTFI.Entities.Solicitud_Soporte>
+﻿@model PagedList.IPagedList<ProyectoTFI.Entities.Solicitud_Mensaje>
 @using PagedList.Mvc;
 
-@{ ViewBag.Title = "Mis Solicitudes";
+@{ ViewBag.Title = "Mensajes de Solicitud";
     Layout = "~/Views/Shared/_LayoutInterno.cshtml";
 }
 
@@ -14,20 +13,16 @@
     <link href="~/Scripts/pagedListStyles.css" rel="stylesheet" />
 </head>
 <body>
-    <h4>Mis Solicitudes</h4>
+    <h4>Mensajes de Solicitud Nº @ViewBag.solicitudId</h4>
+    <h5>Asunto: @ViewBag.asunto</h5>
     <hr />
     <div style="display: flex; align-items: center;">
         <div style="border-right: thin solid black;">
-            @Html.ActionLink("Agregar", "Agregar", "Solicitud_Soporte", new { area = "" }, new { @class = "btn btn-info", @style = "color:white;font-weight:bold; margin-right: 10px;" })
+            @Html.ActionLink("Volver", "VerPendientes", "Solicitud_Soporte", new { area = "" }, new { @class = "btn btn-success", @style = "color:white;font-weight:bold; margin-right: 10px;" })
         </div>
         @using (Html.BeginForm())
         {
             <div style="margin-left:15px;">
-                <div>
-                    <b>Estado:</b>
-                    @Html.RadioButton("pEstado", "Abierto", true) <text>Abierta</text>
-                    @Html.RadioButton("pEstado", "Cerrado") <text>Cerrada</text>
-                </div>
                 <div>
                     @Html.TextBox("pBusqueda", null, new { placeholder = "Escriba aquí para buscar", style = "width: 210px;" })
                     <input type="submit" value="Buscar" class="btn btn-info" style="color: white; font-weight: bold;" />
@@ -40,10 +35,9 @@
             <thead style="background-color: #ffd800;">
                 <tr>
                     <th scope="col" class="col-2 order" style="border: 2px solid #fff;">ID</th>
-                    <th scope="col" class="col-2 order" style="border: 2px solid #fff;">Asunto</th>
-                    <th scope="col" class="col-2" style="border: 2px solid #fff;">Tipo de Consulta</th>
                     <th scope="col" class="col-1" style="border: 2px solid #fff;">Fecha de Emisión</th>
-                    <th scope="col" class="col-1 ">Activo</th>
+                    <th scope="col" class="col-2 order" style="border: 2px solid #fff;">¿Respondido?</th>
+                    <th scope="col" class="col-2" style="border: 2px solid #fff;">Fecha de Respuesta</th>
                     <th scope="col" class="col-1" style="border: 2px solid #fff;">Acciones</th>
                 </tr>
             </thead>
@@ -56,31 +50,42 @@
                 }
                 else
                 {
-                    foreach (var solicitud in Model)
+                    foreach (var mensaje in Model)
                     {
                         <tr>
                             <td>
-                                @Html.DisplayFor(modelItem => solicitud.ID)
+                                @Html.DisplayFor(modelItem => mensaje.ID)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => solicitud.Asunto)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => solicitud.TipoConsulta)
-                            </td>
-                            <td>
-                                @solicitud.Fecha.ToShortDateString()
+                                @mensaje.FechaEmision.ToShortDateString()
                             </td>
                             <td style="text-align: center;">
-                                @if ((bool)solicitud.Activo)
-                                {<text>✅</text>}
-                            else
-                            { <text>❌</text>}
+                                @if (mensaje.RespuestaAdministrador != null)
+                                {
+                                    <text>✅</text>
+                                }
+                                else
+                                {
+                                    <text>❌</text>
+                                }
+                            </td>
+                            <td>
+                                @if (mensaje.RespuestaAdministrador != null)
+                                {
+                                    @DateTime.Parse(mensaje.FechaRespuesta.ToString()).ToShortDateString();
+                                }
+                                else
+                                {
+                                    <text></text>
+                                }
                             </td>
                             <td>
                                 <div class="d-flex justify-content-between">
-                                    @*@Html.ActionLink("🔍", "Detalle", new { id = solicitud.ID }, new { @class = "btn btn-primary" })*@
-                                    @Html.ActionLink("🔍", "Ver", "Solicitud_Mensaje", new { area = "", solicitudId = solicitud.ID, asunto = solicitud.Asunto }, new { @class = "btn btn-primary" })
+                                    @Html.ActionLink("🔍", "DetalleResponder", new { id = mensaje.ID }, new { @class = "btn btn-primary" })
+                                    @if (mensaje.RespuestaAdministrador == null && mensaje.Solicitud_Soporte.Activo)
+                                    {
+                                        @Html.ActionLink("✏", "Responder", new { solicitudId = mensaje.Solicitud_Soporte.ID, id = mensaje.ID }, new { @class = "btn btn-success" })
+                                    }
                                 </div>
                             </td>
                         </tr>
