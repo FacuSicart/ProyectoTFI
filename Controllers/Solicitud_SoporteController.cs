@@ -93,14 +93,14 @@ namespace ProyectoTFI.Controllers
         [HttpPost]
         public ActionResult Responder(Solicitud_SoporteViewModel solicitud, string DescripcionRespuesta)
         {
-            Solicitud_Respuesta SR = new Solicitud_Respuesta
-            {
-                Descripcion = DescripcionRespuesta,
-                Fecha = DateTime.Now,
-                SolicitudID = solicitud.ID,
-                AdministradorID = ((Usuario)Session["user"]).Administrador.First().ID
-            };
-            solicitud.Solicitud_Respuesta.Add(SR);
+            //Solicitud_Respuesta SR = new Solicitud_Respuesta
+            //{
+            //    Descripcion = DescripcionRespuesta,
+            //    Fecha = DateTime.Now,
+            //    SolicitudID = solicitud.ID,
+            //    AdministradorID = ((Usuario)Session["user"]).Administrador.First().ID
+            //};
+            //solicitud.Solicitud_Respuesta.Add(SR);
             solicitud_soporteService = new Solicitud_SoporteService();
             solicitud_soporteService.ResponderSolicitudSoporte(solicitud);
             return RedirectToAction("VerPendientes", "Solicitud_Soporte");

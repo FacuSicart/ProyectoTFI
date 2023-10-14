@@ -1,8 +1,7 @@
-﻿@*@model IEnumerable<ProyectoTFI.Entities.Usuario>*@
-@model PagedList.IPagedList<ProyectoTFI.Entities.Solicitud_Soporte>
+﻿@model PagedList.IPagedList<ProyectoTFI.Entities.Solicitud_Mensaje>
 @using PagedList.Mvc;
 
-@{ ViewBag.Title = "Ver Solicitudes Pendientes";
+@{ ViewBag.Title = "Mensajes de Solicitud";
     Layout = "~/Views/Shared/_LayoutInterno.cshtml";
 }
 
@@ -10,21 +9,20 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Ver Solicitudes Pendientes</title>
+    <title>VerSolicitudes</title>
     <link href="~/Scripts/pagedListStyles.css" rel="stylesheet" />
 </head>
 <body>
-    <h4>Ver Solicitudes</h4>
+    <h4>Mensajes de Solicitud Nº @ViewBag.solicitudId</h4>
+    <h5>Asunto: @ViewBag.asunto</h5>
     <hr />
     <div style="display: flex; align-items: center;">
+        <div style="border-right: thin solid black;">
+            @Html.ActionLink("Volver", "Ver", "Solicitud_Soporte", new { area = "" }, new { @class = "btn btn-success", @style = "color:white;font-weight:bold; margin-right: 10px;" })
+        </div>
         @using (Html.BeginForm())
         {
             <div style="margin-left:15px;">
-                <div>
-                    <b>Estado:</b>
-                    @Html.RadioButton("pEstado", "Abierto", true) <text>Abierta</text>
-                    @Html.RadioButton("pEstado", "Cerrado") <text>Cerrada</text>
-                </div>
                 <div>
                     @Html.TextBox("pBusqueda", null, new { placeholder = "Escriba aquí para buscar", style = "width: 210px;" })
                     <input type="submit" value="Buscar" class="btn btn-info" style="color: white; font-weight: bold;" />
@@ -37,11 +35,9 @@
             <thead style="background-color: #ffd800;">
                 <tr>
                     <th scope="col" class="col-2 order" style="border: 2px solid #fff;">ID</th>
-                    <th scope="col" class="col-2 order" style="border: 2px solid #fff;">Asunto</th>
-                    <th scope="col" class="col-2" style="border: 2px solid #fff;">Tipo de Consulta</th>
                     <th scope="col" class="col-1" style="border: 2px solid #fff;">Fecha de Emisión</th>
-                    <th scope="col" class="col-1" style="border: 2px solid #fff;">Usuario</th>
-                    <th scope="col" class="col-1 ">Activo</th>
+                    <th scope="col" class="col-2 order" style="border: 2px solid #fff;">¿Respondido?</th>
+                    <th scope="col" class="col-2" style="border: 2px solid #fff;">Fecha de Respuesta</th>
                     <th scope="col" class="col-1" style="border: 2px solid #fff;">Acciones</th>
                 </tr>
             </thead>
@@ -56,34 +52,39 @@
                 {
                     foreach (var solicitud in Model)
                     {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => solicitud.ID)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => solicitud.Asunto)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => solicitud.TipoConsulta)
-                </td>
-                <td>
-                    @solicitud.Fecha.ToShortDateString()
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => solicitud.Alumno.Usuario.Username)
-                </td>
-                <td style="text-align: center;">
-                    @if ((bool)solicitud.Activo)
-                    {<text>✅</text>}
-                else
-                { <text>❌</text>}
-                </td>
-                <td>
-                    <div class="d-flex justify-content-between">
-                        @Html.ActionLink("🔍", "VerResponder", "Solicitud_Mensaje", new { area = "", solicitudId = solicitud.ID, asunto = solicitud.Asunto }, new { @class = "btn btn-primary" })
-                    </div>
-                </td>
-            </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => solicitud.ID)
+                            </td>
+                            <td>
+                                @solicitud.FechaEmision.ToShortDateString()
+                            </td>
+                            <td style="text-align: center;">
+                                @if (solicitud.RespuestaAdministrador != null)
+                                {
+                                    <text>✅</text>
+                                }
+                                else
+                                {
+                                    <text>❌</text>
+                                }
+                            </td>
+                            <td>
+                                @if (solicitud.RespuestaAdministrador != null)
+                                {
+                                    @DateTime.Parse(solicitud.FechaRespuesta.ToString()).ToShortDateString();
+                                }
+                                else
+                                {
+                                    <text></text>
+                                }
+                            </td>  
+                            <td>
+                                <div class="d-flex justify-content-between">
+                                    @Html.ActionLink("🔍", "Detalle", new { id = solicitud.ID }, new { @class = "btn btn-primary" })
+                                </div>
+                            </td>
+                        </tr>
                     }
                 }
             </tbody>

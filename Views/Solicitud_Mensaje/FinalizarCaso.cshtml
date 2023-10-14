@@ -1,0 +1,50 @@
+﻿@model ProyectoTFI.Models.Solicitud_MensajeViewModel
+
+@{
+    ViewBag.Title = "Finalizar Caso";
+    Layout = "~/Views/Shared/_LayoutInterno.cshtml";
+    string FechaResp = Model.Solicitud_Soporte.Solicitud_Mensaje.Last().RespuestaAdministrador != null ? ((DateTime)Model.Solicitud_Soporte.Solicitud_Mensaje.Last().FechaRespuesta).ToShortDateString() : "-";
+
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Finalizar Caso</h4>
+        <hr />
+        <h5>¿Está seguro que quiere finalizar la solicitud @Model.SolicitudID?</h5>
+        <h6>Ya no podrá ser respondida ni podrá agregar mensajes nuevos</h6>
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ID)
+
+    <div class="" style="background-color: antiquewhite; border-radius:10px;padding:10px;">
+        @if (ViewData["ErrorMensaje"] != null)
+        {
+            <div class="alert alert-danger" role="alert">
+                @ViewData["ErrorMensaje"]
+            </div>
+        }
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="row gy-5">
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <p style="font-weight:bold;">Fecha de Emisión de Solicitud: @Model.Solicitud_Soporte.Fecha.ToShortDateString()</p>
+                    <p style="font-weight:bold;">Cantidad de Mensajes: @Model.Solicitud_Soporte.Solicitud_Mensaje.Count.ToString()</p>
+                    <p style="font-weight:bold;">Fecha Último Mensaje del Alumno: @Model.Solicitud_Soporte.Solicitud_Mensaje.Last().FechaEmision.ToShortDateString()</p>
+                    <p style="font-weight:bold;">Fecha Última Respuesta: @FechaResp</p>
+                </div>
+            </div>
+        </div>
+        <div class="row gy-5">
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    @Html.ActionLink("Volver", "Detalle", "Solicitud_Mensaje", new { area = "", id = ViewBag.MensajeID }, new { @class = "btn btn-success" })
+                    <input type="submit" value="Finalizar" id="btnSubmit" class="btn btn-success" />
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+}

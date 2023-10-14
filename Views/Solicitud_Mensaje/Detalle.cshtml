@@ -1,10 +1,10 @@
-﻿@model ProyectoTFI.Models.Solicitud_SoporteViewModel
+﻿@model ProyectoTFI.Models.Solicitud_MensajeViewModel
 
-@{ ViewBag.Title = "Ver Solicitud";
+@{ ViewBag.Title = "Ver Mensajes";
     Layout = "~/Views/Shared/_LayoutInterno.cshtml"; }
 
 @{
-    string estadoMostrado = (bool)Model.Activo ? "Pendiente" : "Respondido";
+    string estadoMostrado = Model.AdministradorID == null ? "Pendiente" : "Respondido";
 }
 
 <!DOCTYPE html>
@@ -12,7 +12,7 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Ver Solicitud</title>
+    <title>Ver Mensaje de Solicitud</title>
 </head>
 <body>
     @Scripts.Render("~/bundles/jquery")
@@ -36,28 +36,19 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            @Html.LabelFor(model => model.Asunto, htmlAttributes: new { @class = "control-label" })
+                            @Html.LabelFor(model => model.Solicitud_Soporte.Asunto, htmlAttributes: new { @class = "control-label" })
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.Asunto, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
-                                @Html.ValidationMessageFor(model => model.Asunto, "", new { @class = "text-danger" })
+                                @Html.EditorFor(model => model.Solicitud_Soporte.Asunto, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                                @Html.ValidationMessageFor(model => model.Solicitud_Soporte.Asunto, "", new { @class = "text-danger" })
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            @Html.LabelFor(model => model.Fecha, htmlAttributes: new { @class = "control-label " })
+                            @Html.LabelFor(model => model.FechaEmision, htmlAttributes: new { @class = "control-label " })
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.Fecha, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
-                                @Html.ValidationMessageFor(model => model.Fecha, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.TipoConsulta, htmlAttributes: new { @class = "control-label " })
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.TipoConsulta, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
-                                @Html.ValidationMessageFor(model => model.TipoConsulta, "", new { @class = "text-danger" })
+                                @Html.EditorFor(model => model.FechaEmision, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                                @Html.ValidationMessageFor(model => model.FechaEmision, "", new { @class = "text-danger" })
                             </div>
                         </div>
                     </div>
@@ -74,10 +65,10 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group">
-                            @Html.LabelFor(model => model.Descripcion, htmlAttributes: new { @class = "control-label" })
+                            @Html.LabelFor(model => model.DescripcionAlumno, htmlAttributes: new { @class = "control-label" })
                             <div class="col-lg-12">
-                                <textarea id="Descripcion" name="Descripcion" rows="4" class="form-control" disabled>@Model.Descripcion</textarea>
-                                @Html.ValidationMessageFor(model => model.Descripcion, "", new { @class = "text-danger" })
+                                @Html.TextAreaFor(model => model.DescripcionAlumno, new { @class = "form-control", @disabled = "disabled", @rows = 4 })
+                                @Html.ValidationMessageFor(model => model.DescripcionAlumno, "", new { @class = "text-danger" })
                             </div>
                         </div>
                     </div>
@@ -104,8 +95,8 @@
                         <div class="form-group">
                             Respondido Por
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.Solicitud_Mensaje.FirstOrDefault().Administrador.Usuario.Username, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
-                                @Html.ValidationMessageFor(model => model.Solicitud_Mensaje.FirstOrDefault().Administrador.Usuario.Username, "", new { @class = "text-danger" })
+                                @Html.EditorFor(model => model.Administrador.Usuario.Username, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                                @Html.ValidationMessageFor(model => model.Administrador.Usuario.Username, "", new { @class = "text-danger" })
                             </div>
                         </div>
                     </div>
@@ -116,8 +107,8 @@
                             @*@Html.LabelFor(model => model.Solicitud_Respuesta.FirstOrDefault().Descripcion, htmlAttributes: new { @class = "control-label " })*@
                             Descripción de Respuesta
                             <div class="col-md-10">
-                                @Html.TextAreaFor(model => model.Solicitud_Mensaje.FirstOrDefault().RespuestaAdministrador, new { @class = "form-control", @disabled = "disabled", @rows = 4 })
-                                @Html.ValidationMessageFor(model => model.Solicitud_Mensaje.FirstOrDefault().RespuestaAdministrador, "", new { @class = "text-danger" })
+                                @Html.TextAreaFor(model => model.RespuestaAdministrador, new { @class = "form-control", @disabled = "disabled", @rows = 4 })
+                                @Html.ValidationMessageFor(model => model.RespuestaAdministrador, "", new { @class = "text-danger" })
                             </div>
                         </div>
                     </div>
@@ -125,8 +116,20 @@
                 <br />
                 <div class="row gy-5">
                     <div class="form-group">
-                        <div class="col-md-offset-2 col-md-10">
-                            @Html.ActionLink("Volver", "Ver", "Solicitud_Soporte", new { area = "", solicitudId = @ViewBag.solicitudId }, new { @class = "btn btn-success" })
+                        <div class="col-md-10 col-md-offset-2">
+                            @Html.ActionLink("Volver", "Ver", "Solicitud_Mensaje", new { area = "", solicitudId = Model.SolicitudID, asunto = Model.Solicitud_Soporte.Asunto }, new { @class = "btn btn-success" })
+                            @if (Model.Solicitud_Soporte.Activo)
+                            {
+                                if (Model.RespuestaAdministrador != null && Model.Solicitud_Soporte.Solicitud_Mensaje.OrderByDescending(m => m.ID).FirstOrDefault().ID == Model.ID)
+                                {
+                                    @Html.ActionLink("Agregar Mensaje", "Agregar", "Solicitud_Mensaje", new { area = "", solicitudId = Model.SolicitudID, mensajeId = Model.ID }, new { @class = "btn btn-info float-right ml-2", @style = "color: white; margin-left: 2%;" })
+                                }
+                                else
+                                {
+                                    <button class="btn btn-info float-right ml-2" disabled="disabled" style="color: white; margin-left: 2%;">Agregar Mensaje</button>
+                                }
+                                @Html.ActionLink("Finalizar Caso", "FinalizarCaso", "Solicitud_Mensaje", new { area = "", mensajeId = Model.ID, solicitudId = Model.SolicitudID }, new { @class = "btn btn-primary float-right ml-2", @style="margin-left:0.5%;" })
+                            }
                         </div>
                     </div>
                 </div>
@@ -144,6 +147,7 @@
             });
         });
     </script>
+
 </body>
 
 </html>

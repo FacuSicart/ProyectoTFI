@@ -145,15 +145,17 @@
           <Property Name="ID" Type="int" Nullable="false" />
           <Property Name="Nombre" Type="varchar" MaxLength="50" />
         </EntityType>
-        <EntityType Name="Solicitud_Respuesta">
+        <EntityType Name="Solicitud_Mensaje">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Descripcion" Type="varchar" MaxLength="450" Nullable="false" />
-          <Property Name="Fecha" Type="date" Nullable="false" />
+          <Property Name="DescripcionAlumno" Type="varchar" MaxLength="450" Nullable="false" />
+          <Property Name="RespuestaAdministrador" Type="varchar" MaxLength="450" />
+          <Property Name="FechaEmision" Type="date" Nullable="false" />
+          <Property Name="FechaRespuesta" Type="date" />
           <Property Name="SolicitudID" Type="int" Nullable="false" />
-          <Property Name="AdministradorID" Type="int" Nullable="false" />
+          <Property Name="AdministradorID" Type="int" />
         </EntityType>
         <EntityType Name="Solicitud_Soporte">
           <Key>
@@ -162,20 +164,9 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Asunto" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="TipoConsulta" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Descripcion" Type="varchar" MaxLength="450" Nullable="false" />
           <Property Name="Fecha" Type="date" Nullable="false" />
           <Property Name="Activo" Type="bit" Nullable="false" />
           <Property Name="AlumnoID" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="Tarjeta">
           <Key>
@@ -419,25 +410,25 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Solicitud_Respuesta_Administrador">
-          <End Role="Administrador" Type="Self.Administrador" Multiplicity="1" />
-          <End Role="Solicitud_Respuesta" Type="Self.Solicitud_Respuesta" Multiplicity="*" />
+          <End Role="Administrador" Type="Self.Administrador" Multiplicity="0..1" />
+          <End Role="Solicitud_Mensaje" Type="Self.Solicitud_Mensaje" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Administrador">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="Solicitud_Respuesta">
+            <Dependent Role="Solicitud_Mensaje">
               <PropertyRef Name="AdministradorID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Solicitud_Respuesta_Solicitud_Soporte">
           <End Role="Solicitud_Soporte" Type="Self.Solicitud_Soporte" Multiplicity="1" />
-          <End Role="Solicitud_Respuesta" Type="Self.Solicitud_Respuesta" Multiplicity="*" />
+          <End Role="Solicitud_Mensaje" Type="Self.Solicitud_Mensaje" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Solicitud_Soporte">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="Solicitud_Respuesta">
+            <Dependent Role="Solicitud_Mensaje">
               <PropertyRef Name="SolicitudID" />
             </Dependent>
           </ReferentialConstraint>
@@ -483,9 +474,8 @@
           <EntitySet Name="Quiz_Pregunta_Opcion" EntityType="Self.Quiz_Pregunta_Opcion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Quiz_Respuesta" EntityType="Self.Quiz_Respuesta" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Rol" EntityType="Self.Rol" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Solicitud_Respuesta" EntityType="Self.Solicitud_Respuesta" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Solicitud_Mensaje" EntityType="Self.Solicitud_Mensaje" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Solicitud_Soporte" EntityType="Self.Solicitud_Soporte" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tarjeta" EntityType="Self.Tarjeta" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Administrador_Usuario" Association="Self.FK_Administrador_Usuario">
@@ -562,11 +552,11 @@
           </AssociationSet>
           <AssociationSet Name="FK_Solicitud_Respuesta_Administrador" Association="Self.FK_Solicitud_Respuesta_Administrador">
             <End Role="Administrador" EntitySet="Administrador" />
-            <End Role="Solicitud_Respuesta" EntitySet="Solicitud_Respuesta" />
+            <End Role="Solicitud_Mensaje" EntitySet="Solicitud_Mensaje" />
           </AssociationSet>
           <AssociationSet Name="FK_Solicitud_Respuesta_Solicitud_Soporte" Association="Self.FK_Solicitud_Respuesta_Solicitud_Soporte">
             <End Role="Solicitud_Soporte" EntitySet="Solicitud_Soporte" />
-            <End Role="Solicitud_Respuesta" EntitySet="Solicitud_Respuesta" />
+            <End Role="Solicitud_Mensaje" EntitySet="Solicitud_Mensaje" />
           </AssociationSet>
           <AssociationSet Name="FK_Solicitud_Soporte_Alumno" Association="Self.FK_Solicitud_Soporte_Alumno">
             <End Role="Alumno" EntitySet="Alumno" />
@@ -589,7 +579,7 @@
           <Property Name="UsuarioID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Usuario" Relationship="Self.FK_Administrador_Usuario" FromRole="Administrador" ToRole="Usuario" />
           <NavigationProperty Name="Curso" Relationship="Self.FK_Curso_Administrador" FromRole="Administrador" ToRole="Curso" />
-          <NavigationProperty Name="Solicitud_Respuesta" Relationship="Self.FK_Solicitud_Respuesta_Administrador" FromRole="Administrador" ToRole="Solicitud_Respuesta" />
+          <NavigationProperty Name="Solicitud_Mensaje" Relationship="TFIContext.FK_Solicitud_Respuesta_Administrador1" FromRole="Administrador" ToRole="Solicitud_Mensaje" />
         </EntityType>
         <EntityType Name="Alumno">
           <Key>
@@ -755,18 +745,6 @@
           <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Usuario" Relationship="Self.FK_Usuario_Rol" FromRole="Rol" ToRole="Usuario" />
         </EntityType>
-        <EntityType Name="Solicitud_Respuesta">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Descripcion" Type="String" MaxLength="450" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="SolicitudID" Type="Int32" Nullable="false" />
-          <Property Name="AdministradorID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Administrador" Relationship="Self.FK_Solicitud_Respuesta_Administrador" FromRole="Solicitud_Respuesta" ToRole="Administrador" />
-          <NavigationProperty Name="Solicitud_Soporte" Relationship="Self.FK_Solicitud_Respuesta_Solicitud_Soporte" FromRole="Solicitud_Respuesta" ToRole="Solicitud_Soporte" />
-        </EntityType>
         <EntityType Name="Solicitud_Soporte">
           <Key>
             <PropertyRef Name="ID" />
@@ -774,22 +752,11 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Asunto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="TipoConsulta" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Descripcion" Type="String" MaxLength="450" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="Activo" Type="Boolean" Nullable="false" />
           <Property Name="AlumnoID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Alumno" Relationship="Self.FK_Solicitud_Soporte_Alumno" FromRole="Solicitud_Soporte" ToRole="Alumno" />
-          <NavigationProperty Name="Solicitud_Respuesta" Relationship="Self.FK_Solicitud_Respuesta_Solicitud_Soporte" FromRole="Solicitud_Soporte" ToRole="Solicitud_Respuesta" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Solicitud_Mensaje" Relationship="TFIContext.FK_Solicitud_Respuesta_Solicitud_Soporte1" FromRole="Solicitud_Soporte" ToRole="Solicitud_Mensaje" />
         </EntityType>
         <EntityType Name="Tarjeta">
           <Key>
@@ -842,18 +809,6 @@
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="Curso">
-              <PropertyRef Name="AdministradorID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Solicitud_Respuesta_Administrador">
-          <End Role="Administrador" Type="Self.Administrador" Multiplicity="1" />
-          <End Role="Solicitud_Respuesta" Type="Self.Solicitud_Respuesta" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Administrador">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Solicitud_Respuesta">
               <PropertyRef Name="AdministradorID" />
             </Dependent>
           </ReferentialConstraint>
@@ -1062,18 +1017,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Solicitud_Respuesta_Solicitud_Soporte">
-          <End Role="Solicitud_Soporte" Type="Self.Solicitud_Soporte" Multiplicity="1" />
-          <End Role="Solicitud_Respuesta" Type="Self.Solicitud_Respuesta" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Solicitud_Soporte">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Solicitud_Respuesta">
-              <PropertyRef Name="SolicitudID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="ProyectoTFI" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Administrador" EntityType="Self.Administrador" />
           <EntitySet Name="Alumno" EntityType="Self.Alumno" />
@@ -1091,9 +1034,7 @@
           <EntitySet Name="Quiz_Pregunta_Opcion" EntityType="Self.Quiz_Pregunta_Opcion" />
           <EntitySet Name="Quiz_Respuesta" EntityType="Self.Quiz_Respuesta" />
           <EntitySet Name="Rol" EntityType="Self.Rol" />
-          <EntitySet Name="Solicitud_Respuesta" EntityType="Self.Solicitud_Respuesta" />
           <EntitySet Name="Solicitud_Soporte" EntityType="Self.Solicitud_Soporte" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="Tarjeta" EntityType="Self.Tarjeta" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" />
           <AssociationSet Name="FK_Administrador_Usuario" Association="Self.FK_Administrador_Usuario">
@@ -1103,10 +1044,6 @@
           <AssociationSet Name="FK_Curso_Administrador" Association="Self.FK_Curso_Administrador">
             <End Role="Administrador" EntitySet="Administrador" />
             <End Role="Curso" EntitySet="Curso" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Solicitud_Respuesta_Administrador" Association="Self.FK_Solicitud_Respuesta_Administrador">
-            <End Role="Administrador" EntitySet="Administrador" />
-            <End Role="Solicitud_Respuesta" EntitySet="Solicitud_Respuesta" />
           </AssociationSet>
           <AssociationSet Name="FK_Alumno_Usuario" Association="Self.FK_Alumno_Usuario">
             <End Role="Usuario" EntitySet="Usuario" />
@@ -1176,13 +1113,18 @@
             <End Role="Rol" EntitySet="Rol" />
             <End Role="Usuario" EntitySet="Usuario" />
           </AssociationSet>
-          <AssociationSet Name="FK_Solicitud_Respuesta_Solicitud_Soporte" Association="Self.FK_Solicitud_Respuesta_Solicitud_Soporte">
-            <End Role="Solicitud_Soporte" EntitySet="Solicitud_Soporte" />
-            <End Role="Solicitud_Respuesta" EntitySet="Solicitud_Respuesta" />
-          </AssociationSet>
           <AssociationSet Name="FK_Docente_Curso_Curso" Association="TFIContext.FK_Docente_Curso_Curso">
             <End Role="Curso" EntitySet="Curso" />
             <End Role="Docente_Curso" EntitySet="Docente_Curso" />
+          </AssociationSet>
+          <EntitySet Name="Solicitud_Mensaje" EntityType="TFIContext.Solicitud_Mensaje" />
+          <AssociationSet Name="FK_Solicitud_Respuesta_Administrador1" Association="TFIContext.FK_Solicitud_Respuesta_Administrador1">
+            <End Role="Administrador" EntitySet="Administrador" />
+            <End Role="Solicitud_Mensaje" EntitySet="Solicitud_Mensaje" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Solicitud_Respuesta_Solicitud_Soporte1" Association="TFIContext.FK_Solicitud_Respuesta_Solicitud_Soporte1">
+            <End Role="Solicitud_Soporte" EntitySet="Solicitud_Soporte" />
+            <End Role="Solicitud_Mensaje" EntitySet="Solicitud_Mensaje" />
           </AssociationSet>
         </EntityContainer>
         <Association Name="FK_Docente_Curso_Curso">
@@ -1194,6 +1136,44 @@
             </Principal>
             <Dependent Role="Docente_Curso">
               <PropertyRef Name="CursoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Solicitud_Mensaje">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DescripcionAlumno" Type="String" Nullable="false" MaxLength="450" FixedLength="false" Unicode="false" />
+          <Property Name="RespuestaAdministrador" Type="String" MaxLength="450" FixedLength="false" Unicode="false" />
+          <Property Name="FechaEmision" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="FechaRespuesta" Type="DateTime" Precision="0" />
+          <Property Name="SolicitudID" Type="Int32" Nullable="false" />
+          <Property Name="AdministradorID" Type="Int32" />
+          <NavigationProperty Name="Administrador" Relationship="TFIContext.FK_Solicitud_Respuesta_Administrador1" FromRole="Solicitud_Mensaje" ToRole="Administrador" />
+          <NavigationProperty Name="Solicitud_Soporte" Relationship="TFIContext.FK_Solicitud_Respuesta_Solicitud_Soporte1" FromRole="Solicitud_Mensaje" ToRole="Solicitud_Soporte" />
+        </EntityType>
+        <Association Name="FK_Solicitud_Respuesta_Administrador1">
+          <End Type="TFIContext.Administrador" Role="Administrador" Multiplicity="0..1" />
+          <End Type="TFIContext.Solicitud_Mensaje" Role="Solicitud_Mensaje" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Administrador">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Solicitud_Mensaje">
+              <PropertyRef Name="AdministradorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Solicitud_Respuesta_Solicitud_Soporte1">
+          <End Type="TFIContext.Solicitud_Soporte" Role="Solicitud_Soporte" Multiplicity="1" />
+          <End Type="TFIContext.Solicitud_Mensaje" Role="Solicitud_Mensaje" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Solicitud_Soporte">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Solicitud_Mensaje">
+              <PropertyRef Name="SolicitudID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1359,38 +1339,15 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Solicitud_Respuesta">
-            <EntityTypeMapping TypeName="TFIContext.Solicitud_Respuesta">
-              <MappingFragment StoreEntitySet="Solicitud_Respuesta">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
-                <ScalarProperty Name="SolicitudID" ColumnName="SolicitudID" />
-                <ScalarProperty Name="AdministradorID" ColumnName="AdministradorID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Solicitud_Soporte">
             <EntityTypeMapping TypeName="TFIContext.Solicitud_Soporte">
               <MappingFragment StoreEntitySet="Solicitud_Soporte">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Asunto" ColumnName="Asunto" />
                 <ScalarProperty Name="TipoConsulta" ColumnName="TipoConsulta" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="Fecha" ColumnName="Fecha" />
                 <ScalarProperty Name="Activo" ColumnName="Activo" />
                 <ScalarProperty Name="AlumnoID" ColumnName="AlumnoID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="TFIContext.sysdiagrams">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1418,6 +1375,19 @@
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Activo" ColumnName="Activo" />
                 <ScalarProperty Name="RolID" ColumnName="RolID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Solicitud_Mensaje">
+            <EntityTypeMapping TypeName="TFIContext.Solicitud_Mensaje">
+              <MappingFragment StoreEntitySet="Solicitud_Mensaje">
+                <ScalarProperty Name="AdministradorID" ColumnName="AdministradorID" />
+                <ScalarProperty Name="SolicitudID" ColumnName="SolicitudID" />
+                <ScalarProperty Name="FechaRespuesta" ColumnName="FechaRespuesta" />
+                <ScalarProperty Name="FechaEmision" ColumnName="FechaEmision" />
+                <ScalarProperty Name="RespuestaAdministrador" ColumnName="RespuestaAdministrador" />
+                <ScalarProperty Name="DescripcionAlumno" ColumnName="DescripcionAlumno" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
