@@ -80,7 +80,8 @@
                     <div class="form-group">
                         @Html.LabelFor(model => model.FechaNacimiento, htmlAttributes: new { @class = "control-label " })
                         <div class="col-md-10">
-                            @Html.TextBoxFor(model => model.FechaNacimiento, new { @type = "date", @class = "form-control datepicker" })
+                            @*@Html.TextBoxFor(model => model.FechaNacimiento, new { @type = "date", @class = "form-control datepicker" })*@
+                            @Html.TextBoxFor(m => m.FechaNacimiento, "{0:yyyy-MM-dd}", new { type = "date", @class = "form-control datepicker" })
                         </div>
                     </div>
                 </div>
