@@ -112,12 +112,12 @@ namespace ProyectoTFI.Controllers
         }
 
 
-        public ActionResult VerClasesCurso(int ID, int? page)
+        public ActionResult VerClasesCurso(int ID, string pBusqueda, string pTipoUsuario, int? page)
         {
             if (Session["user"] != null)
             {
                 claseService = new ClaseService();
-                var listaClases = claseService.ListarClasesAlumno(ID);
+                var listaClases = claseService.ListarClases(pBusqueda, pTipoUsuario, ID);
                 Session["Curso"] = ID;
                 int pageSize = 10;
                 int pageNumber = (page ?? 1);
