@@ -118,6 +118,7 @@ namespace ProyectoTFI.Controllers
             {
                 claseService = new ClaseService();
                 var listaClases = claseService.ListarClasesAlumno(ID);
+                Session["Curso"] = ID;
                 int pageSize = 10;
                 int pageNumber = (page ?? 1);
                 return View(listaClases.ToPagedList(pageNumber, pageSize));

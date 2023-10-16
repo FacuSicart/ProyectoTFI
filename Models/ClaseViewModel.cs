@@ -33,6 +33,7 @@ namespace ProyectoTFI.Models
         [Required]
         [Display(Name = "Descripción")]
         public string Descripcion { get; set; }
+
         [Display(Name = "Enlace del video")]
         public string LinkVideo { get; set; }
         public Nullable<bool> Activo { get; set; }
