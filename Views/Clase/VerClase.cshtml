@@ -1,0 +1,33 @@
+﻿@model ProyectoTFI.Models.ClaseViewModel
+
+@{
+    ViewBag.Title = "Ver Clase";
+    Layout = "~/Views/Shared/_LayoutInterno.cshtml";
+}
+
+<h2>Ver Clase</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descripcion)
+        </dd>
+
+        <dt>
+            Clase
+        </dt>
+
+        <dd>
+             <iframe width="700" height="515" src="@Model.LinkVideo.Replace("watch?v=", "embed/")" frameborder="0" allowfullscreen></iframe>
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Volver", "VerClasesCurso", "Curso", new { id = Model.CursoID }, new { @class = "btn btn-success" })
+</p>

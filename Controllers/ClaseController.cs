@@ -21,21 +21,11 @@ namespace ProyectoTFI.Controllers
         }
 
         // GET: Admin/Details/5
-        public ActionResult DetalleClase(int id)
+        public ActionResult VerClase(int id)
         {
             claseService = new ClaseService();
             var clase = claseService.VerClase(id);
             return View(clase);
-        }
-
-        public ActionResult VerClases(string pBusqueda, string pTipoUsuario, int pClaseID, int? page)
-        {
-            claseService = new ClaseService();
-            var listaClases = claseService.ListarClases(pBusqueda, pTipoUsuario, pClaseID);
-
-            int pageSize = 10;
-            int pageNumber = (page ?? 1);
-            return View(listaClases.ToPagedList(pageNumber,pageSize));
         }
 
         // GET: Clase/Create
@@ -48,11 +38,12 @@ namespace ProyectoTFI.Controllers
         [HttpPost]
         public ActionResult AgregarClase(ClaseViewModel clase)
         {
+            clase.CursoID = (int?)Session["Curso"];
             claseService = new ClaseService();
             if (ModelState.IsValid)
             {
                 var respuesta = claseService.AgregarClase(clase);
-                return RedirectToAction("VerAdministradores", "Admin");
+                return RedirectToAction("VerClasesCurso", "Curso", new { id = clase.CursoID });
             }
             else
             {
@@ -76,7 +67,7 @@ namespace ProyectoTFI.Controllers
             if (ModelState.IsValid)
             {
                 claseService.EditarClase(clase);
-                return RedirectToAction("VerAdministradores", "Admin");
+                return RedirectToAction("VerClasesCurso", "Curso", new { id = clase.CursoID });
             }
             else
             {
@@ -97,11 +88,11 @@ namespace ProyectoTFI.Controllers
         public ActionResult BajaClase(ClaseViewModel clase)
         {
             claseService = new ClaseService();
-
+            clase.CursoID = (int?)Session["Curso"];
             bool baja = claseService.BajaClase(clase.ID);
             if (baja == true)
             {
-                return RedirectToAction("VerAdministradores", "Admin");
+                return RedirectToAction("VerClasesCurso", "Curso", new { id = clase.CursoID });
             }
             else
             {
@@ -117,11 +108,12 @@ namespace ProyectoTFI.Controllers
         }
 
         [HttpPost]
-        public ActionResult RehabilitarAdministrador(ClaseViewModel pClase)
+        public ActionResult RehabilitarClase(ClaseViewModel clase)
         {
             claseService = new ClaseService();
-            claseService.RehabilitarClase(pClase.ID);
-            return RedirectToAction("VerAdministradores", "Admin");
+            claseService.RehabilitarClase(clase.ID);
+            clase.CursoID = (int?)Session["Curso"];
+            return RedirectToAction("VerClasesCurso", "Curso", new { id = clase.CursoID });
         }
     }
 }
