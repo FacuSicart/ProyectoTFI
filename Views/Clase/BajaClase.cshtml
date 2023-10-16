@@ -1,0 +1,41 @@
+﻿@model ProyectoTFI.Models.ClaseViewModel
+
+@{
+    ViewBag.Title = "Baja Clase";
+    Layout = "~/Views/Shared/_LayoutInterno.cshtml";
+}
+
+<h2>Baja Clase</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LinkVideo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LinkVideo)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div class="row">
+            <div class="form-actions no-color">
+                <input type="submit" value="Baja" class="btn btn-success" />
+                @Html.ActionLink("Volver", "VerClasesCurso", "Curso", new { id = Model.CursoID }, new { @class = "btn btn-success", style = "background-color: #DC143C; border-color: #DC143C; color: #fff;", onmouseover = "this.style.backgroundColor='#DC143C'; this.style.borderColor='#5cb85c';", onmouseout = "this.style.backgroundColor='#DC143C'; this.style.borderColor='#DC143C';" })
+            </div>
+        </div>
+    }
+</div>

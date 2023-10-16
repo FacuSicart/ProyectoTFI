@@ -1,5 +1,6 @@
 ﻿@*@model IEnumerable<ProyectoTFI.Entities.Usuario>*@
 @model PagedList.IPagedList<ProyectoTFI.Entities.Clase>
+
 @using PagedList.Mvc;
 
 @{ ViewBag.Title = "Clases de curso";
@@ -17,17 +18,16 @@
 <body>
     <h4>Clases de curso</h4>
     <hr />
-    @*@Html.ActionLink("Agregar", "AgregarAdministrador", "Admin", new { area = "" }, new { @class = "btn", @style = "background-color: blue;color:white;border-color:blue;", @onmouseover = "this.style.backgroundColor='blue';", @onmouseout = "this.style.backgroundColor='white'; this.style.color: blue;" })*@
-<div style="display: flex; align-items: center;">
-    @using (Html.BeginForm("VerClasesCurso", "Curso", FormMethod.Post))
-    {
-    }
-</div>
+    @Html.ActionLink("Agregar", "AgregarClase", "Clase", new { area = "" }, new { @class = "btn", @style = "background-color: blue;color:white;border-color:blue;", @onmouseover = "this.style.backgroundColor='blue';", @onmouseout = "this.style.backgroundColor='white'; this.style.color: blue;" })
+    <div style="display: flex; align-items: center;">
+        @using (Html.BeginForm("VerClasesCurso", "Curso", FormMethod.Post))
+        {
+        }
+    </div>
     <div class="contentTable">
         <table class="table table-hover" aria-describedby="clase" style="padding-top:20px;">
             <thead style="background-color: #ffd800;">
                 <tr>
-                    <th scope="col" class="col-2 order" style="border: 2px solid #fff;">ID</th>
                     <th scope="col" class="col-2 order" style="border: 2px solid #fff;">Descripción</th>
                     <th scope="col" class="col-1" style="border: 2px solid #fff;">Acciones</th>
                 </tr>
@@ -45,14 +45,18 @@
                     {
                         <tr>
                             <td>
-                                @Html.DisplayFor(modelItem => clase.ID)
-                            </td>
-                            <td>
                                 @Html.DisplayFor(modelItem => clase.Descripcion)
                             </td>
                             <td>
                                 <div class="d-flex justify-content-between">
-                                    @Html.ActionLink("🔍", "VerClase", new { id = clase.ID }, new { @class = "btn btn-primary" })
+                                    @Html.ActionLink("🔍", "VerClase", "Clase", new { id = clase.ID }, new { @class = "btn btn-primary" })
+                                    @Html.ActionLink("✏", "EditarClase", "Clase", new { id = clase.ID }, new { @class = "btn btn-success" })
+                                    @if ((bool)clase.Activo == true)
+                                    {
+                                        @Html.ActionLink("🗑", "BajaClase","Clase", new { id = clase.ID }, new { @class = "btn btn-danger" })
+                                    }
+                                    else
+                                    {@Html.ActionLink("⬆", "RehabilitarClase", "Clase", new { id = clase.ID }, new { @class = "btn btn-danger" })}
                                 </div>
                             </td>
                         </tr>

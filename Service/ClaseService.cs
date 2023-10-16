@@ -32,7 +32,7 @@ namespace ProyectoTFI.Service
                 ID = clase.ID,
                 Descripcion = clase.Descripcion,
                 LinkVideo = clase.LinkVideo,
-                Activo = clase.Activo,
+                Activo = true,
                 CursoID = clase.CursoID
             };
             bool Respuesta = claseRepository.AgregarClase(ClaseReal);

@@ -365,12 +365,6 @@
     <Content Include="Views\Docente\ReestablecerPassword.cshtml" />
     <Content Include="Views\Docente\Rehabilitar.cshtml" />
     <Content Include="Views\Docente\Ver.cshtml" />
-    <Content Include="Views\Clase\Agregar.cshtml" />
-    <Content Include="Views\Clase\Baja.cshtml" />
-    <Content Include="Views\Clase\Detalle.cshtml" />
-    <Content Include="Views\Clase\Editar.cshtml" />
-    <Content Include="Views\Clase\Rehabilitar.cshtml" />
-    <Content Include="Views\Clase\Ver.cshtml" />
     <Content Include="Views\Solicitud_Soporte\Ver.cshtml" />
     <Content Include="Views\Solicitud_Soporte\Agregar.cshtml" />
     <Content Include="Views\Solicitud_Soporte\Detalle.cshtml" />
@@ -395,6 +389,11 @@
     <Content Include="Views\Solicitud_Mensaje\VerResponder.cshtml" />
     <Content Include="Views\Solicitud_Mensaje\DetalleResponder.cshtml" />
     <Content Include="Views\Solicitud_Mensaje\Responder.cshtml" />
+    <Content Include="Views\Clase\VerClase.cshtml" />
+    <Content Include="Views\Clase\AgregarClase.cshtml" />
+    <Content Include="Views\Clase\EditarClase.cshtml" />
+    <Content Include="Views\Clase\BajaClase.cshtml" />
+    <Content Include="Views\Clase\RehabilitarClase.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
