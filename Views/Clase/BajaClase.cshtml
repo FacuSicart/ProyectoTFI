@@ -1,41 +1,64 @@
 ﻿@model ProyectoTFI.Models.ClaseViewModel
 
 @{
-    ViewBag.Title = "Baja Clase";
+    ViewBag.Title = "Deshabilitar Clase";
     Layout = "~/Views/Shared/_LayoutInterno.cshtml";
 }
 
-<h2>Baja Clase</h2>
+@{
+    string estadoMostrado = (bool)Model.Activo ? "Activo" : "Inactivo";
+}
 
-<div>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <h4>Deshabilitar Administrador</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Descripcion)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Descripcion)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.LinkVideo)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.LinkVideo)
-        </dd>
-
-    </dl>
-
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
+    <h5>¿Está seguro que quiere deshabilitar la clase seleccionada?</h5>
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.ID)
+    @Html.HiddenFor(model => model.CursoID)
+    @Html.HiddenFor(model => model.Activo)
+    <div class="" style="background-color: antiquewhite; border-radius:10px;padding:10px;">
+        @if (ViewData["ErrorMensaje"] != null)
+        {
+            <div class="alert alert-danger" role="alert">
+                @ViewData["ErrorMensaje"]
+            </div>
+        }
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="row">
-            <div class="form-actions no-color">
-                <input type="submit" value="Baja" class="btn btn-success" />
-                @Html.ActionLink("Volver", "VerClasesCurso", "Curso", new { id = Model.CursoID }, new { @class = "btn btn-success", style = "background-color: #DC143C; border-color: #DC143C; color: #fff;", onmouseover = "this.style.backgroundColor='#DC143C'; this.style.borderColor='#5cb85c';", onmouseout = "this.style.backgroundColor='#DC143C'; this.style.borderColor='#DC143C';" })
+            <div class="col-md-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Descripcion, htmlAttributes: new { @class = "control-label" })
+                    <div class="col-md-10">
+                        @Html.DisplayFor(model => model.Descripcion)
+                        @Html.ValidationMessageFor(model => model.Descripcion, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.LinkVideo, htmlAttributes: new { @class = "control-label " })
+                    <div class="col-md-10">
+                        @Html.DisplayFor(model => model.LinkVideo)
+                        @Html.ValidationMessageFor(model => model.LinkVideo, "", new { @class = "text-danger" })
+                    </div>
+                </div>
             </div>
         </div>
-    }
+        <br />
+        <div class="row gy-5">
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Deshabilitar" id="btnSubmit" class="btn btn-success" />
+                    @Html.ActionLink("Volver", "VerClasesCurso", "Curso", new { id = Model.CursoID }, new { @class = "btn btn-success", style = "background-color: #DC143C; border-color: #DC143C; color: #fff;", onmouseover = "this.style.backgroundColor='#DC143C'; this.style.borderColor='#5cb85c';", onmouseout = "this.style.backgroundColor='#DC143C'; this.style.borderColor='#DC143C';" })
+                </div>
+
+            </div>
+        </div>
+    </div>
 </div>
+}
