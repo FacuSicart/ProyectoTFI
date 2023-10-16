@@ -18,17 +18,28 @@
 <body>
     <h4>Clases de curso</h4>
     <hr />
-    @Html.ActionLink("Agregar", "AgregarClase", "Clase", new { area = "" }, new { @class = "btn", @style = "background-color: blue;color:white;border-color:blue;", @onmouseover = "this.style.backgroundColor='blue';", @onmouseout = "this.style.backgroundColor='white'; this.style.color: blue;" })
-    <div style="display: flex; align-items: center;">
-        @using (Html.BeginForm("VerClasesCurso", "Curso", FormMethod.Post))
-        {
-        }
-    </div>
+<div style="display: flex; align-items: center;">
+    @using (Html.BeginForm("VerClasesCurso", "Curso", FormMethod.Post))
+    {
+
+        <div style="margin-left:15px;">
+            <div>
+                @Html.TextBox("pBusqueda", null, new { placeholder = "Escriba aquí para buscar", style = "width: 210px;" })
+                <b>Estado:</b>
+                @Html.RadioButton("pTipoUsuario", "Activo", true) <text>Activos</text>
+                @Html.RadioButton("pTipoUsuario", "Inactivo") <text>Inactivos</text>
+                <input type="submit" value="Buscar" class="btn btn-info" style="color: white; font-weight: bold;" />
+                @Html.ActionLink("Agregar", "AgregarClase", "Clase", new { area = "" }, new { @class = "btn", @style = "background-color: blue;color:white;border-color:blue;", @onmouseover = "this.style.backgroundColor='blue';", @onmouseout = "this.style.backgroundColor='white'; this.style.color: blue;" })
+            </div>
+        </div>
+    }
+</div>
     <div class="contentTable">
         <table class="table table-hover" aria-describedby="clase" style="padding-top:20px;">
             <thead style="background-color: #ffd800;">
                 <tr>
                     <th scope="col" class="col-2 order" style="border: 2px solid #fff;">Descripción</th>
+                    <th scope="col" class="col-1 ">Activo</th>
                     <th scope="col" class="col-1" style="border: 2px solid #fff;">Acciones</th>
                 </tr>
             </thead>
@@ -46,6 +57,12 @@
                         <tr>
                             <td>
                                 @Html.DisplayFor(modelItem => clase.Descripcion)
+                            </td>
+                            <td style="text-align: center;">
+                            @if ((bool)clase.Activo)
+                            {<text>✅</text>}
+                            else
+                            { <text>❌</text>}
                             </td>
                             <td>
                                 <div class="d-flex justify-content-between">
