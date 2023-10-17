@@ -323,7 +323,9 @@
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Content\D.css" />
     <Content Include="Scripts\pagedListStyles.css" />
+    <Content Include="SQLScripts\FixErrorIniciarProyecto.txt" />
     <Content Include="SQLScripts\scriptTFI.sql" />
+    <Content Include="SQLScripts\scriptTFIV10.sql" />
     <Content Include="SQLScripts\scriptTFIV2.sql" />
     <Content Include="SQLScripts\scriptTFIV3.sql" />
     <Content Include="SQLScripts\scriptTFIV4.sql" />

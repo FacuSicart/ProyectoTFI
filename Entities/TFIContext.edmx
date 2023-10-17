@@ -34,10 +34,11 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Descripcion" Type="varchar" MaxLength="500" />
+          <Property Name="Titulo" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar(max)" />
           <Property Name="LinkVideo" Type="varchar" MaxLength="500" />
-          <Property Name="Activo" Type="bit" />
-          <Property Name="CursoID" Type="int" />
+          <Property Name="Activo" Type="bit" Nullable="false" />
+          <Property Name="CursoID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Cursada_de_Alumno">
           <Key>
@@ -230,7 +231,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Clase_Curso">
-          <End Role="Curso" Type="Self.Curso" Multiplicity="0..1" />
+          <End Role="Curso" Type="Self.Curso" Multiplicity="1" />
           <End Role="Clase" Type="Self.Clase" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Curso">
@@ -607,12 +608,13 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Descripcion" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Activo" Type="Boolean" />
-          <Property Name="CursoID" Type="Int32" />
+          <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Activo" Type="Boolean" Nullable="false" />
+          <Property Name="CursoID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Curso" Relationship="Self.FK_Clase_Curso" FromRole="Clase" ToRole="Curso" />
           <NavigationProperty Name="Quiz" Relationship="Self.FK_Quiz_Clase" FromRole="Clase" ToRole="Quiz" />
           <Property Name="LinkVideo" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Titulo" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Cursada_de_Alumno">
           <Key>
@@ -862,7 +864,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Clase_Curso">
-          <End Role="Curso" Type="Self.Curso" Multiplicity="0..1" />
+          <End Role="Curso" Type="Self.Curso" Multiplicity="1" />
           <End Role="Clase" Type="Self.Clase" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Curso">
@@ -1213,6 +1215,7 @@
           <EntitySetMapping Name="Clase">
             <EntityTypeMapping TypeName="TFIContext.Clase">
               <MappingFragment StoreEntitySet="Clase">
+                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
                 <ScalarProperty Name="LinkVideo" ColumnName="LinkVideo" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />

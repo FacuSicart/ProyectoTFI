@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using ProyectoTFI.Service;
 using ProyectoTFI.Entities;
+using ProyectoTFI.Tools;
 
 namespace ProyectoTFI.Data
 {
@@ -15,31 +16,27 @@ namespace ProyectoTFI.Data
             context = new ProyectoTFI.Entities.ProyectoTFI();
         }
 
-        public List<Clase> ListarClases(string pBusqueda, string pEstado, int pCurso)
+        public List<Clase> ListarClases(string pBusqueda, string pEstado, int pCursoID)
         {
             List<Clase> LC = new List<Clase>();
-            if (!String.IsNullOrEmpty(pBusqueda))
+
+            if (pEstado ==  "Activo" || pEstado is null)
             {
-                if (pEstado == "Activo" || pEstado is null)
-                {
-                    LC = context.Clase.Where(x => ((x.Curso.ID == pCurso) && (x.Activo == true)) && ((x.ID.ToString().Contains(pBusqueda)) || (x.Descripcion.Contains(pBusqueda)))).ToList();     
-                }
-                else
-                {
-                    LC = context.Clase.Where(x => ((x.Curso.ID == pCurso) && (x.Activo == false)) && ((x.ID.ToString().Contains(pBusqueda)) || (x.Descripcion.Contains(pBusqueda)))).ToList();
-                }
+                LC = new List<Clase>();
+                LC = context.Clase
+                            .WhereIf(!String.IsNullOrEmpty(pBusqueda), c => c.Titulo.ToString().Contains(pBusqueda))
+                            .Where(c => c.CursoID == pCursoID && c.Activo == true)
+                            .ToList();
             }
             else
             {
-                if (pEstado == "Activo" || pEstado is null)
-                {
-                    LC = context.Clase.Where(x => (x.Curso.ID == pCurso) && (x.Activo == true)).ToList();
-                }
-                else
-                {
-                    LC = context.Clase.Where(x => (x.Curso.ID == pCurso) && (x.Activo == false)).ToList();
-                }
+                LC = new List<Clase>();
+                LC = context.Clase
+                            .WhereIf(!String.IsNullOrEmpty(pBusqueda), c => c.Titulo.ToString().Contains(pBusqueda))
+                            .Where(c => c.CursoID == pCursoID && c.Activo == false)
+                            .ToList();
             }
+
             return LC;
         }
         public List<Clase> ListarClasesAlumno(int pCurso)
@@ -74,6 +71,7 @@ namespace ProyectoTFI.Data
         public void EditarClase(Clase clase)
         {
             Clase C = context.Clase.Where(u => u.ID == clase.ID).FirstOrDefault();
+            C.Titulo = clase.Titulo;
             C.Descripcion = clase.Descripcion;
             C.LinkVideo = clase.LinkVideo;
             context.SaveChanges();

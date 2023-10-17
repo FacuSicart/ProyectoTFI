@@ -16,8 +16,6 @@ namespace ProyectoTFI.Controllers
 {
     public class CursoController : Controller
     {
-
-        UsuarioService usarioService;
         CursoService cursoService;
         AlumnoService alumnoService;
         ClaseService claseService;
@@ -112,16 +110,17 @@ namespace ProyectoTFI.Controllers
         }
 
 
-        public ActionResult VerClasesCurso(int ID, string pBusqueda, string pTipoUsuario, int? page)
+        public ActionResult VerClasesCurso(int ID, string NombreCurso, string pBusqueda, string pEstado, int? page)
         {
             if (Session["user"] != null)
             {
                 claseService = new ClaseService();
-                var listaClases = claseService.ListarClases(pBusqueda, pTipoUsuario, ID);
-                Session["Curso"] = ID;
+                List<Clase> LC = claseService.ListarClases(pBusqueda, pEstado, ID);
+                ViewBag.CursoID = ID;
+                ViewBag.NombreCurso = NombreCurso;
                 int pageSize = 10;
                 int pageNumber = (page ?? 1);
-                return View(listaClases.ToPagedList(pageNumber, pageSize));
+                return View(LC.ToPagedList(pageNumber, pageSize));
             }
             else
             {
