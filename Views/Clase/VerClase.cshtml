@@ -5,29 +5,28 @@
     Layout = "~/Views/Shared/_LayoutInterno.cshtml";
 }
 
-<h2>Ver Clase</h2>
+<h4>Clase: @Model.Titulo</h4>
+<h5>Curso: @Model.CursoNombre</h5>
 
 <div>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Descripcion)
-        </dt>
+    @Html.ActionLink("Volver", "VerClasesCurso", "Curso", new { id = Model.CursoID, NombreCurso = Model.CursoNombre }, new { @class = "btn btn-success", @style ="margin-bottom: 5px;" })
 
+<dl class="dl-horizontal" style=" border: 1px solid #ccc; padding: 10px; border-radius: 5px;">
+    @if (Model.LinkVideo != "")
+    {
         <dd>
+            <div style="display: flex; justify-content: center;">
+                <iframe width="500" height="375" src="@Model.LinkVideo.Replace("watch?v=", "embed/")" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </dd>
+    }
+    <br />
+    <dd>
+        <div style="background-color: #f5f5f5; padding: 10px; border-radius: 5px; font-size: 16px;">
             @Html.DisplayFor(model => model.Descripcion)
-        </dd>
+        </div>
 
-        <dt>
-            Clase
-        </dt>
-
-        <dd>
-             <iframe width="700" height="515" src="@Model.LinkVideo.Replace("watch?v=", "embed/")" frameborder="0" allowfullscreen></iframe>
-        </dd>
-
-    </dl>
+    </dd>
+</dl>
 </div>
-<p>
-    @Html.ActionLink("Volver", "VerClasesCurso", "Curso", new { id = Model.CursoID }, new { @class = "btn btn-success" })
-</p>

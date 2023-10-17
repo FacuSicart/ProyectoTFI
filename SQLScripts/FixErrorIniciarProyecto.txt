@@ -1,0 +1,2 @@
+﻿En Consola de Administrador de paquetes (Packet Manager COnsole) ejecutar:
+Update-Package Microsoft.CodeDom.Providers.DotNetCompilerPlatform -r

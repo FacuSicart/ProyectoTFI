@@ -29,25 +29,29 @@ namespace ProyectoTFI.Controllers
         }
 
         // GET: Clase/Create
-        public ActionResult AgregarClase()
+        public ActionResult AgregarClase(int pCursoID, string pNombreCurso)
         {
-            return View();
+            ViewBag.CursoID = pCursoID;
+            ViewBag.NombreCurso = pNombreCurso;
+            ClaseViewModel CVM = new ClaseViewModel();
+            CVM.CursoID = pCursoID;
+            CVM.CursoNombre = pNombreCurso;
+            return View(CVM);
         }
 
         // POST: Clase/Create
         [HttpPost]
         public ActionResult AgregarClase(ClaseViewModel clase)
         {
-            clase.CursoID = (int?)Session["Curso"];
             claseService = new ClaseService();
             if (ModelState.IsValid)
             {
                 var respuesta = claseService.AgregarClase(clase);
-                return RedirectToAction("VerClasesCurso", "Curso", new { id = clase.CursoID });
+                return RedirectToAction("VerClasesCurso", "Curso", new { id = clase.CursoID, NombreCurso = clase.CursoNombre });
             }
             else
             {
-                return View("Error", model: "No se encuentra logueado");
+                return View(clase);
             }
         }
 
@@ -67,7 +71,7 @@ namespace ProyectoTFI.Controllers
             if (ModelState.IsValid)
             {
                 claseService.EditarClase(clase);
-                return RedirectToAction("VerClasesCurso", "Curso", new { id = clase.CursoID });
+                return RedirectToAction("VerClasesCurso", "Curso", new { id = clase.CursoID, NombreCurso = clase.CursoNombre });
             }
             else
             {
@@ -88,11 +92,10 @@ namespace ProyectoTFI.Controllers
         public ActionResult BajaClase(ClaseViewModel clase)
         {
             claseService = new ClaseService();
-            clase.CursoID = (int?)Session["Curso"];
             bool baja = claseService.BajaClase(clase.ID);
             if (baja == true)
             {
-                return RedirectToAction("VerClasesCurso", "Curso", new { id = clase.CursoID });
+                return RedirectToAction("VerClasesCurso", "Curso", new { id = clase.CursoID, NombreCurso = clase.CursoNombre });
             }
             else
             {
@@ -112,8 +115,7 @@ namespace ProyectoTFI.Controllers
         {
             claseService = new ClaseService();
             claseService.RehabilitarClase(clase.ID);
-            clase.CursoID = (int?)Session["Curso"];
-            return RedirectToAction("VerClasesCurso", "Curso", new { id = clase.CursoID });
+            return RedirectToAction("VerClasesCurso", "Curso", new { id = clase.CursoID, NombreCurso = clase.CursoNombre });
         }
     }
 }

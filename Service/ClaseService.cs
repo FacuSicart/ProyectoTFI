@@ -27,11 +27,12 @@ namespace ProyectoTFI.Service
         }
         public bool AgregarClase(ClaseViewModel clase)
         {
-            Clase ClaseReal = new Clase 
+            Clase ClaseReal = new Clase
             {
                 ID = clase.ID,
+                Titulo = clase.Titulo,
                 Descripcion = clase.Descripcion,
-                LinkVideo = clase.LinkVideo,
+                LinkVideo = clase.LinkVideo == null ? "" : clase.LinkVideo,
                 Activo = true,
                 CursoID = clase.CursoID
             };
@@ -57,8 +58,9 @@ namespace ProyectoTFI.Service
             Clase Clase = new Clase
             {
                 ID = clase.ID,
+                Titulo = clase.Titulo,
                 Descripcion = clase.Descripcion,
-                LinkVideo = clase.LinkVideo,
+                LinkVideo = clase.LinkVideo == null? "" : clase.LinkVideo,
                 Activo = clase.Activo,
                 CursoID = clase.CursoID
             };

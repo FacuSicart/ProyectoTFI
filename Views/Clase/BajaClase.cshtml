@@ -5,60 +5,58 @@
     Layout = "~/Views/Shared/_LayoutInterno.cshtml";
 }
 
-@{
-    string estadoMostrado = (bool)Model.Activo ? "Activo" : "Inactivo";
-}
+<h4>Deshabilitar Clase</h4>
+<h5>Curso: @Model.CursoNombre</h5>
+<h6>¿Está seguro que quiere deshabilitar la Clase seleccionada?</h6>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
+    @Html.Hidden("CursoID", Model.CursoID)
+    @Html.Hidden("CursoNombre", Model.CursoNombre)
 
-<div class="form-horizontal">
-    <h4>Deshabilitar Administrador</h4>
-    <hr />
-    <h5>¿Está seguro que quiere deshabilitar la clase seleccionada?</h5>
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    @Html.HiddenFor(model => model.ID)
-    @Html.HiddenFor(model => model.CursoID)
-    @Html.HiddenFor(model => model.Activo)
-    <div class="" style="background-color: antiquewhite; border-radius:10px;padding:10px;">
-        @if (ViewData["ErrorMensaje"] != null)
-        {
-            <div class="alert alert-danger" role="alert">
-                @ViewData["ErrorMensaje"]
-            </div>
-        }
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="row">
-            <div class="col-md-6">
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Descripcion, htmlAttributes: new { @class = "control-label" })
-                    <div class="col-md-10">
-                        @Html.DisplayFor(model => model.Descripcion)
-                        @Html.ValidationMessageFor(model => model.Descripcion, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    @Html.LabelFor(model => model.LinkVideo, htmlAttributes: new { @class = "control-label " })
-                    <div class="col-md-10">
-                        @Html.DisplayFor(model => model.LinkVideo)
-                        @Html.ValidationMessageFor(model => model.LinkVideo, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-            </div>
-        </div>
-        <br />
-        <div class="row gy-5">
+    <div class="form-horizontal">
+        <hr />
+        <div class="" style="background-color: antiquewhite; border-radius:10px;padding:10px;">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Deshabilitar" id="btnSubmit" class="btn btn-success" />
-                    @Html.ActionLink("Volver", "VerClasesCurso", "Curso", new { id = Model.CursoID }, new { @class = "btn btn-success", style = "background-color: #DC143C; border-color: #DC143C; color: #fff;", onmouseover = "this.style.backgroundColor='#DC143C'; this.style.borderColor='#5cb85c';", onmouseout = "this.style.backgroundColor='#DC143C'; this.style.borderColor='#DC143C';" })
+                @Html.LabelFor(model => model.Titulo, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Titulo, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                    @Html.ValidationMessageFor(model => model.Titulo, "", new { @class = "text-danger" })
                 </div>
+            </div>
+            <br />
+            <div class="form-group">
+                @Html.LabelFor(model => model.Descripcion, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextAreaFor(model => model.Descripcion, new { @class = "form-control", @rows = 4, @disabled = "disabled" })
+                    @Html.ValidationMessageFor(model => model.Descripcion, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <br />
+            @if (Model.LinkVideo != "")
+            {
+                <div class="form-group">
+                    Video
+                    <div class="col-md-10">
+                        <div style="display: flex;">
+                            <iframe width="300" height="225" src="@Model.LinkVideo.Replace("watch?v=", "embed/")" frameborder="0" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
+                <br />
+            }
 
+            <div class="row gy-5">
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Deshabilitar" id="btnSubmit" class="btn btn-success" />
+                        @Html.ActionLink("Cancelar", "VerClasesCurso", "Curso", new { id = Model.CursoID, NombreCurso = Model.CursoNombre }, new { @class = "btn btn-success", style = "background-color: #DC143C; border-color: #DC143C; color: #fff;", onmouseover = "this.style.backgroundColor='#DC143C'; this.style.borderColor='#5cb85c';", onmouseout = "this.style.backgroundColor='#DC143C'; this.style.borderColor='#DC143C';" })
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
 }
+
