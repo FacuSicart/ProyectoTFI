@@ -39,11 +39,13 @@ namespace ProyectoTFI.Data
 
             return LC;
         }
-        public List<Clase> ListarClasesAlumno(int pCurso)
+        public List<Clase> ListarClasesAlumno(string pBusqueda, int pCurso)
         {
             List<Clase> LC = new List<Clase>();
 
-            LC = context.Clase.Where(x => ((x.Curso.ID == pCurso))).ToList();
+            LC = context.Clase
+                 .WhereIf(!String.IsNullOrEmpty(pBusqueda), c => c.Titulo.ToString().Contains(pBusqueda))
+                 .Where(x => ((x.Curso.ID == pCurso))).ToList();
 
             return LC;
         }

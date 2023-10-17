@@ -396,6 +396,8 @@
     <Content Include="Views\Clase\EditarClase.cshtml" />
     <Content Include="Views\Clase\BajaClase.cshtml" />
     <Content Include="Views\Clase\RehabilitarClase.cshtml" />
+    <Content Include="Views\Curso\VerClasesCursoAlumno.cshtml" />
+    <Content Include="Views\Clase\VerClaseAlumno.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

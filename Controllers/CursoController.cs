@@ -127,6 +127,24 @@ namespace ProyectoTFI.Controllers
                 return View("Error", model: "No se encuentra logueado");
             }
         }
+
+        public ActionResult VerClasesCursoAlumno(int ID, string NombreCurso, string pBusqueda, int? page)
+        {
+            if (Session["user"] != null)
+            {
+                claseService = new ClaseService();
+                List<Clase> LC = claseService.ListarClasesAlumno(pBusqueda, ID);
+                ViewBag.CursoID = ID;
+                ViewBag.NombreCurso = NombreCurso;
+                int pageSize = 10;
+                int pageNumber = (page ?? 1);
+                return View(LC.ToPagedList(pageNumber, pageSize));
+            }
+            else
+            {
+                return View("Error", model: "No se encuentra logueado");
+            }
+        }
         public ActionResult RegistrarCurso(int id)
         {
             if (Session["user"] != null)

@@ -27,6 +27,12 @@ namespace ProyectoTFI.Controllers
             var clase = claseService.VerClase(id);
             return View(clase);
         }
+        public ActionResult VerClaseAlumno(int id)
+        {
+            claseService = new ClaseService();
+            var clase = claseService.VerClase(id);
+            return View(clase);
+        }
 
         // GET: Clase/Create
         public ActionResult AgregarClase(int pCursoID, string pNombreCurso)
