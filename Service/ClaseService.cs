@@ -34,7 +34,8 @@ namespace ProyectoTFI.Service
                 Descripcion = clase.Descripcion,
                 LinkVideo = clase.LinkVideo == null ? "" : clase.LinkVideo,
                 Activo = true,
-                CursoID = clase.CursoID
+                CursoID = clase.CursoID,
+                ClaseAnteriorID = clase.ClaseAnteriorID
             };
             bool Respuesta = claseRepository.AgregarClase(ClaseReal);
             return Respuesta;
@@ -46,9 +47,9 @@ namespace ProyectoTFI.Service
             return true;
         }
 
-        public ClaseViewModel VerClase(int id)
+        public ClaseViewModel VerClase(int id, string orden = null)
         {
-            Clase clase = claseRepository.VerClase(id);
+            Clase clase = claseRepository.VerClase(id, orden);
             ClaseViewModel claseV = new ClaseViewModel(clase);
             return claseV;
         }

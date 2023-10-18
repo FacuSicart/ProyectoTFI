@@ -51,6 +51,13 @@ namespace ProyectoTFI.Data
         }
         public bool AgregarClase(Clase pClase)
         {
+            Clase Clase = context.Clase.Where(u => u.CursoID == (int)pClase.CursoID)
+                .OrderByDescending(e => e.ID)
+                .FirstOrDefault();
+            if (Clase != null)
+            {
+                pClase.ClaseAnteriorID = Clase.ID;
+            }
             context.Clase.Add(pClase);
 
             return context.SaveChanges() > 0;
@@ -63,9 +70,11 @@ namespace ProyectoTFI.Data
             context.SaveChanges();
         }
 
-        public Clase VerClase(int id)
+        public Clase VerClase(int id, string orden)
         {
-            Clase Clase = context.Clase.Where(u => u.ID == id).FirstOrDefault();
+            Clase Clase = context.Clase
+            .Where(x => (orden != "anterior" ? (orden != "siguiente" ? x.ID == id : x.ClaseAnteriorID == id) : x.ID == id))
+            .FirstOrDefault();
 
             return Clase;
         }

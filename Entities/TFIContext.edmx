@@ -39,6 +39,7 @@
           <Property Name="LinkVideo" Type="varchar" MaxLength="500" />
           <Property Name="Activo" Type="bit" Nullable="false" />
           <Property Name="CursoID" Type="int" Nullable="false" />
+          <Property Name="ClaseAnteriorID" Type="int" />
         </EntityType>
         <EntityType Name="Cursada_de_Alumno">
           <Key>
@@ -615,6 +616,7 @@
           <NavigationProperty Name="Quiz" Relationship="Self.FK_Quiz_Clase" FromRole="Clase" ToRole="Quiz" />
           <Property Name="LinkVideo" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="Titulo" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ClaseAnteriorID" Type="Int32" />
         </EntityType>
         <EntityType Name="Cursada_de_Alumno">
           <Key>
@@ -1215,6 +1217,7 @@
           <EntitySetMapping Name="Clase">
             <EntityTypeMapping TypeName="TFIContext.Clase">
               <MappingFragment StoreEntitySet="Clase">
+                <ScalarProperty Name="ClaseAnteriorID" ColumnName="ClaseAnteriorID" />
                 <ScalarProperty Name="Titulo" ColumnName="Titulo" />
                 <ScalarProperty Name="LinkVideo" ColumnName="LinkVideo" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
