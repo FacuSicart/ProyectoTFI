@@ -1,0 +1,59 @@
+﻿@model ProyectoTFI.Models.AgregarQuizViewModel
+
+@{
+    ViewBag.Title = "Agregar Quiz";
+    Layout = "~/Views/Shared/_LayoutInterno.cshtml";
+}
+
+<h4>Agregar Quiz</h4>
+<h5>Curso: @Model.CursoNombre</h5>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.Hidden("ID", Model.ID)
+    @Html.Hidden("CursoID", Model.CursoID)
+    @Html.Hidden("CursoNombre", Model.CursoNombre)
+    @*@Html.Hidden("ClaseSinQuiz", Model.ClaseSinQuiz)*@
+
+    <div class="form-horizontal">
+        <hr />
+        <div class="" style="background-color: antiquewhite; border-radius:10px;padding:10px;">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.Descripcion, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Descripcion, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Descripcion, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <br />
+            <div class="form-group">
+                @Html.LabelFor(model => model.PorcAprobacion, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.PorcAprobacion, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.PorcAprobacion, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <br />
+            <div class="form-group">
+                @Html.Label("Clase", new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("ClaseID", new SelectList(Model.ClaseSinQuiz, "ID", "Titulo"), "Selecciona una clase", new { @class = "form-control" })
+                    @Html.ValidationMessage("ClaseID", "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <br />
+            <div class="row gy-5">
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        @*@Html.ActionLink("Agregar", "AgregarClase", "Clase", new { pCursoID = ViewBag.CursoID }, new { @class = "btn btn-success" })*@
+                        <input type="submit" value="Agregar" id="btnSubmit" class="btn btn-success" />
+                        @Html.ActionLink("Cancelar", "VerQuizesCurso", "Quiz", new { pCursoID = Model.CursoID, pNombreCurso = Model.CursoNombre }, new { @class = "btn btn-success", style = "background-color: #DC143C; border-color: #DC143C; color: #fff;", onmouseover = "this.style.backgroundColor='#DC143C'; this.style.borderColor='#5cb85c';", onmouseout = "this.style.backgroundColor='#DC143C'; this.style.borderColor='#DC143C';" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+

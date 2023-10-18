@@ -1,9 +1,9 @@
 ﻿@*@model IEnumerable<ProyectoTFI.Entities.Usuario>*@
-@model PagedList.IPagedList<ProyectoTFI.Entities.Clase>
+@model PagedList.IPagedList<ProyectoTFI.Entities.Quiz>
 
 @using PagedList.Mvc;
 
-@{ ViewBag.Title = "Clases del Curso";
+@{ ViewBag.Title = "Quizes del Curso";
     Layout = "~/Views/Shared/_LayoutInterno.cshtml";
 
 }
@@ -12,20 +12,19 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Clases del Curso</title>
+    <title>Quizes del Curso</title>
     <link href="~/Scripts/pagedListStyles.css" rel="stylesheet" />
 </head>
 <body>
-    <h4>Clases del Curso</h4>
+    <h4>Quizes del Curso</h4>
     <h5>Curso: @ViewBag.NombreCurso</h5>
     <hr />
     <div style="display: flex; align-items: center;">
         <div style="border-right: thin solid black;">
-            @Html.ActionLink("Volver", "VerCursos", "Curso", new { area = "" }, new { @class = "btn btn-success", @style = "color:white;font-weight:bold; margin-right: 10px;" })
-            @Html.ActionLink("Quizes", "VerQuizesCurso", "Quiz", new { area = "", pCursoID = ViewBag.CursoID, pNombreCurso = ViewBag.NombreCurso }, new { @class = "btn btn-primary", @style = "color:white;font-weight:bold; margin-right: 10px;" })
-            @Html.ActionLink("Agregar", "AgregarClase", "Clase", new { area = "", pCursoID = ViewBag.CursoID, pNombreCurso = ViewBag.NombreCurso }, new { @class = "btn btn-info", @style = "color:white;font-weight:bold; margin-right: 10px;" })
+            @Html.ActionLink("Volver", "VerClasesCurso", "Curso", new { area = "", id = ViewBag.CursoID, NombreCurso = ViewBag.NombreCurso }, new { @class = "btn btn-success", @style = "color:white;font-weight:bold; margin-right: 10px;" })
+            @Html.ActionLink("Agregar", "Agregar", "Quiz", new { area = "", ID = ViewBag.CursoID, NombreCurso = ViewBag.NombreCurso }, new { @class = "btn btn-info", @style = "color:white;font-weight:bold; margin-right: 10px;" })
         </div>
-        @using (Html.BeginForm("VerClasesCurso", "Curso", FormMethod.Post))
+        @using (Html.BeginForm("VerQuizesCurso", "Quiz", FormMethod.Post))
         {
             <input type="hidden" name="NombreCurso" value="@ViewBag.NombreCurso">
             <div style="margin-left:15px;">
@@ -48,6 +47,7 @@
                     <th scope="col" class="col-2 order" style="border: 2px solid #fff;">ID</th>
                     <th scope="col" class="col-2 order" style="border: 2px solid #fff;">Título</th>
                     <th scope="col" class="col-1 ">Activo</th>
+                    <th scope="col" class="col-2 order" style="border: 2px solid #fff;">Clase</th>
                     <th scope="col" class="col-1" style="border: 2px solid #fff;">Acciones</th>
                 </tr>
             </thead>
@@ -60,34 +60,37 @@
                 }
                 else
                 {
-                    foreach (var clase in Model)
+                    foreach (var quiz in Model)
                     {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => clase.ID)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => clase.Titulo)
-                            </td>
-                            <td style="text-align: center;">
-                                @if ((bool)clase.Activo)
-                                {<text>✅</text>}
-                            else
-                            { <text>❌</text>}
-                            </td>
-                            <td>
-                                <div class="d-flex justify-content-between">
-                                    @Html.ActionLink("🔍", "VerClase", "Clase", new { id = clase.ID }, new { @class = "btn btn-primary" })
-                                    @Html.ActionLink("✏", "EditarClase", "Clase", new { id = clase.ID }, new { @class = "btn btn-success" })
-                                    @if ((bool)clase.Activo == true)
-                                    {
-                                        @Html.ActionLink("🗑", "BajaClase", "Clase", new { id = clase.ID }, new { @class = "btn btn-danger" })
-                                    }
-                                    else
-                                    {@Html.ActionLink("⬆", "RehabilitarClase", "Clase", new { id = clase.ID }, new { @class = "btn btn-danger" })}
-                                </div>
-                            </td>
-                        </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => quiz.ID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => quiz.Descripcion)
+                </td>
+                <td style="text-align: center;">
+                    @if ((bool)quiz.Activo)
+                    {<text>✅</text>}
+                else
+                { <text>❌</text>}
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => quiz.Clase.Titulo)
+                </td>
+                <td>
+                    <div class="d-flex justify-content-between">
+                        @Html.ActionLink("🔍", "VerClase", "Clase", new { id = quiz.ID }, new { @class = "btn btn-primary" })
+                        @Html.ActionLink("✏", "EditarClase", "Clase", new { id = quiz.ID }, new { @class = "btn btn-success" })
+                        @if ((bool)quiz.Activo == true)
+                        {
+                            @Html.ActionLink("🗑", "BajaClase", "Clase", new { id = quiz.ID }, new { @class = "btn btn-danger" })
+                        }
+                        else
+                        {@Html.ActionLink("⬆", "RehabilitarClase", "Clase", new { id = quiz.ID }, new { @class = "btn btn-danger" })}
+                    </div>
+                </td>
+            </tr>
                     }
                 }
             </tbody>
@@ -96,7 +99,7 @@
         <br />
         @*@Html.PagedListPager(Model, page => Url.Action("VerAdministradores",
             new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))*@
-        @Html.PagedListPager(Model, page => Url.Action("VerClasesCuso",
+        @Html.PagedListPager(Model, page => Url.Action("VerQuizesCurso",
         new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }),
         new PagedListRenderOptions
         {

@@ -127,6 +127,14 @@ namespace ProyectoTFI.Controllers
                 return View("Error", model: "No se encuentra logueado");
             }
         }
+
+        public ActionResult VerClasesSinQuiz(int ID)
+        {
+            claseService = new ClaseService();
+            List<Clase> LC = claseService.ListarClasesSinQuiz(ID);
+            return View(LC);
+        }
+
         public ActionResult RegistrarCurso(int id)
         {
             if (Session["user"] != null)
