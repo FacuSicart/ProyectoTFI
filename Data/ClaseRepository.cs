@@ -39,6 +39,19 @@ namespace ProyectoTFI.Data
 
             return LC;
         }
+
+        public List<Clase> ListarClasesSinQuiz(int pCursoID)
+        {
+            List<Clase> LC = new List<Clase>();
+
+            LC = context.Clase
+                        .Where(c => c.CursoID == pCursoID && c.Activo)
+                        .Where(c => !context.Quiz.Any(q => q.ClaseID == c.ID))
+                        .ToList();
+
+            return LC;
+        }
+
         public List<Clase> ListarClasesAlumno(int pCurso)
         {
             List<Clase> LC = new List<Clase>();

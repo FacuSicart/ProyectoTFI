@@ -137,6 +137,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\CursoController.cs" />
+    <Compile Include="Controllers\QuizController.cs" />
     <Compile Include="Controllers\Solicitud_MensajeController.cs" />
     <Compile Include="Controllers\Solicitud_SoporteController.cs" />
     <Compile Include="Controllers\ClaseController.cs" />
@@ -147,6 +148,7 @@
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Data\AlumnoRepository.cs" />
     <Compile Include="Data\CursoRepository.cs" />
+    <Compile Include="Data\QuizRepository.cs" />
     <Compile Include="Data\Solicitud_MensajeRepository.cs" />
     <Compile Include="Data\Solicitud_SoporteRepository.cs" />
     <Compile Include="Data\ClaseRepository.cs" />
@@ -232,8 +234,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AgregarQuizViewModel.cs" />
     <Compile Include="Models\AgregarCursoViewModel.cs" />
     <Compile Include="Models\CursoViewModel.cs" />
+    <Compile Include="Models\QuizViewModel.cs" />
     <Compile Include="Models\Solicitud_MensajeViewModel.cs" />
     <Compile Include="Models\Solicitud_SoporteViewModel.cs" />
     <Compile Include="Models\ClaseViewModel.cs" />
@@ -243,6 +247,7 @@
     <Compile Include="Service\AlumnoService.cs" />
     <Compile Include="Service\CursoService.cs" />
     <Compile Include="Service\Solicitud_MensajeService.cs" />
+    <Compile Include="Service\QuizService.cs" />
     <Compile Include="Service\Solicitud_SoporteService.cs" />
     <Compile Include="Service\ClaseService.cs" />
     <Compile Include="Service\DocenteService.cs" />
@@ -396,9 +401,12 @@
     <Content Include="Views\Clase\EditarClase.cshtml" />
     <Content Include="Views\Clase\BajaClase.cshtml" />
     <Content Include="Views\Clase\RehabilitarClase.cshtml" />
+    <Content Include="Views\Quiz\VerQuizesCurso.cshtml" />
+    <Content Include="Views\Quiz\Agregar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Quiz_Pregunta\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />
