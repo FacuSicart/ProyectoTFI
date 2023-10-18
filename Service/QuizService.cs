@@ -33,12 +33,5 @@ namespace ProyectoTFI.Service
             };
             quizRepository.AgregarQuiz(quiz);
         }
-
-        //public Solicitud_SoporteViewModel VerSolicitud(int id)
-        //{
-        //    Solicitud_Soporte solicitud = solicitud_soporteRepository.VerSolicitud(id);
-        //    Solicitud_SoporteViewModel solicitudV = new Solicitud_SoporteViewModel(solicitud);
-        //    return solicitudV;
-        //}
     }
 }

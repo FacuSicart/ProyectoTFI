@@ -1,0 +1,91 @@
+﻿@model ProyectoTFI.Models.AgregarQuiz_PreguntaViewModel
+
+@{
+    ViewBag.Title = "Agregar Pregunta";
+    Layout = "~/Views/Shared/_LayoutInterno.cshtml";
+}
+
+<h4>Agregar Pregunta</h4>
+<h5>Quiz: @ViewBag.NombreQuiz</h5>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.Hidden("ID", Model.ID)
+    @Html.Hidden("QuizID", Model.QuizID)
+    @*@Html.Hidden("ClaseSinQuiz", Model.ClaseSinQuiz)*@
+
+    <div class="form-horizontal">
+        <hr />
+        <div class="" style="background-color: antiquewhite; border-radius:10px;padding:10px;">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.DescripcionPregunta, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.DescripcionPregunta, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.DescripcionPregunta, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <br />
+            <div class="form-group">
+                @Html.LabelFor(model => model.DescripcionRespuesta1, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <label>
+                        @Html.RadioButtonFor(model => model.RespuestaCorrecta, "1", new { @class = "radio-input", @checked = "checked" })
+                        @Html.Label("Correcta")
+                    </label>
+                    @Html.EditorFor(model => model.DescripcionRespuesta1, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.DescripcionRespuesta1, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <br />
+            <div class="form-group">
+                @Html.LabelFor(model => model.DescripcionRespuesta2, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <label>
+                        @Html.RadioButtonFor(model => model.RespuestaCorrecta, "2", new { @class = "radio-input" })
+                        @Html.Label("Correcta")
+                    </label>
+                    @Html.EditorFor(model => model.DescripcionRespuesta2, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.DescripcionRespuesta2, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <br />
+            <div class="form-group">
+                @Html.LabelFor(model => model.DescripcionRespuesta3, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <label>
+                        @Html.RadioButtonFor(model => model.RespuestaCorrecta, "3", new { @class = "radio-input" })
+                        @Html.Label("Correcta")
+                    </label>
+                    @Html.EditorFor(model => model.DescripcionRespuesta3, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.DescripcionRespuesta3, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <br />
+            <div class="form-group">
+                @Html.LabelFor(model => model.DescripcionRespuesta4, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <label>
+                        @Html.RadioButtonFor(model => model.RespuestaCorrecta, "4", new { @class = "radio-input" })
+                        @Html.Label("Correcta")
+                    </label>
+                    @Html.EditorFor(model => model.DescripcionRespuesta4, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.DescripcionRespuesta4, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <br />
+            <div class="row gy-5">
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        @*@Html.ActionLink("Agregar", "AgregarClase", "Clase", new { pCursoID = ViewBag.CursoID }, new { @class = "btn btn-success" })*@
+                        <input type="submit" value="Agregar" id="btnSubmit" class="btn btn-success" />
+                        @Html.ActionLink("Cancelar", "VerPreguntasQuiz", "Quiz_Pregunta", new { pCursoID = Model.CursoID, pNombreCurso = Model.NombreCurso, pQuizID = Model.QuizID, pNombreQuiz = Model.NombreQuiz }, new { @class = "btn btn-success", style = "background-color: #DC143C; border-color: #DC143C; color: #fff;", onmouseover = "this.style.backgroundColor='#DC143C'; this.style.borderColor='#5cb85c';", onmouseout = "this.style.backgroundColor='#DC143C'; this.style.borderColor='#DC143C';" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+

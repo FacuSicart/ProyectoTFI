@@ -31,12 +31,6 @@ namespace ProyectoTFI.Data
             catch (Exception ex) { throw new Exception(ex.Message); }
         }
              
-        public Solicitud_Mensaje VerSolicitud(int pID)
-        {
-            Solicitud_Mensaje Solicitud = context.Solicitud_Mensaje.Where(u => u.ID == pID).FirstOrDefault();
-
-            return Solicitud;
-        }
         public bool AgregarQuiz(Quiz pQuiz)
         {
             context.Quiz.Add(pQuiz);
