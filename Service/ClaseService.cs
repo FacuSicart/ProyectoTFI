@@ -21,6 +21,12 @@ namespace ProyectoTFI.Service
         {
             return claseRepository.ListarClases(pBusqueda, pTipoUsuario, pCursoID);
         }
+        public List<Clase> ListarClasesSinQuiz(int pCursoID)
+        {
+            return claseRepository.ListarClasesSinQuiz(pCursoID);
+        }
+
+        public List<Clase> ListarClasesAlumno(int pCursoID)
         public List<Clase> ListarClasesAlumno(string pBusqueda, int pCursoID)
         {
             return claseRepository.ListarClasesAlumno(pBusqueda, pCursoID);

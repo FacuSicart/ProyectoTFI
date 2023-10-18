@@ -128,6 +128,14 @@ namespace ProyectoTFI.Controllers
             }
         }
 
+        public ActionResult VerClasesSinQuiz(int ID)
+        {
+            claseService = new ClaseService();
+            List<Clase> LC = claseService.ListarClasesSinQuiz(ID);
+            return View(LC);
+        }
+
+
         public ActionResult VerClasesCursoAlumno(int ID, string NombreCurso, string pBusqueda, int? page)
         {
             if (Session["user"] != null)
