@@ -1,9 +1,8 @@
-﻿@*@model IEnumerable<ProyectoTFI.Entities.Usuario>*@
-@model PagedList.IPagedList<ProyectoTFI.Entities.Quiz>
+﻿@model PagedList.IPagedList<ProyectoTFI.Entities.Quiz_Pregunta>
 
 @using PagedList.Mvc;
 
-@{ ViewBag.Title = "Quizes del Curso";
+@{ ViewBag.Title = "Preguntas del Quiz";
     Layout = "~/Views/Shared/_LayoutInterno.cshtml";
 
 }
@@ -16,23 +15,19 @@
     <link href="~/Scripts/pagedListStyles.css" rel="stylesheet" />
 </head>
 <body>
-    <h4>Quizes del Curso</h4>
-    <h5>Curso: @ViewBag.NombreCurso</h5>
+    <h4>Preguntas del Quiz</h4>
+    <h5>Quiz: @ViewBag.NombreQuiz</h5>
+    <h6>Curso: @ViewBag.NombreCurso</h6>
     <hr />
     <div style="display: flex; align-items: center;">
         <div style="border-right: thin solid black;">
-            @Html.ActionLink("Volver", "VerClasesCurso", "Curso", new { area = "", id = ViewBag.CursoID, NombreCurso = ViewBag.NombreCurso }, new { @class = "btn btn-success", @style = "color:white;font-weight:bold; margin-right: 10px;" })
-            @Html.ActionLink("Agregar", "Agregar", "Quiz", new { area = "", ID = ViewBag.CursoID, NombreCurso = ViewBag.NombreCurso }, new { @class = "btn btn-info", @style = "color:white;font-weight:bold; margin-right: 10px;" })
+            @Html.ActionLink("Volver", "VerQuizesCurso", "Quiz", new { area = "", pCursoID = ViewBag.CursoID, pNombreCurso = ViewBag.NombreCurso }, new { @class = "btn btn-success", @style = "color:white;font-weight:bold; margin-right: 10px;" })
+            @Html.ActionLink("Agregar", "Agregar", "Quiz_Pregunta", new { area = "", pQuizID = ViewBag.QuizID, QuizNombre = ViewBag.NombreQuiz, CursoID = ViewBag.CursoID, CursoNombre = ViewBag.NombreCurso}, new { @class = "btn btn-info", @style = "color:white;font-weight:bold; margin-right: 10px;" })
         </div>
         @using (Html.BeginForm("VerQuizesCurso", "Quiz", FormMethod.Post))
         {
             <input type="hidden" name="NombreCurso" value="@ViewBag.NombreCurso">
             <div style="margin-left:15px;">
-                <div>
-                    <b>Estado:</b>
-                    @Html.RadioButton("pEstado", "Activo", true) <text>Activas</text>
-                    @Html.RadioButton("pEstado", "Inactivo") <text>Inactivas</text>
-                </div>
                 <div>
                     @Html.TextBox("pBusqueda", null, new { placeholder = "Escriba aquí para buscar", style = "width: 210px;" })
                     <input type="submit" value="Buscar" class="btn btn-info" style="color: white; font-weight: bold;" />
@@ -45,9 +40,7 @@
             <thead style="background-color: #ffd800;">
                 <tr>
                     <th scope="col" class="col-2 order" style="border: 2px solid #fff;">ID</th>
-                    <th scope="col" class="col-2 order" style="border: 2px solid #fff;">Título</th>
-                    <th scope="col" class="col-1 ">Activo</th>
-                    <th scope="col" class="col-2 order" style="border: 2px solid #fff;">Clase</th>
+                    <th scope="col" class="col-2 order" style="border: 2px solid #fff;">Descripción</th>
                     <th scope="col" class="col-1" style="border: 2px solid #fff;">Acciones</th>
                 </tr>
             </thead>
@@ -67,27 +60,13 @@
                     @Html.DisplayFor(modelItem => quiz.ID)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => quiz.Descripcion)
-                </td>
-                <td style="text-align: center;">
-                    @if ((bool)quiz.Activo)
-                    {<text>✅</text>}
-                else
-                { <text>❌</text>}
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => quiz.Clase.Titulo)
+                    @Html.DisplayFor(modelItem => quiz.DescripcionPregunta)
                 </td>
                 <td>
                     <div class="d-flex justify-content-between">
-                        @Html.ActionLink("🔍", "VerPreguntasQuiz", "Quiz_Pregunta", new { pQuizID = quiz.ID, pCursoID = quiz.Clase.CursoID, pNombreQuiz = quiz.Descripcion, pNombreCurso = quiz.Clase.Curso.Nombre }, new { @class = "btn btn-primary" })
+                        @Html.ActionLink("🔍", "VerClase", "Clase", new { id = quiz.ID }, new { @class = "btn btn-primary" })
                         @Html.ActionLink("✏", "EditarClase", "Clase", new { id = quiz.ID }, new { @class = "btn btn-success" })
-                        @if ((bool)quiz.Activo == true)
-                        {
-                            @Html.ActionLink("🗑", "BajaClase", "Clase", new { id = quiz.ID }, new { @class = "btn btn-danger" })
-                        }
-                        else
-                        {@Html.ActionLink("⬆", "RehabilitarClase", "Clase", new { id = quiz.ID }, new { @class = "btn btn-danger" })}
+                        @Html.ActionLink("🗑", "BajaClase", "Clase", new { id = quiz.ID }, new { @class = "btn btn-danger" })
                     </div>
                 </td>
             </tr>

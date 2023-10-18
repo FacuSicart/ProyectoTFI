@@ -60,7 +60,7 @@ namespace ProyectoTFI.Controllers
                     quizService = new QuizService();
                     quizService.AgregarQuiz(viewModel);
 
-                    return RedirectToAction("VerCursosDisponibles", "Curso");
+                    return RedirectToAction("VerQuizesCurso", new { pBusqueda = "", pCursoID = viewModel.CursoID, pNombreCurso = viewModel.CursoNombre });
                 }
                 else
                 {
