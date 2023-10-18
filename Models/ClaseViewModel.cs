@@ -22,7 +22,7 @@ namespace ProyectoTFI.Models
             Descripcion = pClase.Descripcion;
             LinkVideo = pClase.LinkVideo;
             Activo = pClase.Activo;
-            
+            ClaseAnteriorID = pClase.ClaseAnteriorID;
             if (pClase.Curso != null)
             {
                 CursoID = pClase.Curso.ID;
@@ -49,5 +49,6 @@ namespace ProyectoTFI.Models
         public bool Activo { get; set; }
         public int CursoID { get; set; }
         public string CursoNombre { get; set; }
+        public Nullable<int> ClaseAnteriorID { get; set; }
     }
 }

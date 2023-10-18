@@ -26,6 +26,7 @@ namespace ProyectoTFI.Entities
         public int CursoID { get; set; }
         public string LinkVideo { get; set; }
         public string Titulo { get; set; }
+        public Nullable<int> ClaseAnteriorID { get; set; }
     
         public virtual Curso Curso { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

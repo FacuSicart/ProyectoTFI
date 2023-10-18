@@ -53,15 +53,25 @@ namespace ProyectoTFI.Data
         }
 
         public List<Clase> ListarClasesAlumno(int pCurso)
+        public List<Clase> ListarClasesAlumno(string pBusqueda, int pCurso)
         {
             List<Clase> LC = new List<Clase>();
 
-            LC = context.Clase.Where(x => ((x.Curso.ID == pCurso))).ToList();
+            LC = context.Clase
+                 .WhereIf(!String.IsNullOrEmpty(pBusqueda), c => c.Titulo.ToString().Contains(pBusqueda))
+                 .Where(x => ((x.Curso.ID == pCurso))).ToList();
 
             return LC;
         }
         public bool AgregarClase(Clase pClase)
         {
+            Clase Clase = context.Clase.Where(u => u.CursoID == (int)pClase.CursoID)
+                .OrderByDescending(e => e.ID)
+                .FirstOrDefault();
+            if (Clase != null)
+            {
+                pClase.ClaseAnteriorID = Clase.ID;
+            }
             context.Clase.Add(pClase);
 
             return context.SaveChanges() > 0;
@@ -74,9 +84,11 @@ namespace ProyectoTFI.Data
             context.SaveChanges();
         }
 
-        public Clase VerClase(int id)
+        public Clase VerClase(int id, string orden)
         {
-            Clase Clase = context.Clase.Where(u => u.ID == id).FirstOrDefault();
+            Clase Clase = context.Clase
+            .Where(x => (orden != "anterior" ? (orden != "siguiente" ? x.ID == id : x.ClaseAnteriorID == id) : x.ID == id))
+            .FirstOrDefault();
 
             return Clase;
         }
