@@ -52,7 +52,7 @@ namespace ProyectoTFI.Data
             return LC;
         }
 
-        public List<Clase> ListarClasesAlumno(int pCurso)
+
         public List<Clase> ListarClasesAlumno(string pBusqueda, int pCurso)
         {
             List<Clase> LC = new List<Clase>();
