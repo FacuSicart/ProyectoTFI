@@ -26,9 +26,10 @@ namespace ProyectoTFI.Service
             return claseRepository.ListarClasesSinQuiz(pCursoID);
         }
 
-        public List<Clase> ListarClasesAlumno(int pCursoID)
+
+        public List<Clase> ListarClasesAlumno(string pBusqueda, int pCursoID)
         {
-            return claseRepository.ListarClasesAlumno(pCursoID);
+            return claseRepository.ListarClasesAlumno(pBusqueda, pCursoID);
         }
         public bool AgregarClase(ClaseViewModel clase)
         {
@@ -39,7 +40,8 @@ namespace ProyectoTFI.Service
                 Descripcion = clase.Descripcion,
                 LinkVideo = clase.LinkVideo == null ? "" : clase.LinkVideo,
                 Activo = true,
-                CursoID = clase.CursoID
+                CursoID = clase.CursoID,
+                ClaseAnteriorID = clase.ClaseAnteriorID
             };
             bool Respuesta = claseRepository.AgregarClase(ClaseReal);
             return Respuesta;
@@ -51,9 +53,9 @@ namespace ProyectoTFI.Service
             return true;
         }
 
-        public ClaseViewModel VerClase(int id)
+        public ClaseViewModel VerClase(int id, string orden = null)
         {
-            Clase clase = claseRepository.VerClase(id);
+            Clase clase = claseRepository.VerClase(id, orden);
             ClaseViewModel claseV = new ClaseViewModel(clase);
             return claseV;
         }

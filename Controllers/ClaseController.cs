@@ -21,10 +21,16 @@ namespace ProyectoTFI.Controllers
         }
 
         // GET: Admin/Details/5
-        public ActionResult VerClase(int id)
+        public ActionResult VerClase(int id, string orden)
         {
             claseService = new ClaseService();
-            var clase = claseService.VerClase(id);
+            var clase = claseService.VerClase(id, orden);
+            return View(clase);
+        }
+        public ActionResult VerClaseAlumno(int id, string orden)
+        {
+            claseService = new ClaseService();
+            var clase = claseService.VerClase(id, orden);
             return View(clase);
         }
 

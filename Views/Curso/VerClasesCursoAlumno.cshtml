@@ -1,9 +1,17 @@
-﻿@*@model IEnumerable<ProyectoTFI.Entities.Usuario>*@
-@model PagedList.IPagedList<ProyectoTFI.Models.CursoViewModel>
+﻿
+@{
+    ViewBag.Title = "Clases";
+    Layout = "~/Views/Shared/_LayoutInterno.cshtml";
+}
+
+<h2>Clases</h2>
+
+@*@model IEnumerable<ProyectoTFI.Entities.Usuario>*@
+@model PagedList.IPagedList<ProyectoTFI.Entities.Clase>
+
 @using PagedList.Mvc;
 
-
-@{ ViewBag.Title = "Cursos Registrados";
+@{ ViewBag.Title = "Clases del Curso";
     Layout = "~/Views/Shared/_LayoutInterno.cshtml";
 
 }
@@ -12,15 +20,19 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Mis Cursos</title>
     <link href="~/Scripts/pagedListStyles.css" rel="stylesheet" />
 </head>
 <body>
-    <h4>Mis Cursos</h4>
+    <h4>Clases del Curso</h4>
+    <h5>Curso: @ViewBag.NombreCurso</h5>
     <hr />
     <div style="display: flex; align-items: center;">
-        @using (Html.BeginForm())
+        <div style="border-right: thin solid black;">
+            @Html.ActionLink("Volver", "VerCursosAlumno", "Curso", new { area = "" }, new { @class = "btn btn-success", @style = "color:white;font-weight:bold; margin-right: 10px;" })
+        </div>
+        @using (Html.BeginForm("VerClasesCursoAlumno", "Curso", FormMethod.Post))
         {
+            <input type="hidden" name="NombreCurso" value="@ViewBag.NombreCurso">
             <div style="margin-left:15px;">
                 <div>
                     @Html.TextBox("pBusqueda", null, new { placeholder = "Escriba aquí para buscar", style = "width: 210px;" })
@@ -30,11 +42,11 @@
         }
     </div>
     <div class="contentTable">
-        <table class="table table-hover" aria-describedby="curso" style="padding-top:20px;">
+        <table class="table table-hover" aria-describedby="clase" style="padding-top:20px;">
             <thead style="background-color: #ffd800;">
                 <tr>
                     <th scope="col" class="col-2 order" style="border: 2px solid #fff;">ID</th>
-                    <th scope="col" class="col-2 order" style="border: 2px solid #fff;">Nombre</th>
+                    <th scope="col" class="col-2 order" style="border: 2px solid #fff;">Título</th>
                     <th scope="col" class="col-1" style="border: 2px solid #fff;">Acciones</th>
                 </tr>
             </thead>
@@ -47,18 +59,19 @@
                 }
                 else
                 {
-                    foreach (var curso in Model)
+                    foreach (var clase in Model)
                     {
                         <tr>
                             <td>
-                                @Html.DisplayFor(modelItem => curso.ID)
+                                @Html.DisplayFor(modelItem => clase.ID)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => curso.Nombre)
+                                @Html.DisplayFor(modelItem => clase.Titulo)
                             </td>
+
                             <td>
                                 <div class="d-flex justify-content-between">
-                                    @Html.ActionLink("🔍", "VerClasesCursoAlumno", new { id = curso.ID }, new { @class = "btn btn-primary" })
+                                    @Html.ActionLink("🔍", "VerClaseAlumno", "Clase", new { id = clase.ID }, new { @class = "btn btn-primary" })
                                 </div>
                             </td>
                         </tr>
@@ -70,7 +83,7 @@
         <br />
         @*@Html.PagedListPager(Model, page => Url.Action("VerAdministradores",
             new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))*@
-        @Html.PagedListPager(Model, page => Url.Action("VerCursosUsuario",
+        @Html.PagedListPager(Model, page => Url.Action("VerCursosAlumno",
         new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }),
         new PagedListRenderOptions
         {
