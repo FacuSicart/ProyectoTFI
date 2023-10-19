@@ -412,6 +412,10 @@
     <Content Include="Views\Quiz_Pregunta\Agregar.cshtml" />
     <Content Include="Views\Curso\VerClasesCursoAlumno.cshtml" />
     <Content Include="Views\Clase\VerClaseAlumno.cshtml" />
+    <Content Include="Views\Quiz\VerQuiz.cshtml" />
+    <Content Include="Views\Quiz\Editar.cshtml" />
+    <Content Include="Views\Quiz\Baja.cshtml" />
+    <Content Include="Views\Quiz\Rehabilitar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
