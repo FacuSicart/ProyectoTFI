@@ -21,17 +21,21 @@ namespace ProyectoTFI.Controllers
         }
 
         // GET: Solicitud_Respuesta/Details/5
-        public ActionResult Detalle(int id)
+        public ActionResult VerQuiz(int id)
         {
-            return View();
+            quizService = new QuizService();
+            QuizViewModel Qvm = quizService.VerQuiz(id);
+            return View(Qvm);
         }
 
         public ActionResult VerQuizesCurso(string pBusqueda, int pCursoID, string pNombreCurso, int? page)
         {
             quizService = new QuizService();
-            List<Quiz> listaQuizes = quizService.ListarQuizesCurso(pBusqueda, pCursoID);
+            List<QuizViewModel> listaQuizes = quizService.ListarQuizesCurso(pBusqueda, pCursoID);
             ViewBag.CursoID = pCursoID;
+            Session["CursoID"] = pCursoID;
             ViewBag.NombreCurso = pNombreCurso;
+            Session["NombreCurso"] = pNombreCurso;
 
             int pageSize = 10;
             int pageNumber = (page ?? 1);
@@ -88,7 +92,59 @@ namespace ProyectoTFI.Controllers
         //    //return RedirectToAction("Ver", "Solicitud_Mensaje");
         //    return RedirectToAction("Ver", new { pBusqueda = "", pTipoUsuario = "", solicitudId = solicitud.SolicitudID });
         //}
+        public ActionResult Editar(int id)
+        {
+            quizService = new QuizService();
+            QuizViewModel Qvm = quizService.VerQuiz(id);
+            return View(Qvm);
+        }
 
+        [HttpPost]
+        public ActionResult Editar(QuizViewModel viewModel)
+        {
+            try
+            {
+                quizService = new QuizService();
+                quizService.EditarQuiz(viewModel);
+                return RedirectToAction("VerQuizesCurso", new { pBusqueda = "", pCursoID = Session["CursoID"], pNombreCurso = Session["NombreCurso"] });
 
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+        }
+
+        public ActionResult Baja(int id)
+        {
+            quizService = new QuizService();
+            QuizViewModel Qvm = quizService.VerQuiz(id);
+            return View(Qvm);
+        }
+
+        // POST: Clase/Delete/5
+        [HttpPost]
+        public ActionResult Baja(QuizViewModel viewModel)
+        {
+            try
+            {
+                quizService = new QuizService();
+                quizService.BajaQuiz(viewModel.ID);
+                return RedirectToAction("VerQuizesCurso", new { pBusqueda = "", pCursoID = Session["CursoID"], pNombreCurso = Session["NombreCurso"] });
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+        }
+
+        public ActionResult Rehabilitar(int id)
+        {
+            quizService = new QuizService();
+            var clase = quizService.VerQuiz(id);
+            return View(clase);
+        }
+
+        [HttpPost]
+        public ActionResult Rehabilitar(QuizViewModel viewModel)
+        {
+            quizService = new QuizService();
+            quizService.RehabilitarQuiz(viewModel.ID);
+            return RedirectToAction("VerQuizesCurso", new { pBusqueda = "", pCursoID = Session["CursoID"], pNombreCurso = Session["NombreCurso"] });
+        }
     }
 }
