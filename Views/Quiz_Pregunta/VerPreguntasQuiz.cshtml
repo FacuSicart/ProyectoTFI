@@ -64,9 +64,9 @@
                 </td>
                 <td>
                     <div class="d-flex justify-content-between">
-                        @Html.ActionLink("🔍", "VerClase", "Clase", new { id = quiz.ID }, new { @class = "btn btn-primary" })
-                        @Html.ActionLink("✏", "EditarClase", "Clase", new { id = quiz.ID }, new { @class = "btn btn-success" })
-                        @Html.ActionLink("🗑", "BajaClase", "Clase", new { id = quiz.ID }, new { @class = "btn btn-danger" })
+                        @Html.ActionLink("🔍", "Ver", "Quiz_Pregunta", new { id = quiz.ID }, new { @class = "btn btn-info", @style = "color:white;font-weight:bold; margin-right: 10px;" })
+                        @*@Html.ActionLink("✏", "Editar", "Quiz_Pregunta", new { id = quiz.ID }, new { @class = "btn btn-success" })*@
+                        @Html.ActionLink("🗑", "Borrar", "Quiz_Pregunta", new { id = quiz.ID }, new { @class = "btn btn-danger" })
                     </div>
                 </td>
             </tr>

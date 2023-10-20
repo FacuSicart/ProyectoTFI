@@ -1,0 +1,61 @@
+﻿@model ProyectoTFI.Models.Quiz_PreguntaViewModel
+
+@{
+    ViewBag.Title = "Ver Pregunta";
+    Layout = "~/Views/Shared/_LayoutInterno.cshtml";
+}
+@{
+    var numero = 1;
+}
+<h4>Ver Pregunta</h4>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.Hidden("ID", Model.ID)
+    @Html.Hidden("QuizID", Model.QuizID)
+    @*@Html.Hidden("ClaseSinQuiz", Model.ClaseSinQuiz)*@
+
+    <div class="form-horizontal">
+        <hr />
+        <div class="" style="background-color: antiquewhite; border-radius:10px;padding:10px;">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.DisplayFor(model => model.DescripcionPregunta)
+
+            </div>
+            <br />
+            @foreach (var respuesta in Model.Quiz_Pregunta_Opcion)
+            {
+
+                <div class="form-group">
+                    @Html.DisplayFor(model => respuesta.DescripcionOpcion)
+                    <div class="col-md-10">
+                        <label>
+                            @if ((bool)respuesta.Correcta)
+                            {
+                                @Html.RadioButtonFor(model => respuesta.Correcta, numero.ToString(), new { @class = "radio-input", @checked = "checked", @disabled = "disabled" })
+                            }
+                            else
+                            {
+                                @Html.RadioButtonFor(model => respuesta.Correcta, numero.ToString(), new { @class = "radio-input", @disabled = "disabled" })
+                            }
+                            @Html.Label("Correcta")
+                        </label>
+                    </div>
+                </div>
+                <br />
+                numero++;
+            }
+            <div class="row gy-5">
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Borrar" id="btnSubmit" class="btn btn-success" />
+                        @Html.ActionLink("Volver", "VerPreguntasQuiz", "Quiz_Pregunta", new { pCursoID = Model.Quiz.Clase.CursoID, pNombreCurso = Model.Quiz.Clase.Curso.Nombre, pQuizID = Model.QuizID, pNombreQuiz = Model.Quiz.Descripcion }, new { @class = "btn btn-info" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
