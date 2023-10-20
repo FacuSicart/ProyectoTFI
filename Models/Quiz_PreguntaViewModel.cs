@@ -14,7 +14,15 @@ namespace ProyectoTFI.Models
         {
 
         }
+        public Quiz_PreguntaViewModel(Quiz_Pregunta qp)
+        {
+            ID = qp.ID;
+            DescripcionPregunta = qp.DescripcionPregunta;
+            QuizID = qp.QuizID;
+            Quiz_Pregunta_Opcion = qp.Quiz_Pregunta_Opcion;
 
+            Quiz = qp.Quiz;
+        }
         public int ID { get; set; }
         [Display(Name = "Pregunta")]
         [Required]

@@ -416,6 +416,9 @@
     <Content Include="Views\Quiz\Editar.cshtml" />
     <Content Include="Views\Quiz\Baja.cshtml" />
     <Content Include="Views\Quiz\Rehabilitar.cshtml" />
+    <Content Include="Views\Quiz_Pregunta\Ver.cshtml" />
+    <Content Include="Views\Quiz_Pregunta\Editar.cshtml" />
+    <Content Include="Views\Quiz_Pregunta\Borrar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
