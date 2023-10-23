@@ -7,7 +7,7 @@
 
 <h2>Baja Quiz</h2>
 
-<h3>¿Está seguro que quiere deshabilitar al Administrador seleccionado?</h3>
+<h3>¿Está seguro que quiere deshabilitar el Quiz seleccionado?</h3>
 <div>
     <hr />
     <dl class="" style="background-color: antiquewhite; border-radius:10px;padding:10px;">
@@ -42,8 +42,8 @@
         @Html.AntiForgeryToken()
 
 <div class="form-actions no-color">
-    <input type="submit" value="Borrar" class="btn btn-success" /> |
-    @Html.ActionLink("Quizes", "VerQuizesCurso", "Quiz", new { area = "", pCursoID = Model.Clase.CursoID, pNombreCurso = Model.Clase.Curso.Nombre }, new { @class = "btn btn-info", @style = "color:white;font-weight:bold; margin-right: 10px;" })
+    <input type="submit" value="Deshabilitar" class="btn btn-success" /> |
+    @Html.ActionLink("Volver", "VerQuizesCurso", "Quiz", new { area = "", pCursoID = Model.Clase.CursoID, pNombreCurso = Model.Clase.Curso.Nombre }, new { @class = "btn btn-info", @style = "color:white;font-weight:bold; margin-right: 10px;" })
 </div>
     }
 </div>

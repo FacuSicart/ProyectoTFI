@@ -16,10 +16,10 @@ namespace ProyectoTFI.Service
             quizRepository = new QuizRepository();
         }
 
-        public List<QuizViewModel> ListarQuizesCurso(string pBusqueda, int pCursoID)
+        public List<QuizViewModel> ListarQuizesCurso(string pBusqueda, int pCursoID, string pEstado)
         {
             List<QuizViewModel> LQvm = new List<QuizViewModel>();
-            foreach (Quiz q in quizRepository.ListarQuizesCurso(pBusqueda, pCursoID))
+            foreach (Quiz q in quizRepository.ListarQuizesCurso(pBusqueda, pCursoID, pEstado))
             {
                 bool resuelto = quizRepository.QuizRealizado(q.ID);
                 QuizViewModel Qvm = new QuizViewModel(q);

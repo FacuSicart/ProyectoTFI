@@ -7,7 +7,7 @@
 
 <h2>Rehabilitar Quiz</h2>
 
-<h3>¿Está seguro que quiere Rehabilitar al Administrador seleccionado?</h3>
+<h3>¿Está seguro que quiere Rehabilitar el Quiz seleccionado?</h3>
 <div>
     <hr />
     <dl class="" style="background-color: antiquewhite; border-radius:10px;padding:10px;">
@@ -43,7 +43,7 @@
 
         <div class="form-actions no-color">
             <input type="submit" value="Rehabilitar" class="btn btn-success" /> |
-            @Html.ActionLink("Quizes", "VerQuizesCurso", "Quiz", new { area = "", pCursoID = Model.Clase.CursoID, pNombreCurso = Model.Clase.Curso.Nombre }, new { @class = "btn btn-info", @style = "color:white;font-weight:bold; margin-right: 10px;" })
+            @Html.ActionLink("Volver", "VerQuizesCurso", "Quiz", new { area = "", pCursoID = Model.Clase.CursoID, pNombreCurso = Model.Clase.Curso.Nombre }, new { @class = "btn btn-info", @style = "color:white;font-weight:bold; margin-right: 10px;" })
         </div>
     }
 </div>

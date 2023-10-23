@@ -26,6 +26,7 @@
         </div>
         @using (Html.BeginForm("VerQuizesCurso", "Quiz", FormMethod.Post))
         {
+            <input type="hidden" name="pCursoID" value="@ViewBag.CursoID">
             <input type="hidden" name="NombreCurso" value="@ViewBag.NombreCurso">
             <div style="margin-left:15px;">
                 <div>

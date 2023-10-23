@@ -7,8 +7,8 @@
 @{
     var numero = 1;
 }
-<h4>Ver Pregunta</h4>
-
+<h2>Ver Pregunta</h2>
+<h3>¿Está seguro que quiere Eliminar la pregunta seleccionada?</h3>
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
@@ -50,7 +50,7 @@
             <div class="row gy-5">
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Borrar" id="btnSubmit" class="btn btn-success" />
+                        <input type="submit" value="Eliminar" id="btnSubmit" class="btn btn-success" />
                         @Html.ActionLink("Volver", "VerPreguntasQuiz", "Quiz_Pregunta", new { pCursoID = Model.Quiz.Clase.CursoID, pNombreCurso = Model.Quiz.Clase.Curso.Nombre, pQuizID = Model.QuizID, pNombreQuiz = Model.Quiz.Descripcion }, new { @class = "btn btn-info" })
                     </div>
                 </div>
