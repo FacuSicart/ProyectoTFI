@@ -16,15 +16,28 @@ namespace ProyectoTFI.Data
             context = new ProyectoTFI.Entities.ProyectoTFI();
         }
 
-        public List<Quiz> ListarQuizesCurso(string pBusqueda, int pCursoID)
+        public List<Quiz> ListarQuizesCurso(string pBusqueda, int pCursoID, string pEstado)
         {
             try
             {
                 List<Quiz> LQ = new List<Quiz>();
-                LQ = context.Quiz
-                            .WhereIf(!String.IsNullOrEmpty(pBusqueda), c => c.Descripcion.ToString().Contains(pBusqueda))
-                            .Where(c => c.Clase.Curso.ID == pCursoID)
-                            .ToList();
+
+                if (pEstado == "Activo" || pEstado is null)
+                {
+                    LQ = new List<Quiz>();
+                    LQ = context.Quiz
+                                .WhereIf(!String.IsNullOrEmpty(pBusqueda), c => c.Descripcion.ToString().Contains(pBusqueda))
+                                .Where(c => c.Clase.Curso.ID == pCursoID && c.Activo == true)
+                                .ToList();
+                }
+                else
+                {
+                    LQ = new List<Quiz>();
+                    LQ = context.Quiz
+                                .WhereIf(!String.IsNullOrEmpty(pBusqueda), c => c.Descripcion.ToString().Contains(pBusqueda))
+                                .Where(c => c.Clase.Curso.ID == pCursoID && c.Activo == false)
+                                .ToList();
+                }
 
                 return LQ;
             }
