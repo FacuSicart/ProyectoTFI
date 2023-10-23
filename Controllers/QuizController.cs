@@ -28,14 +28,15 @@ namespace ProyectoTFI.Controllers
             return View(Qvm);
         }
 
-        public ActionResult VerQuizesCurso(string pBusqueda, int pCursoID, string pNombreCurso, int? page)
+        public ActionResult VerQuizesCurso(string pBusqueda, int pCursoID, string pNombreCurso, int? page, string pEstado)
         {
-            quizService = new QuizService();
-            List<QuizViewModel> listaQuizes = quizService.ListarQuizesCurso(pBusqueda, pCursoID);
-            ViewBag.CursoID = pCursoID;
             Session["CursoID"] = pCursoID;
+            quizService = new QuizService();
+            List<QuizViewModel> listaQuizes = quizService.ListarQuizesCurso(pBusqueda, (int)Session["CursoID"], pEstado);
+            ViewBag.CursoID = pCursoID;
             ViewBag.NombreCurso = pNombreCurso;
             Session["NombreCurso"] = pNombreCurso;
+
 
             int pageSize = 10;
             int pageNumber = (page ?? 1);

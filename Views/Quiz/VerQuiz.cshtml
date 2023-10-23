@@ -37,6 +37,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Editar", "Editar", new { id = Model.ID }, new { @class = "btn btn-primary", @style = "color:white;font-weight:bold; margin-right: 10px;" }) |
-    @Html.ActionLink("Quizes", "VerQuizesCurso", "Quiz", new { area = "", pCursoID = Model.Clase.CursoID, pNombreCurso = Model.Clase.Curso.Nombre }, new { @class = "btn btn-primary", @style = "color:white;font-weight:bold; margin-right: 10px;" })
+    @Html.ActionLink("Editar", "Editar", new { id = Model.ID }, new { @class = "btn btn-success", @style = "color:white;font-weight:bold; margin-right: 10px;" }) |
+    @Html.ActionLink("Volver", "VerQuizesCurso", "Quiz", new { area = "", pCursoID = Model.Clase.CursoID, pNombreCurso = Model.Clase.Curso.Nombre }, new { @class = "btn btn-primary", @style = "color:white;font-weight:bold; margin-right: 10px;" })
 </p>
