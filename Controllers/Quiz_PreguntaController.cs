@@ -70,8 +70,22 @@ namespace ProyectoTFI.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    //Validaciones para evitar incoherencias
+                    if ((viewModel.DescripcionRespuesta3 == "" || viewModel.DescripcionRespuesta3 == null) && (viewModel.RespuestaCorrecta == "3"))
+                    {
+                        ViewData["ErrorQuiz"] = "No puede seleccionar como correcta a una descripción de respuesta vacía";
+                        return View(viewModel);
+                    }
+
+                    if ((viewModel.DescripcionRespuesta4 == "" || viewModel.DescripcionRespuesta4 == null) && (viewModel.RespuestaCorrecta == "4"))
+                    {
+                        ViewData["ErrorQuiz"] = "No puede seleccionar como correcta a una descripción de respuesta vacía";
+                        return View(viewModel);
+                    }
+
                     quiz_preguntaService = new Quiz_PreguntaService();
                     quiz_preguntaService.AgregarQuiz(viewModel);
+                    ViewData["ErrorQuiz"] = null;
                     return RedirectToAction("VerPreguntasQuiz", new { pBusqueda = "", pCursoID = viewModel.CursoID, pQuizID = viewModel.QuizID, pNombreCurso = Request.Cookies["NombreCurso"]?.Value, pNombreQuiz = Request.Cookies["NombreQuiz"]?.Value });
                 }
                 else
