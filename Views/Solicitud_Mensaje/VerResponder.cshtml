@@ -97,7 +97,7 @@
         <br />
         @*@Html.PagedListPager(Model, page => Url.Action("VerAdministradores",
             new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))*@
-        @Html.PagedListPager(Model, page => Url.Action("Ver",
+        @Html.PagedListPager(Model, page => Url.Action("VerResponder",
          new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }),
          new PagedListRenderOptions
          {
