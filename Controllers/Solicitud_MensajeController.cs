@@ -73,10 +73,12 @@ namespace ProyectoTFI.Controllers
         public ActionResult Agregar(Solicitud_MensajeViewModel solicitud)
         {
             solicitud_mensajeService = new Solicitud_MensajeService();
+            solicitud_soporteService = new Solicitud_SoporteService();
             solicitud.FechaEmision = DateTime.Now;
             solicitud_mensajeService.AgregarMensaje(solicitud);
             //return RedirectToAction("Ver", "Solicitud_Mensaje");
-            return RedirectToAction("Ver", new { pBusqueda = "", pTipoUsuario = "", solicitudId = solicitud.SolicitudID });
+            Solicitud_SoporteViewModel SVM = solicitud_soporteService.VerSolicitud(solicitud.SolicitudID);            
+            return RedirectToAction("Ver", new { pBusqueda = "", pTipoUsuario = "", solicitudId = solicitud.SolicitudID, asunto = SVM.Asunto });
         }
 
         public ActionResult FinalizarCaso(int solicitudId, int mensajeId)
@@ -108,11 +110,14 @@ namespace ProyectoTFI.Controllers
         public ActionResult Responder(Solicitud_MensajeViewModel solicitud)
         {
             solicitud_mensajeService = new Solicitud_MensajeService();
+            solicitud_soporteService = new Solicitud_SoporteService(); 
 
             solicitud.Administrador = (Administrador)((Usuario)Session["user"]).Administrador.First();
             solicitud.AdministradorID = solicitud.Administrador.ID;
             solicitud_mensajeService.Responder(solicitud);
-            return RedirectToAction("VerResponder", new { pBusqueda = "", pTipoUsuario = "", solicitudId = solicitud.SolicitudID });
+
+            Solicitud_SoporteViewModel SVM = solicitud_soporteService.VerSolicitud(solicitud.SolicitudID);
+            return RedirectToAction("VerResponder", new { pBusqueda = "", pTipoUsuario = "", solicitudId = solicitud.SolicitudID, asunto = SVM.Asunto});
             //return RedirectToAction("VerPendientes", "Solicitud_Soporte");
 
         }
