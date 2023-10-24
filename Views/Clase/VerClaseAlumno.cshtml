@@ -11,8 +11,8 @@
 <div>
     <hr />
     @Html.ActionLink("Volver", "VerClasesCursoAlumno", "Curso", new { id = Model.CursoID, NombreCurso = Model.CursoNombre }, new { @class = "btn btn-success", @style = "margin-bottom: 5px;" })
-    @Html.ActionLink("Anterior", "VerClaseAlumno", "Clase", new { id = (int)Model.ClaseAnteriorID, Orden = "anterior" }, new { @class = "btn btn-success", @style = "margin-bottom: 5px;" })
-    @Html.ActionLink("Siguiente", "VerClaseAlumno", "Clase", new { id = (int)Model.ID, Orden = "siguiente" }, new { @class = "btn btn-success", @style = "margin-bottom: 5px;" })
+    @*@Html.ActionLink("Anterior", "VerClaseAlumno", "Clase", new { id = (int)Model.ClaseAnteriorID, Orden = "anterior" }, new { @class = "btn btn-success", @style = "margin-bottom: 5px;" })*@
+    @*@Html.ActionLink("Siguiente", "VerClaseAlumno", "Clase", new { id = (int)Model.ID, Orden = "siguiente" }, new { @class = "btn btn-success", @style = "margin-bottom: 5px;" })*@
 
     <dl class="dl-horizontal" style=" border: 1px solid #ccc; padding: 10px; border-radius: 5px;">
         @if (Model.LinkVideo != "")

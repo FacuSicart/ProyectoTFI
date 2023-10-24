@@ -415,6 +415,13 @@
     <Content Include="Views\Quiz_Pregunta\Agregar.cshtml" />
     <Content Include="Views\Curso\VerClasesCursoAlumno.cshtml" />
     <Content Include="Views\Clase\VerClaseAlumno.cshtml" />
+    <Content Include="Views\Quiz\VerQuiz.cshtml" />
+    <Content Include="Views\Quiz\Editar.cshtml" />
+    <Content Include="Views\Quiz\Baja.cshtml" />
+    <Content Include="Views\Quiz\Rehabilitar.cshtml" />
+    <Content Include="Views\Quiz_Pregunta\Ver.cshtml" />
+    <Content Include="Views\Quiz_Pregunta\Editar.cshtml" />
+    <Content Include="Views\Quiz_Pregunta\Borrar.cshtml" />
     <Content Include="Views\Quiz\VerQuizesCursoAlumno.cshtml" />
     <Content Include="Views\Quiz_Pregunta\ResponderPregunta.cshtml" />
     <Content Include="Views\Quiz_Pregunta\ResultadosQuiz.cshtml" />

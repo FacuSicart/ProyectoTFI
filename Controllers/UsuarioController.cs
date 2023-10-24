@@ -98,7 +98,7 @@ namespace ProyectoTFI.Controllers
                 }
                 else
                 {
-                    return View();
+                    return View(usuario);
                 }
 
             }

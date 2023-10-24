@@ -1,0 +1,49 @@
+﻿@model ProyectoTFI.Models.QuizViewModel
+
+@{
+    ViewBag.Title = "Baja";
+    Layout = "~/Views/Shared/_LayoutInterno.cshtml";
+}
+
+<h3>Deshabilitar Quiz</h3>
+
+<h4>¿Está seguro que quiere deshabilitar el Quiz seleccionado?</h4>
+<div>
+    <hr />
+    <dl class="" style="background-color: antiquewhite; border-radius:10px;padding:10px;">
+        <dt>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PorcAprobacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PorcAprobacion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Clase.Titulo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Clase.Titulo)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+<div class="form-actions no-color">
+    <input type="submit" value="Deshabilitar" class="btn btn-success" /> |
+    @Html.ActionLink("Volver", "VerQuizesCurso", "Quiz", new { area = "", pCursoID = Model.Clase.CursoID, pNombreCurso = Model.Clase.Curso.Nombre }, new { @class = "btn btn-info", @style = "color:white;font-weight:bold; margin-right: 10px;" })
+</div>
+    }
+</div>

@@ -22,11 +22,14 @@
     <div style="display: flex; align-items: center;">
         <div style="border-right: thin solid black;">
             @Html.ActionLink("Volver", "VerQuizesCurso", "Quiz", new { area = "", pCursoID = ViewBag.CursoID, pNombreCurso = ViewBag.NombreCurso }, new { @class = "btn btn-success", @style = "color:white;font-weight:bold; margin-right: 10px;" })
-            @Html.ActionLink("Agregar", "Agregar", "Quiz_Pregunta", new { area = "", pQuizID = ViewBag.QuizID, QuizNombre = ViewBag.NombreQuiz, CursoID = ViewBag.CursoID, CursoNombre = ViewBag.NombreCurso}, new { @class = "btn btn-info", @style = "color:white;font-weight:bold; margin-right: 10px;" })
+            @Html.ActionLink("Agregar", "Agregar", "Quiz_Pregunta", new { area = "", pQuizID = ViewBag.QuizID, QuizNombre = ViewBag.NombreQuiz, CursoID = ViewBag.CursoID, CursoNombre = ViewBag.NombreCurso }, new { @class = "btn btn-info", @style = "color:white;font-weight:bold; margin-right: 10px;" })
         </div>
-        @using (Html.BeginForm("VerQuizesCurso", "Quiz", FormMethod.Post))
+        @using (Html.BeginForm("VerPreguntasQuiz", "Quiz_Pregunta", FormMethod.Post))
         {
-            <input type="hidden" name="NombreCurso" value="@ViewBag.NombreCurso">
+            <input type="hidden" name="pQuizID" value="@ViewBag.QuizID">
+            <input type="hidden" name="pCursoID" value="@ViewBag.CursoID">
+            <input type="hidden" name="pNombreCurso" value="@ViewBag.NombreCurso">
+            <input type="hidden" name="pNombreQuiz" value="@ViewBag.NombreQuiz">
             <div style="margin-left:15px;">
                 <div>
                     @Html.TextBox("pBusqueda", null, new { placeholder = "Escriba aquí para buscar", style = "width: 210px;" })
@@ -64,9 +67,9 @@
                 </td>
                 <td>
                     <div class="d-flex justify-content-between">
-                        @Html.ActionLink("🔍", "VerClase", "Clase", new { id = quiz.ID }, new { @class = "btn btn-primary" })
-                        @Html.ActionLink("✏", "EditarClase", "Clase", new { id = quiz.ID }, new { @class = "btn btn-success" })
-                        @Html.ActionLink("🗑", "BajaClase", "Clase", new { id = quiz.ID }, new { @class = "btn btn-danger" })
+                        @Html.ActionLink("🔍", "Ver", "Quiz_Pregunta", new { id = quiz.ID }, new { @class = "btn btn-info", @style = "color:white;font-weight:bold; margin-right: 10px;" })
+                        @*@Html.ActionLink("✏", "Editar", "Quiz_Pregunta", new { id = quiz.ID }, new { @class = "btn btn-success" })*@
+                        @Html.ActionLink("🗑", "Borrar", "Quiz_Pregunta", new { id = quiz.ID }, new { @class = "btn btn-danger" })
                     </div>
                 </td>
             </tr>

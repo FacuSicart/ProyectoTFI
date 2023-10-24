@@ -1,19 +1,20 @@
-﻿@model ProyectoTFI.Models.AgregarQuizViewModel
+﻿@model ProyectoTFI.Models.QuizViewModel
 
 @{
     ViewBag.Title = "Agregar Quiz";
     Layout = "~/Views/Shared/_LayoutInterno.cshtml";
 }
 
-<h4>Agregar Quiz</h4>
-<h5>Curso: @Model.CursoNombre</h5>
+<h4>Editar Quiz</h4>
+<h5>Curso: @Model.Clase.Titulo</h5>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     @Html.Hidden("ID", Model.ID)
-    @Html.Hidden("CursoID", Model.CursoID)
-    @Html.Hidden("CursoNombre", Model.CursoNombre)
+    @Html.Hidden("CursoID", Model.Clase.CursoID)
+    @Html.Hidden("CursoNombre", Model.Clase.Curso.Nombre)
+    @*@Html.Hidden("ClaseID", Model.ClaseID)*@
     @*@Html.Hidden("ClaseSinQuiz", Model.ClaseSinQuiz)*@
 
     <div class="form-horizontal">
@@ -39,8 +40,8 @@
             <div class="form-group">
                 @Html.Label("Clase", new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.DropDownList("ClaseID", new SelectList(Model.ClaseSinQuiz, "ID", "Titulo"), "Selecciona una clase", new { @class = "form-control" })
-                    @Html.ValidationMessage("ClaseID", "", new { @class = "text-danger" })
+                    @Html.DropDownListFor(model => model.ClaseID, new SelectList(Model.ClaseSinQuiz, "ID", "Titulo"), Model.Clase.Titulo, new { @class = "form-control", @name="ClaseID" })
+                    @Html.ValidationMessageFor(model => model.ClaseID, "", new { @class = "text-danger" })
                 </div>
             </div>
             <br />
@@ -48,8 +49,8 @@
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
                         @*@Html.ActionLink("Agregar", "AgregarClase", "Clase", new { pCursoID = ViewBag.CursoID }, new { @class = "btn btn-success" })*@
-                        <input type="submit" value="Agregar" id="btnSubmit" class="btn btn-success" />
-                        @Html.ActionLink("Cancelar", "VerQuizesCurso", "Quiz", new { pCursoID = Model.CursoID, pNombreCurso = Model.CursoNombre }, new { @class = "btn btn-info", style = "background-color: #DC143C; border-color: #DC143C; color: #fff;", onmouseover = "this.style.backgroundColor='#DC143C'; this.style.borderColor='#5cb85c';", onmouseout = "this.style.backgroundColor='#DC143C'; this.style.borderColor='#DC143C';" })
+                        <input type="submit" value="Guardar" id="btnSubmit" class="btn btn-success" />
+                        @Html.ActionLink("Volver", "VerQuizesCurso", "Quiz", new { pCursoID = Model.Clase.CursoID, pNombreCurso = Model.Clase.Curso.Nombre }, new { @class = "btn btn-info", style = "background-color: #DC143C; border-color: #DC143C; color: #fff;", onmouseover = "this.style.backgroundColor='#DC143C'; this.style.borderColor='#5cb85c';", onmouseout = "this.style.backgroundColor='#DC143C'; this.style.borderColor='#DC143C';" })
                     </div>
                 </div>
             </div>

@@ -1,5 +1,5 @@
 ﻿@*@model IEnumerable<ProyectoTFI.Entities.Usuario>*@
-@model PagedList.IPagedList<ProyectoTFI.Entities.Quiz>
+@model PagedList.IPagedList<ProyectoTFI.Models.QuizViewModel>
 
 @using PagedList.Mvc;
 
@@ -26,7 +26,8 @@
         </div>
         @using (Html.BeginForm("VerQuizesCurso", "Quiz", FormMethod.Post))
         {
-            <input type="hidden" name="NombreCurso" value="@ViewBag.NombreCurso">
+            <input type="hidden" name="pCursoID" value="@ViewBag.CursoID">
+            <input type="hidden" name="pNombreCurso" value="@ViewBag.NombreCurso">
             <div style="margin-left:15px;">
                 <div>
                     <b>Estado:</b>
@@ -80,14 +81,18 @@
                 </td>
                 <td>
                     <div class="d-flex justify-content-between">
-                        @Html.ActionLink("🔍", "VerPreguntasQuiz", "Quiz_Pregunta", new { pQuizID = quiz.ID, pCursoID = quiz.Clase.CursoID, pNombreQuiz = quiz.Descripcion, pNombreCurso = quiz.Clase.Curso.Nombre }, new { @class = "btn btn-primary" })
-                        @Html.ActionLink("✏", "EditarClase", "Clase", new { id = quiz.ID }, new { @class = "btn btn-success" })
+                        @if (quiz.Resuelto == false)
+                        {
+                            @Html.ActionLink("❓", "VerPreguntasQuiz", "Quiz_Pregunta", new { pQuizID = quiz.ID, pCursoID = quiz.Clase.CursoID, pNombreQuiz = quiz.Descripcion, pNombreCurso = quiz.Clase.Curso.Nombre }, new { @class = "btn btn-primary" })
+                            @Html.ActionLink("🔍", "VerQuiz", "Quiz", new { id = quiz.ID }, new { @class = "btn btn-success" })
+                            @Html.ActionLink("✏", "Editar", "Quiz", new { id = quiz.ID }, new { @class = "btn btn-info " })
+                        }
                         @if ((bool)quiz.Activo == true)
                         {
-                            @Html.ActionLink("🗑", "BajaClase", "Clase", new { id = quiz.ID }, new { @class = "btn btn-danger" })
+                            @Html.ActionLink("🗑", "Baja", "Quiz", new { id = quiz.ID }, new { @class = "btn btn-danger" })
                         }
                         else
-                        {@Html.ActionLink("⬆", "RehabilitarClase", "Clase", new { id = quiz.ID }, new { @class = "btn btn-danger" })}
+                        {@Html.ActionLink("⬆", "Rehabilitar", "Quiz", new { id = quiz.ID }, new { @class = "btn btn-danger" })}
                     </div>
                 </td>
             </tr>

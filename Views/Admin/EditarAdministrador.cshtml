@@ -3,7 +3,6 @@
 @{
     ViewBag.Title = "Editar Administrador";
     Layout = "~/Views/Shared/_LayoutInterno.cshtml";
-    string fechaFormateada = string.Format("{0:dd/MM/yyyy}", Model.FechaNacimiento);
 }
 
 @using (Html.BeginForm())
@@ -100,19 +99,6 @@
         </div>
     </div>
 }
-
-<script>
-    $(document).ready(function() {
-        // Inicializa el campo de fecha con el formato DD/MM/AAAA
-        var fechaInicial = "@fechaFormateada";
-
-        // Convierte la fecha al formato AAAA-MM-DD para el campo de tipo "date"
-        var fechaConvertida = fechaInicial.split('/').reverse().join('-');
-
-        // Asigna la fecha convertida al campo de fecha
-        $("#FechaNacimiento").val(fechaConvertida);
-    });
-</script>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
