@@ -14,6 +14,7 @@
     @Html.Hidden("ID", Model.ID)
     @Html.Hidden("CursoID", Model.Clase.CursoID)
     @Html.Hidden("CursoNombre", Model.Clase.Curso.Nombre)
+    @*@Html.Hidden("ClaseID", Model.ClaseID)*@
     @*@Html.Hidden("ClaseSinQuiz", Model.ClaseSinQuiz)*@
 
     <div class="form-horizontal">
@@ -39,8 +40,8 @@
             <div class="form-group">
                 @Html.Label("Clase", new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.DropDownList("ClaseID", new SelectList(Model.ClaseSinQuiz, "ID", "Titulo"),Model.Clase.Titulo, new { @class = "form-control" })
-                    @Html.ValidationMessage("ClaseID", "", new { @class = "text-danger" })
+                    @Html.DropDownListFor(model => model.ClaseID, new SelectList(Model.ClaseSinQuiz, "ID", "Titulo"), Model.Clase.Titulo, new { @class = "form-control", @name="ClaseID" })
+                    @Html.ValidationMessageFor(model => model.ClaseID, "", new { @class = "text-danger" })
                 </div>
             </div>
             <br />
@@ -49,7 +50,7 @@
                     <div class="col-md-offset-2 col-md-10">
                         @*@Html.ActionLink("Agregar", "AgregarClase", "Clase", new { pCursoID = ViewBag.CursoID }, new { @class = "btn btn-success" })*@
                         <input type="submit" value="Guardar" id="btnSubmit" class="btn btn-success" />
-                        @Html.ActionLink("Vovler", "VerQuizesCurso", "Quiz", new { pCursoID = Model.Clase.CursoID, pNombreCurso = Model.Clase.Curso.Nombre }, new { @class = "btn btn-info", style = "background-color: #DC143C; border-color: #DC143C; color: #fff;", onmouseover = "this.style.backgroundColor='#DC143C'; this.style.borderColor='#5cb85c';", onmouseout = "this.style.backgroundColor='#DC143C'; this.style.borderColor='#DC143C';" })
+                        @Html.ActionLink("Volver", "VerQuizesCurso", "Quiz", new { pCursoID = Model.Clase.CursoID, pNombreCurso = Model.Clase.Curso.Nombre }, new { @class = "btn btn-info", style = "background-color: #DC143C; border-color: #DC143C; color: #fff;", onmouseover = "this.style.backgroundColor='#DC143C'; this.style.borderColor='#5cb85c';", onmouseout = "this.style.backgroundColor='#DC143C'; this.style.borderColor='#DC143C';" })
                     </div>
                 </div>
             </div>

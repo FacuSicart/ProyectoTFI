@@ -125,6 +125,9 @@ namespace ProyectoTFI.Controllers
         {
             quiz_preguntaService = new Quiz_PreguntaService();
             Quiz_PreguntaViewModel PreguntaQuizes = quiz_preguntaService.VerPregunta(id);
+            TempData["NombreQuiz"] = PreguntaQuizes.Quiz.Descripcion;
+            TempData["NombreCurso"] = PreguntaQuizes.Quiz.Clase.Curso.Nombre;
+
             return View(PreguntaQuizes);
         }
         [HttpPost]
