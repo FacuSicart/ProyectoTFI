@@ -98,7 +98,7 @@ namespace ProyectoTFI.Service
                 var miCursada = cursadas.Find(ca => ca.AlumnoID == rqvm.AlumnoID);
 
                 QuizService qs = new QuizService();
-                Quiz quiz = qs.ListarQuizesCurso("", rqvm.CursoID).Find(q => q.ID == rqvm.QuizID);
+                QuizViewModel quiz = qs.ListarQuizesCurso("", rqvm.CursoID, "Activo").Find(q => q.ID == rqvm.QuizID);
 
                 Quiz_Cursada_de_Alumno qca = quiz_preguntaRepository.GetQuizCursada(miCursada.ID, quiz.ID);
 
@@ -125,7 +125,7 @@ namespace ProyectoTFI.Service
                 var miCursada = cursadas.Find(ca => ca.AlumnoID == rqvm.AlumnoID);
 
                 QuizService qs = new QuizService();
-                Quiz quiz = qs.ListarQuizesCurso("", rqvm.CursoID).Find(q => q.ID == rqvm.QuizID);
+                QuizViewModel quiz = qs.ListarQuizesCurso("", rqvm.CursoID, "Activo").Find(q => q.ID == rqvm.QuizID);
 
                 Quiz_Cursada_de_Alumno qca = new Quiz_Cursada_de_Alumno
                 {
@@ -158,7 +158,7 @@ namespace ProyectoTFI.Service
                 var miCursada = cursadas.Find(ca => ca.AlumnoID == rqvm.AlumnoID);
 
                 QuizService qs = new QuizService();
-                Quiz quiz = qs.ListarQuizesCurso("", rqvm.CursoID).Find(q => q.ID == rqvm.QuizID);
+                QuizViewModel quiz = qs.ListarQuizesCurso("", rqvm.CursoID, "Activo").Find(q => q.ID == rqvm.QuizID);
 
                 Quiz_Cursada_de_Alumno qca = quiz_preguntaRepository.GetQuizCursada(miCursada.ID, quiz.ID);
 

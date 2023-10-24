@@ -338,6 +338,7 @@
     <Content Include="SQLScripts\FixErrorIniciarProyecto.txt" />
     <Content Include="SQLScripts\scriptTFI.sql" />
     <Content Include="SQLScripts\scriptTFIV10.sql" />
+    <Content Include="SQLScripts\scriptTFIV12.sql" />
     <Content Include="SQLScripts\scriptTFIV2.sql" />
     <Content Include="SQLScripts\scriptTFIV3.sql" />
     <Content Include="SQLScripts\scriptTFIV4.sql" />
