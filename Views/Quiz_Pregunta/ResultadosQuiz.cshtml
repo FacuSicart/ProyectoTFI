@@ -1,0 +1,30 @@
+﻿@model ProyectoTFI.Models.QuizConclusionViewModel
+
+@{
+    ViewBag.Title = "ResultadosQuiz";
+    Layout = "~/Views/Shared/_LayoutInterno.cshtml";
+}
+
+<h2>Resultados del Quiz: @Model.NombreQuiz</h2>
+<h3>Alumno: @Model.Alumno</h3>
+
+<div>
+    <hr />
+    <div class="" style="background-color: antiquewhite; border-radius:10px;padding:10px;">
+
+        <div>
+            @if (Model.Aprobado)
+            {
+                <p>El Quiz se encuentra aprobado con una calificación de @Model.Califiacion</p>
+            }
+            else
+            {
+                <p>El Quiz se encuentra desaprobado con una calificación de @Model.Califiacion</p>
+            }
+        </div>
+
+        <div>
+            <p>Usted ha respondido @Model.RespuestasCorrectas/@Model.TotalPreguntas respuestas correctamente</p>
+        </div>
+    </div>
+</div>

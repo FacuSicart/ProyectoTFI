@@ -1,0 +1,32 @@
+﻿@model ProyectoTFI.Models.ResponderQuizViewModel
+
+@{
+    ViewBag.Title = "View";
+    Layout = "~/Views/Shared/_LayoutInterno.cshtml";
+}
+
+<h2>Realizar Quiz</h2>
+<hr />
+@{
+    ProyectoTFI.Entities.Quiz_Pregunta preguntaActual = Model.Pregunta;
+}
+@using (Html.BeginForm("GuardarYContinuar", "Quiz_Pregunta", FormMethod.Post))
+{
+    <div class="form-horizontal">
+        <div class="" style="background-color: antiquewhite; border-radius:10px;padding:10px;">
+
+            @Html.HiddenFor(model => model.PreguntaID)
+            @Html.HiddenFor(model => model.CursoID)
+            @Html.HiddenFor(model => model.QuizID)
+            @Html.DisplayFor(modelitem => preguntaActual.DescripcionPregunta)
+            @foreach (var item in preguntaActual.Quiz_Pregunta_Opcion)
+            {
+                <div class="form-group">
+                    @Html.RadioButtonFor(model => model.Respuesta, item.ID, new { @class = "radio-input" }) @item.DescripcionOpcion
+                </div>
+            }
+            <br />
+            <input type="submit" value="Responder" id="btnSubmit" class="btn btn-success" />
+        </div>
+    </div>
+}

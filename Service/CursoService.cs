@@ -63,6 +63,17 @@ namespace ProyectoTFI.Service
             catch (Exception ex) { throw new Exception(ex.Message); }
         }
 
+        public List<Curso> ListarCursosAlumnoEntity(int id, string pBusqueda)
+        {
+            List<Curso> lresult = new List<Curso>();
+            try
+            {
+                lresult = cursoRepository.ListarCursosAlumno(id, pBusqueda);
+                return lresult;
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+        }
+
         public List<CursoViewModel> ListarCursosDisponiblesAlumno(int id, string pBusqueda)
         {
             List<CursoViewModel> lresult = new List<CursoViewModel>();

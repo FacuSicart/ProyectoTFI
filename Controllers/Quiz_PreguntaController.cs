@@ -73,6 +73,87 @@ namespace ProyectoTFI.Controllers
             catch (Exception ex) { throw new Exception(ex.Message); }
         }
 
+        public ActionResult RealizarQuiz(int pQuizID, int pCursoID)
+        {
+            try
+            {
+                quiz_preguntaService = new Quiz_PreguntaService();
+                List<Quiz_Pregunta> preguntas = quiz_preguntaService.ListarPreguntasQuiz("", pQuizID);
 
+                ResponderQuizViewModel rqvm = new ResponderQuizViewModel();
+                rqvm.QuizID = pQuizID;
+                rqvm.CursoID = pCursoID;
+                rqvm.Pregunta = preguntas[0];
+                rqvm.PreguntaID = rqvm.Pregunta.ID;
+
+                rqvm.AlumnoID = ((Usuario)Session["user"]).Alumno.FirstOrDefault().ID;
+
+                Session["QuizID"] = pQuizID;
+                Session["CursoID"] = pCursoID;
+                Session["PreguntaID"] = rqvm.Pregunta.ID;
+                Session["Flag"] = false;
+
+                return View("ResponderPregunta", rqvm);
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+        }
+
+        public ActionResult GuardarYContinuar(ResponderQuizViewModel rqvm)
+        {
+            try
+            {
+                quiz_preguntaService = new Quiz_PreguntaService();
+                List<Quiz_Pregunta> preguntas = quiz_preguntaService.ListarPreguntasQuiz("", rqvm.QuizID);
+
+                rqvm.AlumnoID = ((Usuario)Session["user"]).Alumno.FirstOrDefault().ID;
+                rqvm.Pregunta = preguntas.Find(p => p.ID == (int)Session["PreguntaID"]);
+                rqvm.PreguntaID = rqvm.Pregunta.ID;
+
+                if ((bool)Session["Flag"] == false) 
+                {
+                    quiz_preguntaService.GuardarRespuestaFirstTime(rqvm);
+                    Session["Flag"] = true; 
+                }
+                else
+                {
+                    quiz_preguntaService.GuardarRespuesta(rqvm);
+                }
+
+                int indexNuevo = preguntas.FindIndex(p => p.ID == rqvm.PreguntaID) + 1;
+                if (indexNuevo >= preguntas.Count) 
+                {
+                    Session["Model"] = rqvm;
+                    return RedirectToAction("ResultadosQuiz"); 
+                }
+
+                ResponderQuizViewModel viewModel = new ResponderQuizViewModel();
+
+                viewModel.AlumnoID = ((Usuario)Session["user"]).Alumno.FirstOrDefault().ID;
+                viewModel.Pregunta = preguntas[indexNuevo];
+                viewModel.PreguntaID = viewModel.Pregunta.ID;
+                Session["PreguntaID"] = viewModel.Pregunta.ID;
+                viewModel.CursoID = (int)Session["CursoID"];
+                viewModel.QuizID = (int)Session["QuizID"];
+
+                return View("ResponderPregunta", viewModel);
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+        }
+
+        public ActionResult ResultadosQuiz()
+        {
+            try
+            {
+                if (Session["Model"] == null) { return null; }
+                ResponderQuizViewModel rqvm = (ResponderQuizViewModel)Session["Model"];
+                quiz_preguntaService = new Quiz_PreguntaService();
+                QuizConclusionViewModel rta = quiz_preguntaService.GetQuizConclusion(rqvm);
+
+                rta.Alumno = ((Usuario)Session["user"]).Apellido + ", " + ((Usuario)Session["user"]).Nombre;
+                Session["Model"] = null;
+                return View(rta);
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+        }
     }
 }

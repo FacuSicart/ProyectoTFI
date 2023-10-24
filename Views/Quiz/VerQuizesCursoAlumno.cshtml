@@ -1,17 +1,9 @@
-﻿
-@{
-    ViewBag.Title = "Clases";
-    Layout = "~/Views/Shared/_LayoutInterno.cshtml";
-}
-
-<h2>Clases</h2>
-
-@*@model IEnumerable<ProyectoTFI.Entities.Usuario>*@
-@model PagedList.IPagedList<ProyectoTFI.Entities.Clase>
+﻿@*@model IEnumerable<ProyectoTFI.Entities.Usuario>*@
+@model PagedList.IPagedList<ProyectoTFI.Entities.Quiz>
 
 @using PagedList.Mvc;
 
-@{ ViewBag.Title = "Clases del Curso";
+@{ ViewBag.Title = "Quizes del Curso";
     Layout = "~/Views/Shared/_LayoutInterno.cshtml";
 
 }
@@ -20,27 +12,17 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
+    <title>Quizes del Curso</title>
     <link href="~/Scripts/pagedListStyles.css" rel="stylesheet" />
 </head>
 <body>
-    <h4>Clases del Curso</h4>
+    <h4>Quizes del Curso</h4>
     <h5>Curso: @ViewBag.NombreCurso</h5>
     <hr />
     <div style="display: flex; align-items: center;">
         <div style="border-right: thin solid black;">
-            @Html.ActionLink("Volver", "VerCursosAlumno", "Curso", new { area = "" }, new { @class = "btn btn-success", @style = "color:white;font-weight:bold; margin-right: 10px;" })
-            @Html.ActionLink("Quizes", "VerQuizesCurso", "Quiz", new { area = "", pCursoID = ViewBag.CursoID, pNombreCurso = ViewBag.NombreCurso }, new { @class = "btn btn-primary", @style = "color:white;font-weight:bold; margin-right: 10px;" })
+            @Html.ActionLink("Volver", "VerClasesCurso", "Curso", new { area = "", id = ViewBag.CursoID, NombreCurso = ViewBag.NombreCurso }, new { @class = "btn btn-success", @style = "color:white;font-weight:bold; margin-right: 10px;" })
         </div>
-        @using (Html.BeginForm("VerClasesCursoAlumno", "Curso", FormMethod.Post))
-        {
-            <input type="hidden" name="NombreCurso" value="@ViewBag.NombreCurso">
-            <div style="margin-left:15px;">
-                <div>
-                    @Html.TextBox("pBusqueda", null, new { placeholder = "Escriba aquí para buscar", style = "width: 210px;" })
-                    <input type="submit" value="Buscar" class="btn btn-info" style="color: white; font-weight: bold;" />
-                </div>
-            </div>
-        }
     </div>
     <div class="contentTable">
         <table class="table table-hover" aria-describedby="clase" style="padding-top:20px;">
@@ -48,6 +30,7 @@
                 <tr>
                     <th scope="col" class="col-2 order" style="border: 2px solid #fff;">ID</th>
                     <th scope="col" class="col-2 order" style="border: 2px solid #fff;">Título</th>
+                    <th scope="col" class="col-2 order" style="border: 2px solid #fff;">Clase</th>
                     <th scope="col" class="col-1" style="border: 2px solid #fff;">Acciones</th>
                 </tr>
             </thead>
@@ -60,19 +43,21 @@
                 }
                 else
                 {
-                    foreach (var clase in Model)
+                    foreach (var quiz in Model)
                     {
                         <tr>
                             <td>
-                                @Html.DisplayFor(modelItem => clase.ID)
+                                @Html.DisplayFor(modelItem => quiz.ID)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => clase.Titulo)
+                                @Html.DisplayFor(modelItem => quiz.Descripcion)
                             </td>
-
                             <td>
-                                <div class="d-flex justify-content-between">
-                                    @Html.ActionLink("🔍", "VerClaseAlumno", "Clase", new { id = clase.ID }, new { @class = "btn btn-primary" })
+                                @Html.DisplayFor(modelItem => quiz.Clase.Titulo)
+                            </td>
+                            <td>
+                                <div class="text-center">
+                                    @Html.ActionLink("Realizar Quiz", "RealizarQuiz", "Quiz_Pregunta", new { pQuizID = quiz.ID, pCursoID = ViewBag.CursoID }, new { @class = "btn btn-primary" })
                                 </div>
                             </td>
                         </tr>
@@ -84,7 +69,7 @@
         <br />
         @*@Html.PagedListPager(Model, page => Url.Action("VerAdministradores",
             new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))*@
-        @Html.PagedListPager(Model, page => Url.Action("VerCursosAlumno",
+        @Html.PagedListPager(Model, page => Url.Action("VerQuizesCurso",
         new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }),
         new PagedListRenderOptions
         {

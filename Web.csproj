@@ -240,8 +240,10 @@
     <Compile Include="Models\AgregarQuizViewModel.cs" />
     <Compile Include="Models\AgregarCursoViewModel.cs" />
     <Compile Include="Models\CursoViewModel.cs" />
+    <Compile Include="Models\QuizConclusionViewModel.cs" />
     <Compile Include="Models\Quiz_PreguntaViewModel.cs" />
     <Compile Include="Models\QuizViewModel.cs" />
+    <Compile Include="Models\ResponderQuizViewModel.cs" />
     <Compile Include="Models\Solicitud_MensajeViewModel.cs" />
     <Compile Include="Models\Solicitud_SoporteViewModel.cs" />
     <Compile Include="Models\ClaseViewModel.cs" />
@@ -344,6 +346,7 @@
     <Content Include="SQLScripts\scriptTFIV7.sql" />
     <Content Include="SQLScripts\scriptTFIV8.sql" />
     <Content Include="SQLScripts\scriptTFIV9.sql" />
+    <Content Include="SQLScripts\TFIScriptV11.sql" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -412,6 +415,9 @@
     <Content Include="Views\Quiz_Pregunta\Agregar.cshtml" />
     <Content Include="Views\Curso\VerClasesCursoAlumno.cshtml" />
     <Content Include="Views\Clase\VerClaseAlumno.cshtml" />
+    <Content Include="Views\Quiz\VerQuizesCursoAlumno.cshtml" />
+    <Content Include="Views\Quiz_Pregunta\ResponderPregunta.cshtml" />
+    <Content Include="Views\Quiz_Pregunta\ResultadosQuiz.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
