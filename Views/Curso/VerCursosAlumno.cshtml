@@ -58,7 +58,7 @@
                             </td>
                             <td>
                                 <div class="d-flex justify-content-between">
-                                    @Html.ActionLink("🔍", "VerClasesCursoAlumno", new { id = curso.ID }, new { @class = "btn btn-primary" })
+                                    @Html.ActionLink("🔍", "VerClasesCursoAlumno", new { id = curso.ID, NombreCurso = curso.Nombre }, new { @class = "btn btn-primary" })
                                 </div>
                             </td>
                         </tr>
