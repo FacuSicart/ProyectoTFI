@@ -106,6 +106,13 @@ namespace ProyectoTFI.Controllers
             try
             {
                 quizService = new QuizService();
+                if (viewModel.ClaseID == null)
+                {
+                    QuizViewModel QVMAux = new QuizViewModel();
+                    QVMAux = quizService.VerQuiz(viewModel.ID);
+                    viewModel.ClaseID = QVMAux.ClaseID;
+                }
+
                 quizService.EditarQuiz(viewModel);
                 return RedirectToAction("VerQuizesCurso", new { pBusqueda = "", pCursoID = Session["CursoID"], pNombreCurso = Session["NombreCurso"] });
 

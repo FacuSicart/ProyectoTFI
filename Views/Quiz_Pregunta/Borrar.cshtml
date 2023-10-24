@@ -7,13 +7,15 @@
 @{
     var numero = 1;
 }
-<h2>Ver Pregunta</h2>
-<h3>¿Está seguro que quiere Eliminar la pregunta seleccionada?</h3>
+<h3>Eliminar Pregunta</h3>
+<h4>¿Está seguro que quiere Eliminar la pregunta seleccionada?</h4>
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     @Html.Hidden("ID", Model.ID)
     @Html.Hidden("QuizID", Model.QuizID)
+    @Html.Hidden("CursoNombre", Model.Quiz.Clase.Curso.Nombre)
+    @Html.Hidden("QuizNombre", Model.Quiz.Descripcion)
     @*@Html.Hidden("ClaseSinQuiz", Model.ClaseSinQuiz)*@
 
     <div class="form-horizontal">
