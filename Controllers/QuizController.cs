@@ -40,7 +40,20 @@ namespace ProyectoTFI.Controllers
 
             int pageSize = 10;
             int pageNumber = (page ?? 1);
-            return View(listaQuizes.ToPagedList(pageNumber, pageSize));
+
+            Usuario current = Session["user"] as Usuario;
+            if (current.RolID == 3)
+            {
+                return View(listaQuizes.ToPagedList(pageNumber, pageSize));
+            }
+            else if (current.RolID == 4)
+            {
+                return View("VerQuizesCursoAlumno", listaQuizes.ToPagedList(pageNumber, pageSize));
+            }
+            else
+            {
+                return View("Error", model: "Usuario sin autorización para entrar");
+            }
         }
 
         // GET: Solicitud_Respuesta/Create
