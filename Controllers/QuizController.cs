@@ -42,7 +42,7 @@ namespace ProyectoTFI.Controllers
             int pageNumber = (page ?? 1);
 
             Usuario current = Session["user"] as Usuario;
-            if (current.RolID == 3)
+            if (current.RolID == 3 || current.RolID == 2)
             {
                 return View(listaQuizes.ToPagedList(pageNumber, pageSize));
             }

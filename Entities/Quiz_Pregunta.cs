@@ -23,6 +23,7 @@ namespace ProyectoTFI.Entities
         public int ID { get; set; }
         public string DescripcionPregunta { get; set; }
         public Nullable<int> QuizID { get; set; }
+        public string ComentarioAdicional { get; set; }
     
         public virtual Quiz Quiz { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

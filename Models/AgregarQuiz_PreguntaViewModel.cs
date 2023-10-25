@@ -29,5 +29,7 @@ namespace ProyectoTFI.Models
         public string NombreCurso { get; set; }
         public int QuizID { get; set; }
         public string NombreQuiz { get; set; }
+        [Display(Name = "Información complementaria a la respuesta")]
+        public string ComentarioAdicional { get; set; }
     }
 }

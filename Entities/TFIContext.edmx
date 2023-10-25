@@ -102,8 +102,8 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Clasificacion" Type="int" />
           <Property Name="Fecha" Type="datetime" />
+          <Property Name="Calificacion" Type="decimal" Precision="16" Scale="2" />
           <Property Name="Aprobado" Type="bit" />
           <Property Name="QuizCursadaDeAlumno" Type="int" />
         </EntityType>
@@ -122,6 +122,7 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="DescripcionPregunta" Type="varchar" MaxLength="50" />
           <Property Name="QuizID" Type="int" />
+          <Property Name="ComentarioAdicional" Type="varchar" MaxLength="500" Nullable="false" />
         </EntityType>
         <EntityType Name="Quiz_Pregunta_Opcion">
           <Key>
@@ -694,10 +695,10 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Clasificacion" Type="Int32" />
           <Property Name="Fecha" Type="DateTime" Precision="3" />
           <Property Name="Aprobado" Type="Boolean" />
           <Property Name="QuizCursadaDeAlumno" Type="Int32" />
+          <Property Name="Calificacion" Type="Decimal" Precision="16" Scale="2" />
         </EntityType>
         <EntityType Name="Quiz_Cursada_de_Alumno">
           <Key>
@@ -719,6 +720,7 @@
           <Property Name="QuizID" Type="Int32" />
           <NavigationProperty Name="Quiz" Relationship="Self.FK_Quiz_Pregunta_Quiz" FromRole="Quiz_Pregunta" ToRole="Quiz" />
           <NavigationProperty Name="Quiz_Pregunta_Opcion" Relationship="Self.FK_Quiz_Pregunta_Opcion_Quiz_Pregunta" FromRole="Quiz_Pregunta" ToRole="Quiz_Pregunta_Opcion" />
+          <Property Name="ComentarioAdicional" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Quiz_Pregunta_Opcion">
           <Key>
@@ -1292,8 +1294,8 @@
           <EntitySetMapping Name="Quiz_Conclusion">
             <EntityTypeMapping TypeName="TFIContext.Quiz_Conclusion">
               <MappingFragment StoreEntitySet="Quiz_Conclusion">
+                <ScalarProperty Name="Calificacion" ColumnName="Calificacion" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Clasificacion" ColumnName="Clasificacion" />
                 <ScalarProperty Name="Fecha" ColumnName="Fecha" />
                 <ScalarProperty Name="Aprobado" ColumnName="Aprobado" />
                 <ScalarProperty Name="QuizCursadaDeAlumno" ColumnName="QuizCursadaDeAlumno" />
@@ -1312,6 +1314,7 @@
           <EntitySetMapping Name="Quiz_Pregunta">
             <EntityTypeMapping TypeName="TFIContext.Quiz_Pregunta">
               <MappingFragment StoreEntitySet="Quiz_Pregunta">
+                <ScalarProperty Name="ComentarioAdicional" ColumnName="ComentarioAdicional" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="DescripcionPregunta" ColumnName="DescripcionPregunta" />
                 <ScalarProperty Name="QuizID" ColumnName="QuizID" />
