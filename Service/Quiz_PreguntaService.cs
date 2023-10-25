@@ -35,7 +35,8 @@ namespace ProyectoTFI.Service
             Quiz_Pregunta Pregunta = new Quiz_Pregunta
             {
                 DescripcionPregunta = AQPVM.DescripcionPregunta,
-                QuizID = AQPVM.QuizID
+                QuizID = AQPVM.QuizID,
+                ComentarioAdicional = AQPVM.ComentarioAdicional
             };
 
             quiz_preguntaRepository.AgregarPregunta(Pregunta);
@@ -177,7 +178,7 @@ namespace ProyectoTFI.Service
                 {
                     Fecha = DateTime.Today,
                     QuizCursadaDeAlumno = qca.ID,
-                    Clasificacion = 0,
+                    Calificacion = 0,
                     Aprobado = false
                 };
 
@@ -196,7 +197,7 @@ namespace ProyectoTFI.Service
                 }
                 decimal calificacion = correctas / total * 10;
 
-                conclusion.Clasificacion = (int)calificacion;
+                conclusion.Calificacion = (int)calificacion;
 
                 decimal notaMinima = qca.Quiz.PorcAprobacion.Value / 10;
                 conclusion.Aprobado = calificacion >= notaMinima;
@@ -206,7 +207,7 @@ namespace ProyectoTFI.Service
                 QuizConclusionViewModel qcvm = new QuizConclusionViewModel
                 {
                     Aprobado = conclusion.Aprobado.Value,
-                    Califiacion = conclusion.Clasificacion.Value,
+                    Califiacion = conclusion.Calificacion.Value,
                     RespuestasCorrectas = (int)correctas,
                     TotalPreguntas = (int)total,
                     Preguntas = qca.Quiz.Quiz_Pregunta.ToList(),

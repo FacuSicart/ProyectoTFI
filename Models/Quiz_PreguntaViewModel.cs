@@ -18,6 +18,7 @@ namespace ProyectoTFI.Models
         {
             ID = qp.ID;
             DescripcionPregunta = qp.DescripcionPregunta;
+            ComentarioAdicional = qp.ComentarioAdicional;
             QuizID = qp.QuizID;
             Quiz_Pregunta_Opcion = qp.Quiz_Pregunta_Opcion;
 
@@ -32,5 +33,6 @@ namespace ProyectoTFI.Models
         public virtual Quiz Quiz { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Quiz_Pregunta_Opcion> Quiz_Pregunta_Opcion { get; set; }
+        public string ComentarioAdicional { get; set; }
     }
 }

@@ -15,9 +15,9 @@ namespace ProyectoTFI.Entities
     public partial class Quiz_Conclusion
     {
         public int ID { get; set; }
-        public Nullable<int> Clasificacion { get; set; }
         public Nullable<System.DateTime> Fecha { get; set; }
         public Nullable<bool> Aprobado { get; set; }
         public Nullable<int> QuizCursadaDeAlumno { get; set; }
+        public Nullable<decimal> Calificacion { get; set; }
     }
 }

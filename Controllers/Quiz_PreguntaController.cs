@@ -70,6 +70,7 @@ namespace ProyectoTFI.Controllers
             {
                 if (ModelState.IsValid)
                 {
+
                     //Validaciones para evitar incoherencias
                     if ((viewModel.DescripcionRespuesta3 == "" || viewModel.DescripcionRespuesta3 == null) && (viewModel.RespuestaCorrecta == "3"))
                     {
@@ -82,6 +83,8 @@ namespace ProyectoTFI.Controllers
                         ViewData["ErrorQuiz"] = "No puede seleccionar como correcta a una descripción de respuesta vacía";
                         return View(viewModel);
                     }
+
+                    viewModel.ComentarioAdicional = viewModel.ComentarioAdicional == null ? "" : viewModel.ComentarioAdicional;
 
                     quiz_preguntaService = new Quiz_PreguntaService();
                     quiz_preguntaService.AgregarQuiz(viewModel);
