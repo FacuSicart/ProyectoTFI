@@ -16,16 +16,30 @@ namespace ProyectoTFI.Data
             context = new ProyectoTFI.Entities.ProyectoTFI();
         }
 
-        public List<Curso> ListarCursos(string pBusqueda)
+        public List<Curso> ListarCursos(string pBusqueda, string pEstado)
         {
             try
             {
-                List<Curso> LC = new List<Curso>();
-                LC = context.Curso
-                            .WhereIf(!String.IsNullOrEmpty(pBusqueda), c => c.Nombre.Contains(pBusqueda))
-                            .ToList();
+                if (pEstado=="Activo" || pEstado == null)
+                {
+                    List<Curso> LC = new List<Curso>();
+                    LC = context.Curso
+                                .Where(c => c.Activo == true)
+                                .WhereIf(!String.IsNullOrEmpty(pBusqueda), c => c.Nombre.Contains(pBusqueda))
+                                .ToList();
 
-                return LC;
+                    return LC;
+                }
+                else
+                {
+                    List<Curso> LC = new List<Curso>();
+                    LC = context.Curso
+                                .Where(c => c.Activo == false)
+                                .WhereIf(!String.IsNullOrEmpty(pBusqueda), c => c.Nombre.Contains(pBusqueda))
+                                .ToList();
+
+                    return LC;
+                }
             }
             catch (Exception ex) { throw new Exception(ex.Message); }
         }
@@ -103,6 +117,38 @@ namespace ProyectoTFI.Data
                 return context.SaveChanges() > 0;
             }
             catch (Exception ex) { throw new Exception(ex.Message); }
+        }
+
+        public bool DeshabilitarCurso(Curso C)
+        {
+            try
+            {
+                Curso Curso = context.Curso.Where(c => c.ID == C.ID).FirstOrDefault();
+                Curso.Activo = false;
+                return context.SaveChanges() > 0;
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+        }
+
+        public bool RehabilitarCurso(Curso C)
+        {
+            try
+            {
+                Curso Curso = context.Curso.Where(c => c.ID == C.ID).FirstOrDefault();
+                Curso.Activo = true;
+                return context.SaveChanges() > 0;
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+        }
+
+        public List<Docente> VerDocentesCurso(int pID)
+        {
+            List<Docente> LD = new List<Docente>();
+            LD = context.Docente
+                            .Where(d => d.Docente_Curso.Any(dc => dc.CursoID == pID && dc.Activo == true))
+                            .ToList();
+
+            return LD;
         }
     }
 }

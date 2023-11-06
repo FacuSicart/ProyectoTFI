@@ -34,10 +34,10 @@ namespace ProyectoTFI.Controllers
             catch (Exception ex) { throw new Exception(ex.Message); }
         }
 
-        public ActionResult VerCursos(string pBusqueda, int? page)
+        public ActionResult VerCursos(string pBusqueda, string pEstado, int? page)
         {
             cursoService = new CursoService();
-            var listaCursos = cursoService.ListarCursos(pBusqueda);
+            var listaCursos = cursoService.ListarCursos(pBusqueda, pEstado);
 
             int pageSize = 10;
             int pageNumber = (page ?? 1);
@@ -195,6 +195,8 @@ namespace ProyectoTFI.Controllers
 
                     AgregarCursoViewModel viewModel = new AgregarCursoViewModel();
                     viewModel.Docentes = ListarDocentes();
+                    List<Usuario> LD = new List<Usuario>();
+                    viewModel.SelectedDocentes = LD.ToList();
 
                     return View(viewModel);
                 }
@@ -230,9 +232,13 @@ namespace ProyectoTFI.Controllers
         }
 
         // GET: Curso/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Ver(int id)
         {
-            return View();
+            cursoService = new CursoService();
+            var curso = cursoService.VerCurso(id);
+            curso.Docentes = cursoService.VerDocenteCurso(id);
+
+            return View(curso);
         }
 
         // GET: Curso/Create
@@ -280,24 +286,58 @@ namespace ProyectoTFI.Controllers
         }
 
         // GET: Curso/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Baja(int id)
         {
-            return View();
+            cursoService = new CursoService();
+            var curso = cursoService.VerCurso(id);
+            curso.Docentes = cursoService.VerDocenteCurso(id);            
+
+            return View(curso);
         }
 
         // POST: Curso/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Baja(CursoViewModel VM)
         {
             try
             {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
+                cursoService = new CursoService();
+                Curso C = new Curso();
+                C.ID = VM.ID;
+                cursoService.DeshabilitarCurso(C);
+                return RedirectToAction("VerCursos");
             }
             catch
             {
-                return View();
+                return View(VM.ID);
+            }
+        }
+
+        // GET: Curso/Delete/5
+        public ActionResult Rehabilitar(int id)
+        {
+            cursoService = new CursoService();
+            var curso = cursoService.VerCurso(id);
+            curso.Docentes = cursoService.VerDocenteCurso(id);
+
+            return View(curso);
+        }
+
+        // POST: Curso/Delete/5
+        [HttpPost]
+        public ActionResult Rehabilitar(CursoViewModel VM)
+        {
+            try
+            {
+                cursoService = new CursoService();
+                Curso C = new Curso();
+                C.ID = VM.ID;
+                cursoService.RehabilitarCurso(C);
+                return RedirectToAction("VerCursos");
+            }
+            catch
+            {
+                return View(VM.ID);
             }
         }
     }
