@@ -14,7 +14,7 @@ namespace ProyectoTFI.Models
     {
         public CursoViewModel() 
         {
-            
+            Docentes = new List<Docente>();
         }
 
         public CursoViewModel(Curso pcurso)
@@ -25,9 +25,19 @@ namespace ProyectoTFI.Models
             Activo = pcurso.Activo;
         }
 
+        public CursoViewModel(Curso pcurso, List<Docente> pDocentes)
+        {
+            ID = pcurso.ID;
+            Nombre = pcurso.Nombre;
+            Descripcion = pcurso.Descripcion;
+            Activo = pcurso.Activo;
+            Docentes = pDocentes;
+        }
+
         public int ID { get; set; }
         public string Nombre { get; set; }
         public string Descripcion { get; set; }
         public Nullable<bool> Activo { get; set; }
+        public List<Docente> Docentes;
     }
 }

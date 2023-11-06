@@ -16,12 +16,12 @@ namespace ProyectoTFI.Service
             cursoRepository = new CursoRepository();
         }
 
-        public List<CursoViewModel> ListarCursos(string pBusqueda)
+        public List<CursoViewModel> ListarCursos(string pBusqueda, string pEstado)
         {
             List<CursoViewModel> lresult = new List<CursoViewModel>();
             try
             {
-                List<Curso> cursos = cursoRepository.ListarCursos(pBusqueda);
+                List<Curso> cursos = cursoRepository.ListarCursos(pBusqueda, pEstado);
 
                 foreach (Curso c in cursos)
                 {
@@ -125,6 +125,21 @@ namespace ProyectoTFI.Service
                 return cursoRepository.AgregarCurso(c);
             }
             catch (Exception ex) { throw new Exception(ex.Message); }
+        }
+
+        public bool DeshabilitarCurso(Curso C)
+        {
+            return cursoRepository.DeshabilitarCurso(C);
+        }
+
+        public bool RehabilitarCurso(Curso C)
+        {
+            return cursoRepository.RehabilitarCurso(C);
+        }
+
+        public List<Docente> VerDocenteCurso(int pID)
+        {
+            return cursoRepository.VerDocentesCurso(pID);
         }
     }
 }
