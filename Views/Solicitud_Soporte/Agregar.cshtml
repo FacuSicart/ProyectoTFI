@@ -58,7 +58,7 @@
 
                 </div>
                 <div class="row">
-                    <div class="form-group" style="position: relative; bottom: 35px; left: 37.8%;">
+                    <div class="form-group" style="position: relative; bottom: 35px; left: 34%;">
                         @Html.LabelFor(model => model.Descripcion, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-10" style="width: 600px;">
                             @Html.TextAreaFor(model => model.Descripcion, new { @class = "form-control", @rows = 4 })
@@ -69,9 +69,9 @@
                 <br />
                 <div class="row gy-5">
                     <div class="form-group">
-                        <div class="col-md-offset-2 col-md-10"  style="width: 300px; position: relative; bottom: 35px; left: 55%; transform: translate(-50%, -50%);">
+                        <div class="col-md-offset-2 col-md-10"  style="width: 300px; position: relative; bottom: 35px; left: 54%; transform: translate(-50%, -50%);">
                             <input type="submit" value="Enviar" id="btnSubmit" class="btn btn-success" />
-                            @Html.ActionLink("Volver", "Ver", "Solicitud_Soporte", new { area = "" }, new { @class = "btn btn-success" })
+                            @Html.ActionLink("Volver", "Ver", "Solicitud_Soporte", new { area = "" }, new { @class = "btn btn-danger" })
                         </div>
                     </div>
                 </div>
