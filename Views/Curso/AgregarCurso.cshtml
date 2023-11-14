@@ -7,8 +7,8 @@
 
 <h2>Agregar Curso</h2>
 
-@using (Html.BeginForm("AgregarCurso", "Curso", FormMethod.Post, Model))
-{
+@*@using (Html.BeginForm("AgregarCurso", "Curso", FormMethod.Post, Model))*@
+@*{*@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
@@ -39,8 +39,8 @@
                 </select>
             </div>
 
-            <div class="form-group">
-                <button type="submit" name="agregar" class="btn btn-primary">Agregar</button>
+            @*<div class="form-group">
+                <button id="btnAgregar" type="submit" name="agregar" class="btn btn-primary">Agregar</button>
                 <button type="submit" name="eliminar" class="btn btn-danger">Eliminar</button>
             </div>
 
@@ -52,13 +52,64 @@
                         <option value="@docente">@docente</option>
                     }
                 </select>
-            </div>
+            </div>*@
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Agregar" class="btn btn-default" />
+                    <input type="button" value="Agregar Curso" onclick="pruebaJquery()" class="btn btn-primary" />
                 </div>
             </div>
         </div>
     </div>
-}
+@*}*@
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+
+<script type="text/javascript">
+    function pruebaJquery() {
+        //alert($("#listaDocentes").val());
+
+        let text = "test";
+        let value = 1;
+
+        //for (var opt in $('#listaDocentes')) {
+        //    alert(value);
+        //    value++;
+        //}
+
+        //$("#listaDocentes > option:selected").each(function () {
+        //    //$('#listaDocentesSeleccionados').append(new Option(this.text, this.value))
+        //    alert(this.text + ' ' + this.value);
+        //});
+
+        //$('#listaDocentesSeleccionados').append(new Option($('#listaDocentes option:selected').text(), $('#listaDocentes option:selected').val()))
+
+        let myArray = new Array();
+        let i = 0;
+        $("#listaDocentes > option:selected").each(function () {
+            myArray[i] = this.value;
+            i++;
+        })
+
+        let nombre = $('#Curso_Nombre').val();
+        let desc = $('#Curso_Descripcion').val();
+
+        var postData =
+        {
+            pNombre: nombre,
+            pDesc: desc,
+            docentesId: myArray
+        };
+
+        $.ajax({
+            type: "POST",
+            url: "@Url.Action("AgregarCurso", "Curso")",
+            data: postData,
+            success: function (response) {
+                alert("Curso agregado correctamente");
+                window.location.href = response.redirectToUrl;
+            }
+        });
+    }
+</script>

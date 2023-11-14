@@ -430,6 +430,7 @@
     <Content Include="Views\Curso\Baja.cshtml" />
     <Content Include="Views\Curso\Rehabilitar.cshtml" />
     <Content Include="Views\Curso\Ver.cshtml" />
+    <Content Include="Views\Curso\EditarCurso.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -90,5 +90,25 @@ namespace ProyectoTFI.Service
             };
             docenteRepository.ReestablecerPassword(u);
         }
+
+        public List<Usuario> GetDocentesByIds(List<string> docentesId)
+        {
+            try
+            {
+                List<Usuario> usuarios = new List<Usuario>();
+                List<int> docentesIdInt = new List<int>();
+                if (docentesId != null)
+                {
+                    foreach (string s in docentesId)
+                    {
+                        docentesIdInt.Add(int.Parse(s));
+                    }
+                }
+
+                usuarios = docenteRepository.GetDocentesByIds(docentesIdInt);
+                return usuarios;
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+        }
     }
 }

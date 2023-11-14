@@ -14,6 +14,7 @@ namespace ProyectoTFI.Models
         public int TotalPreguntas { get; set; }
         public int RespuestasCorrectas { get; set; }
         public List<Quiz_Pregunta> Preguntas { get; set; }
+        public List<Quiz_Respuesta> RespuestasObject { get; set; }
         public decimal Califiacion { get; set; }
         public string NombreQuiz { get; set; }
         public string Alumno { get; set; }

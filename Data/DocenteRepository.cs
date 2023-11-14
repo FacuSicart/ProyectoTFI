@@ -91,5 +91,21 @@ namespace ProyectoTFI.Data
             user.Password = usuario.Password;
             context.SaveChanges();
         }
+
+        public List<Usuario> GetDocentesByIds(List<int> docentesId)
+        {
+            try
+            {
+                using (var contexto = new ProyectoTFI.Entities.ProyectoTFI())
+                {
+                    List<Usuario> results = new List<Usuario>();
+
+                    results = contexto.Usuario.Include("Docente").Where(u => u.RolID == 3 && u.Activo == true && docentesId.Contains(u.ID)).ToList();
+
+                    return results;
+                }
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+        }
     }
 }

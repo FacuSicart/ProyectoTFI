@@ -31,6 +31,7 @@ namespace ProyectoTFI.Service
             }
             catch (Exception ex) { throw new Exception(ex.Message); }
         }
+
         public List<CursoViewModel> ListarCursosDocente(int id, string pBusqueda)
         {
             List<CursoViewModel> lresult = new List<CursoViewModel>();
@@ -110,19 +111,42 @@ namespace ProyectoTFI.Service
         }
 
 
-
-        public bool AgregarCurso(AgregarCursoViewModel viewModel, Usuario user)
+        public void AgregarCurso(string pNombre, string pDesc, Usuario user, List<Usuario> docentes)
         {
             try
             {
                 Curso c = new Curso()
                 {
-                    Nombre = viewModel.Curso.Nombre,
-                    Descripcion = viewModel.Curso.Descripcion,
-                    Administrador = user.Administrador.FirstOrDefault(),
+                    Nombre = pNombre,
+                    Descripcion = pDesc,
+                    AdministradorID = user.Administrador.FirstOrDefault().ID,
+                    //Administrador = user.Administrador.FirstOrDefault(),
                     Activo = true
                 };
-                return cursoRepository.AgregarCurso(c);
+                cursoRepository.AgregarCurso(c);
+
+                List<Docente_Curso> docente_Cursos = new List<Docente_Curso>();
+                foreach (Usuario u in docentes)
+                {
+                    docente_Cursos.Add(new Docente_Curso() { DocenteID = u.Docente.FirstOrDefault().ID, Curso = c, Activo = true });
+                }
+                cursoRepository.AgregarDocenteCursos(docente_Cursos);
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+        }
+
+        public void EditarCurso(CursoViewModel nuevo)
+        {
+            try
+            {
+                Curso c = new Curso()
+                {
+                    ID = nuevo.ID,
+                    Nombre = nuevo.Nombre,
+                    Descripcion = nuevo.Descripcion
+                };
+
+                cursoRepository.EditarCurso(c);
             }
             catch (Exception ex) { throw new Exception(ex.Message); }
         }

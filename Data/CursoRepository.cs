@@ -49,9 +49,16 @@ namespace ProyectoTFI.Data
             try
             {
                 List<Curso> LC = new List<Curso>();
+
+                //LC = context.Curso.Include("Docente_Curso")
+                //                  .Include("Docente_Curso.Docente")
+                //                  .Where(c => c.Activo == true && c.Docente_Curso.FirstOrDefault().DocenteID == id)
+                //                  .WhereIf(!String.IsNullOrEmpty(pBusqueda), c => c.Nombre.Contains(pBusqueda))
+                //                  .ToList();
+
                 LC = context.Curso.Include("Docente_Curso")
                                   .Include("Docente_Curso.Docente")
-                                  .Where(c => c.Activo == true && c.Docente_Curso.FirstOrDefault().DocenteID == id)
+                                  .Where(c => c.Activo == true && c.Docente_Curso.Any(dc => dc.DocenteID == id))
                                   .WhereIf(!String.IsNullOrEmpty(pBusqueda), c => c.Nombre.Contains(pBusqueda))
                                   .ToList();
                 return LC;
@@ -109,16 +116,6 @@ namespace ProyectoTFI.Data
             return context.SaveChanges() > 0;
         }
 
-        public bool AgregarCurso(Curso C)
-        {
-            try
-            {
-                context.Curso.Add(C);
-                return context.SaveChanges() > 0;
-            }
-            catch (Exception ex) { throw new Exception(ex.Message); }
-        }
-
         public bool DeshabilitarCurso(Curso C)
         {
             try
@@ -149,6 +146,39 @@ namespace ProyectoTFI.Data
                             .ToList();
 
             return LD;
+        }
+
+        public bool AgregarCurso(Curso C)
+        {
+            try
+            {
+                context.Curso.Add(C);
+                return context.SaveChanges() > 0;
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+        }
+
+        public void AgregarDocenteCursos(List<Docente_Curso> dcs)
+        {
+            try
+            {
+                context.Docente_Curso.AddRange(dcs);
+                context.SaveChanges();
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
+        }
+
+        public void EditarCurso(Curso nuevo)
+        {
+            try
+            {
+                Curso viejo = context.Curso.Where(c => c.ID == nuevo.ID).FirstOrDefault();
+
+                viejo.Nombre = nuevo.Nombre;
+                viejo.Descripcion = nuevo.Descripcion;
+                context.SaveChanges();
+            }
+            catch (Exception ex) { throw new Exception(ex.Message); }
         }
     }
 }

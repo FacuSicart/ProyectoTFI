@@ -206,6 +206,7 @@ namespace ProyectoTFI.Service
 
                 QuizConclusionViewModel qcvm = new QuizConclusionViewModel
                 {
+                    RespuestasObject = respuestas,
                     Aprobado = conclusion.Aprobado.Value,
                     Califiacion = conclusion.Calificacion.Value,
                     RespuestasCorrectas = (int)correctas,
