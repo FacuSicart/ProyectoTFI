@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_LayoutInterno.cshtml";
 }
 
-<h2>Agregar Curso</h2>
+<h4>Agregar Curso</h4>
 
 @*@using (Html.BeginForm("AgregarCurso", "Curso", FormMethod.Post, Model))*@
 @*{*@
@@ -22,6 +22,7 @@
                     @Html.ValidationMessageFor(model => model.Curso.Nombre, "", new { @class = "text-danger" })
                 </div>
             </div>
+            <br />
             <div class="form-group">
                 @Html.LabelFor(model => model.Curso.Descripcion, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
@@ -29,6 +30,7 @@
                     @Html.ValidationMessageFor(model => model.Curso.Descripcion, "", new { @class = "text-danger" })
                 </div>
             </div>
+            <br />
             <div class="form-group">
                 <label for="listaDocentes">Docentes:</label>
                 <select id="listaDocentes" name="Docentes" class="form-control" multiple="multiple" size="5">
@@ -53,10 +55,11 @@
                     }
                 </select>
             </div>*@
-
+        <br />
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="button" value="Agregar Curso" onclick="pruebaJquery()" class="btn btn-primary" />
+                    <input type="button" value="Agregar Curso" onclick="pruebaJquery()" class="btn btn-success" />
+                    @Html.ActionLink("Volver", "VerCursos", "Curso", new { area = "" }, new { @class = "btn btn-danger" })
                 </div>
             </div>
         </div>

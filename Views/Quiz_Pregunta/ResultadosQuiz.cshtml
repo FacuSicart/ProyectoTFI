@@ -3,10 +3,12 @@
 @{
     ViewBag.Title = "ResultadosQuiz";
     Layout = "~/Views/Shared/_LayoutInterno.cshtml";
+
+    var cursoID = Session["CursoID"];
+    var nombreCurso = Session["NombreCurso"];
 }
 
-<h2>Resultados del Quiz: @Model.NombreQuiz</h2>
-<h3>Alumno: @Model.Alumno</h3>
+<h4>Resultados del Quiz: @Model.NombreQuiz</h4>
 
 <div>
     <hr />
@@ -54,4 +56,6 @@
             i++;
         }
     </div>
+    <br />
+    @Html.ActionLink("Volver", "VerQuizesCurso", "Quiz", new { pCursoID = cursoID, pNombreCurso = nombreCurso }, new { @class = "btn btn-success", @style = "margin-bottom: 5px;" })
 </div>
