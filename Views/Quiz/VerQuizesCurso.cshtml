@@ -81,12 +81,13 @@
                 </td>
                 <td>
                     <div class="d-flex justify-content-between">
-                        @if (quiz.Resuelto == false)
+                        @Html.ActionLink("❓", "VerPreguntasQuiz", "Quiz_Pregunta", new { pQuizID = quiz.ID, pCursoID = quiz.Clase.CursoID, pNombreQuiz = quiz.Descripcion, pNombreCurso = quiz.Clase.Curso.Nombre }, new { @class = "btn btn-primary" })
+                        @Html.ActionLink("🔍", "VerQuiz", "Quiz", new { id = quiz.ID }, new { @class = "btn btn-success" })
+                        @Html.ActionLink("✏", "Editar", "Quiz", new { id = quiz.ID }, new { @class = "btn btn-info " })
+                        @*@if (quiz.Resuelto == false)
                         {
-                            @Html.ActionLink("❓", "VerPreguntasQuiz", "Quiz_Pregunta", new { pQuizID = quiz.ID, pCursoID = quiz.Clase.CursoID, pNombreQuiz = quiz.Descripcion, pNombreCurso = quiz.Clase.Curso.Nombre }, new { @class = "btn btn-primary" })
-                            @Html.ActionLink("🔍", "VerQuiz", "Quiz", new { id = quiz.ID }, new { @class = "btn btn-success" })
-                            @Html.ActionLink("✏", "Editar", "Quiz", new { id = quiz.ID }, new { @class = "btn btn-info " })
-                        }
+
+                         }*@
                         @if ((bool)quiz.Activo == true)
                         {
                             @Html.ActionLink("🗑", "Baja", "Quiz", new { id = quiz.ID }, new { @class = "btn btn-danger" })

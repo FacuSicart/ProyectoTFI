@@ -58,12 +58,6 @@
                             <td>
                                 <div class="d-flex justify-content-between">
                                     @Html.ActionLink("🔍", "VerClasesCurso", new { id = curso.ID, NombreCurso = curso.Nombre }, new { @class = "btn btn-primary" })
-                                    @if ((bool)curso.Activo == true)
-                                    {
-                                        @Html.ActionLink("🗑", "BajaCurso", new { id = curso.ID }, new { @class = "btn btn-danger" })
-                                    }
-                                    else
-                                    {@Html.ActionLink("⬆", "RehabilitarCurso", new { id = curso.ID }, new { @class = "btn btn-danger" })}
                                 </div>
                             </td>
                         </tr>
